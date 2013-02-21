@@ -1,1 +1,1 @@
-print "ciao Simone"
+print "Simone is sick at home"

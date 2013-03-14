@@ -22,8 +22,9 @@ CREATE TABLE `PersonalPhoto` (
 CREATE TABLE `Object` (
 `object_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 `name` VARCHAR(255) UNIQUE KEY,
-`exhibition` INT UNSIGNED INDEX,
-`section` INT UNSIGNED INDEX
+`exhibition` INT UNSIGNED,
+`section` INT UNSIGNED,
+INDEX(`exhibition`, `section`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `UserPhoto` (
@@ -54,7 +55,8 @@ CREATE TABLE `UserComment` (
 `user_id` INT UNSIGNED,
 `object_id` INT UNSIGNED,
 `comment` TEXT NOT NULL,
-`verified` BOOLEAN NOT NULL INDEX,
+`verified` BOOLEAN NOT NULL,
+INDEX(`verified`),
 PRIMARY KEY (`user_id`, `object_id`),
 CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`),
 CONSTRAINT FOREIGN KEY (`object_id`) REFERENCES `Object`(`object_id`)

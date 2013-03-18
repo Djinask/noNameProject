@@ -1,8 +1,7 @@
 /*
 User(id, email, password)
-PersonalPhoto(id, commento)
+PersonalPhoto(id, user_id, commento)
 Object(id, name, exhibition, sector)
-UserPhoto(user_id, personal_photo_id)
 PhotoReference(personal_photo_id, object_id)
 UserBookmark(user_id, object_id)
 UserComment(user_id, object_id, comment, verified)
@@ -16,7 +15,9 @@ CREATE TABLE `User` (
 
 CREATE TABLE `PersonalPhoto` (
 `personal_photo_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-`comment` TEXT
+`user_id` INT UNSIGNED,
+`comment` TEXT,
+CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`)
 ) ENGINE=INNODB;
 
 CREATE TABLE `Object` (

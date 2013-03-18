@@ -1,0 +1,56 @@
+body
+{
+}
+
+.titolo
+{
+	margin-top: 50px;
+	font-size: 35pt;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+}
+
+.desc
+{
+	margin-top: 40px;
+	text-align: center;
+	font-size: 25pt;
+	line-height: 35px;
+	color: gray;
+}
+
+.icona
+{
+	margin-top: 110px;
+}
+
+.start
+{
+	margin-top: 40px;
+	text-align: center;
+}
+
+.btn-a
+{
+	 padding-left: 90px;
+    padding-right: 90px;
+    text-decoration: none;
+}
+
+.progresso
+{
+	margin-top: 40px;
+}
+
+#album-corrente
+{
+	padding-left: 20px;
+	color: gray;
+	font-size: 10pt;
+}
+
+#anteprima
+{
+	margin-top: 30px;
+}

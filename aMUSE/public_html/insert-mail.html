@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>aMUSE</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+        <link href="bootstrap/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+        <style>
+            .centerContainer {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid well">
+            <div class="row-fluid">
+                <div class="span3">
+                    <a class="btn btn-primary btn-large">
+                        <i class="icon-arrow-left"></i> Back
+                    </a>
+                </div>
+                <div class="span9">
+                    <h1>Inserisci il tuo indirizzo E-mail</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid well well-large">
+            <div class="centerContainer span5 offset3">
+
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="label" for="inputEmail"><h4>Email</h4></label>
+                        <div class="controls">
+
+                            <input type="text" id="inputEmail" placeholder="Email">
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="label control-label label-info" for="inputEmail"><h4>Verify Email</h4></label>
+                        <div class="controls">
+
+                            <input type="text" id="inputEmail2" placeholder="Email">
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+
+                            <button type="submit" class="btn-primary btn-large">Insert</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap-select.min.js"></script>
+        <script type="text/javascript">
+            $('.selectpicker').selectpicker();
+        </script>
+    </body>
+</html>

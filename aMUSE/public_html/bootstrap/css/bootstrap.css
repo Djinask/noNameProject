@@ -238,7 +238,7 @@ a {
 a:hover,
 a:focus {
   color: #005580;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .img-rounded {
@@ -276,7 +276,7 @@ a:focus {
 }
 
 .photocontainer{
-  height: 300px;
+  height: 280px;
   width: 300px;
   text-align: center;
   margin: auto;
@@ -5605,7 +5605,9 @@ input[type="submit"].btn.btn-mini {
        -o-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
 }
-
+.starbutton:hover {
+  background-color: gray;
+}
 a.thumbnail:hover,
 a.thumbnail:focus {
   border-color: #0088cc;
@@ -5622,6 +5624,7 @@ a.thumbnail:focus {
 }
 
 .thumbnail .caption {
+
   text-align: center;
   padding: 2px;
   color: #555555;

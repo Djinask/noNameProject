@@ -3,15 +3,10 @@
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap-select/bootstrap-select.css" >
-        <link href="css/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<style>
-            .thumbnail {
-                background: #d6e9c6;
-        </style>
-
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="bootstrap-select/bootstrap-select.css" >
+        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>x
         <title>.:. aMuse</title>
 
     </head>
@@ -85,15 +80,14 @@
         <div id="content" class=" well-large" style="min-height:300px">
             <div class="row-fluid">
                 <ul class="thumbnails" >
-                    <li class="span3 offse">
+
+                    <li class="span3">
                         <a href="#img1" role="button"  data-toggle="modal" class="thumbnail">
-                            <img src="Images/img-es/aquila.jpg" >
-
                             <div class="caption">
-                                <h3>La figa de so mare</h3>
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-
-
+                             <h4>Un quadro molto bello</h4>
+                            </div>
+                            <div class="photocontainer">
+                            <img src="Images/img-es/aquila.jpg" >
                             </div>
                         </a> 
                         <div id="img1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -104,7 +98,7 @@
                             <div class="modal-body">
                                 <img src="Images/img-es/aquila.jpg" class="img-polaroid">
                                 
-                                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p>Cra justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 
                             </div>
                             <div class="modal-footer">
@@ -112,8 +106,11 @@
                                 <button class="btn btn-primary">Add</button>
                             </div>
                         </div>
-                        <p align="center" ><img src="Images/star.png"> </p>
+                         <div class="thumbnail starbutton">
+                            <img src="Images/emptystar.png" height="25" width="25">
+                            </div>
                     </li>
+
                     <li class="span3">
                         <a href="#" class="thumbnail">
                             <img src="Images/img-es/camillob.jpg">
@@ -215,8 +212,8 @@
                 <li><a href="#">Next</a></li>
             </ul>
         </div>
-        <script type="text/javascript" src="css/bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript" src="css/bootstrap-select/bootstrap-select.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="bootstrap-select/bootstrap-select.js"></script>
         <script type="text/javascript">
             $('.selectpicker').selectpicker();
         </script>

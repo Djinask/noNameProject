@@ -22,7 +22,7 @@ var func  = function(req,res) {
 		}	
 	})();
 
-	connection.query("INSERT INTO User(email,password) VALUES ('email','passGen')");
+	connection.query("INSERT INTO User(email,password) VALUES (" + email + "," + password + ")");
 
 	connection.end();
 };

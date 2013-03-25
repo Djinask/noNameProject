@@ -1,5 +1,3 @@
-var express = require('express'); 
-var app = express();
 var mysql = require('mysql');
 var connection = mysql.createConnection({
 	host: 'amuse.db.8861958.hostedresource.com',
@@ -7,6 +5,7 @@ var connection = mysql.createConnection({
 	password: 'ABCdef123!',
 	database: 'amuse'
 });
+connection.connect();
 
 var generatePassword = function() {
 	var text = "";
@@ -18,10 +17,9 @@ var generatePassword = function() {
 	return text;	
 };
 
-var signUp  = function(req, res) {
+exports.app  = function(req, res) {
 	var email = req.params.email;
 	var password = generatePassword();
-	connection.connect();
 	connection.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
 		if(error) {
 			console.log(error);
@@ -29,10 +27,5 @@ var signUp  = function(req, res) {
 		} else {
 			res.send(200, 'Query executed, your email is: ' + email + 'and your password is: ' + password);
 		}
-	});
-	connection.end();
+	});	
 };
-
-app.get('/signup/:email', signUp);
-
-app.listen(3033);

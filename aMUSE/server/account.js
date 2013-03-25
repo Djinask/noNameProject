@@ -1,11 +1,4 @@
 var mysql = require('mysql');
-var connection = mysql.createConnection({
-	host: 'amuse.db.8861958.hostedresource.com',
-	user: 'amuse',
-	password: 'ABCdef123!',
-	database: 'amuse'
-});
-connection.connect();
 
 var generatePassword = function() {
 	var text = "";
@@ -18,6 +11,13 @@ var generatePassword = function() {
 };
 
 exports.app  = function(req, res) {
+	var connection = mysql.createConnection({
+		host: 'amuse.db.8861958.hostedresource.com',
+		user: 'amuse',
+		password: 'ABCdef123!',
+		database: 'amuse'
+	});
+	connection.connect();
 	var email = req.params.email;
 	var password = generatePassword();
 	connection.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
@@ -28,4 +28,5 @@ exports.app  = function(req, res) {
 			res.send(200, 'Query executed, your email is: ' + email + 'and your password is: ' + password);
 		}
 	});	
+	connection.end();
 };

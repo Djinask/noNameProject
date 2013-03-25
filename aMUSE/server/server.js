@@ -11,18 +11,17 @@ swig.init({
   autoescape: true,
   cache: true,
   encoding: 'utf8',
-  filters: {},
   root: "../public_html"
 });
 
 app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', function(req, res) {
-	res.send(200, "BuBu: " + req.params.id);
+    res.send(200, "BuBu: " + req.params.id);
 });
 app.get('/signup/:email', require('./account.js').app);
-var home = require('./data.js').app
-app.get('/:filter', home);
+var home = require('./data.js').app;
+app.get('/:selection', home);
 app.get('/', home);
 
 app.listen(1234);

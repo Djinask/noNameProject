@@ -3,9 +3,9 @@
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-select.css" >
-        <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-select.css" >
+        <link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
         <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
         <title>.:. aMuse</title>
 
@@ -79,24 +79,24 @@
         <div id="content" class=" well-large" style="min-height:300px">
             <div class="row-fluid">
                 <ul class="thumbnails" >
-{% for i in items -%}
+                    {% for i in items -%}
                     <li class="span3">
-                        <a href="#img1" role="button"  data-toggle="modal" class="thumbnail">
+                        <a href="#img{{i.object_id}}" role="button"  data-toggle="modal" class="thumbnail">
                             <div class="caption">
-                             <h4>{{i.name}}</h4>
+                                <h4>{{i.name}}</h4>
                             </div>
                             <div class="photocontainer">
-                            <img src="photos/{{i.object_id}}.jpg" >
+                                <img src="/static/photos/{{i.object_id}}.jpg" >
                             </div>
                         </a> 
-                        <div id="img1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div id="img{{i.object_id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-header">
                                 <i class="icon-remove close"data-dismiss="modal" aria-hidden="true"></i>
                                 <h3 id="myModalLabel">Modal header</h3>
                             </div>
                             <div class="modal-body">
-                                <img src="Images/img-es/aquila.jpg" class="img-polaroid">
-                                
+                                <img src="/static/photos/{{i.object_id}}.jpg" class="img-polaroid">
+
                                 <p>{{i.description}}</p>
 
                             </div>
@@ -105,18 +105,24 @@
                                 <button class="btn btn-primary">Add</button>
                             </div>
                         </div>
-                         <div class="thumbnail starbutton">
-                            <img src="img/emptystar.png" height="25" width="25">
-                            </div>
+                        <div class="thumbnail starbutton">
+                            <img src="/static/img/emptystar.png" height="25" width="25">
+                        </div>
                     </li>
-{%- endfor %}
-               
+                    {% if (loop.index) % 4 == 0 %}
+                    </ul></div>
+                    {% if !loop.last %}
+                    <div class="row-fluid">
+                    <ul class="thumbnails" >
+                    {% endif %}
+                    {% endif %}
+                    {%- endfor %}
 
                 </ul>
-                </div>
             </div>
+        </div>
 
-      
+
 
         <div class="pagination" align="center">
             <ul>
@@ -129,12 +135,12 @@
                 <li><a href="#">Next</a></li>
             </ul>
         </div>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap-select.js"></script>
-        <script type="text/javascript" src="js/favorite.js"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/static/bootstrap/js/bootstrap-select.js"></script>
+        <script type="text/javascript" src="/static/js/favorite.js"></script>
         <script type="text/javascript">
             $('.selectpicker').selectpicker();
-            
+
         </script>
     </body>
 </html>

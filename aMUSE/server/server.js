@@ -15,6 +15,8 @@ swig.init({
   root: "../public_html"
 });
 
+app.use('/static', express.static('../public_html'));
+
 app.get('/object/:id', function(req, res) {
 	res.send(200, "BuBu: " + req.params.id);
 });

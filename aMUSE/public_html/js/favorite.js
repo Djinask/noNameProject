@@ -2,7 +2,7 @@
 	var buttons = document.querySelectorAll('.starbutton > img');
 	var containers = document.querySelectorAll('.starbutton');
 	var startcolor = containers.item(0).style.backgroundColor;
-	var empty = './img/emptystar.png', full = './img/fullstar.png';
+	var empty = '/static/img/emptystar.png', full = '/static/img/fullstar.png';
 	for(var i = 0; i < buttons.length; i++) {
 		var item = buttons.item(i);
 		item.starStatus = false;

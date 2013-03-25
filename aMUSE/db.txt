@@ -1,4 +1,5 @@
 Password: ABCdef123!
-Host: amuse.db.8861958.hostedresource.com
+Database: amuse
+Host: amuse.db.8861958.hostedresource.com 
 User: amuse
-PhpMyAdmin: https://n1nlsmysqladm01.secureserver.net/grid50/301
+PhpMyAdmin: https://n1nlsmysqladm01.secureserver.net/dgrid50/47

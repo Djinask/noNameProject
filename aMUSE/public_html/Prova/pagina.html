@@ -1,0 +1,34 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+<meta charset="UTF-8" />
+<style>
+@media all and (min-width: 50em){
+    .copertina {width: 50%;}
+    .testo {width: 50%;}
+    .starbutton{ float: none; width: 50%;}
+
+@media all and (min-width: 36em){
+    .copertina {width: 100%;}
+    .testo {float: none; width: 100%;}
+    .starbutton {float: none; width: 100%; }
+}
+}
+</style>
+</head>
+<body>
+<div data-role="header" addBackBtn="true">
+    <a href="./index.html" data-icon="arrow-l" addBackBtn="true">Indietro</a>
+    <h1>aMuse - the Muse Experience</h1>
+</div>
+
+<div class="ui-grid-a ui-responsive">
+    <div id="copertina" class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">Bella immagine</div></div>
+    <div id="testo" class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">Le info vanno qui</div></div>
+</div>
+    <a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-inline="true">Icon only</a>
+
+</body>
+</html>

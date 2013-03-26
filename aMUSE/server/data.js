@@ -12,8 +12,9 @@ exports.app = function(req, res) {
 	var filters;
 	if(req.params.selection) {
 		filters = req.params.selection.split('-');
+                console.log(filters);
 	} else {
-		connection.query('SELECT * FROM Object LIMIT 25', function(error, results) {
+		connection.query('SELECT * FROM Object LIMIT 24', function(error, results) {
 			res.render('index0.html', {
 				items: results
 			});

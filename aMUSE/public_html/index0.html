@@ -75,11 +75,11 @@
                 <ul class="thumbnails" >
                     {% for i in items -%}
                     <li class="span3">
-                        <a href="#img{{i.object_id}}" role="button"  data-toggle="modal" class="thumbnail">
+                        <a href="#img{{i.object_id}}"  role="button"  data-toggle="modal" class="thumbnail">
                             <div class="caption">
                                 <h4>{{i.name}}</h4>
                             </div>
-                            <div class="photocontainer">
+                            <div class="photocontainer" id="{{i.object_id}}">
                                 <img src="/static/photos/{{i.object_id}}.jpg" >
                             </div>
                         </a> 

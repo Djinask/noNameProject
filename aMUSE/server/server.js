@@ -24,4 +24,4 @@ var home = require('./data.js').app;
 app.get('/:selection', home);
 app.get('/', home);
 
-app.listen(8888);
+app.listen(8288);

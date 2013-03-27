@@ -5,8 +5,7 @@
 	
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script></head>
+	
 	<style>
 
 		h2{
@@ -69,53 +68,42 @@
 
 <!-- Start of first page -->
 <div data-role="page" id="insert">
-
 	<div class="row-fluid show-grid">
-            <div class="span">
-                <div class="well">
-
-                    <h1> aMuse<small>  The Muse Experience</small></h1>
-                </div>
+        <div class="span">
+            <div class="well">
+                <h1> aMuse<small>  The Muse Experience</small></h1>
             </div>
-        </div><!-- /header -->
-
+        </div>
+    </div><!-- /header -->
 	<div>
-
-	<div>
-		<a href="#" data-role="button" data-icon="back" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
-	</div>
-	<form>
-    	<div ><label for="email-1">Inserisci la tua e-mail</label>
-    	<input type="email" data-clear-btn="true" name="email-1" id="email-1" value=""></div>
-    	<div><label for="email-2">Conferma la tua e-mail</label>
-    	<input type="email" data-clear-btn="true" name="email-2" id="email-2" value=""></div>
-    	<div><a class="buttons" href="#ok" data-role="button" data-rel="dialog" data-transition="flip" data-theme="b" >Submit</a></div>
-
-
-	</form>
-	
+		<div>
+			<a href="#" data-role="button" data-icon="back" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
+		</div>
+		<form>
+    		<div >
+    			<label for="email-1">Insert your e-mail</label>
+    			<input type="email" data-clear-btn="true" name="email-1" id="email-1" value="">
+    		</div>
+    		<div>
+    			<label for="email-2">Confirm your e-mail</label>
+    			<input type="email" data-clear-btn="true" name="email-2" id="email-2" value="">
+    		</div>
+    		<div>
+    			<a class="buttons" href="#ok" data-role="button" data-rel="dialog" data-transition="flip" data-theme="b" >Submit</a>
+    		</div>
+		</form>
 	</div><!-- /content -->
-<!--
-	<div id="foot" data-role="footer">
-		<h4>Page Footer</h4>
-	</div> /footer -->
 </div><!-- /page -->
 
 <!-- Start of second page -->
 <div data-role="page" id="ok">
-<!-- 
-	<div data-role="header">
-		<h1>header</h1>
-	</div>/header -->
-
 	<div data-role="content">
-		<h2 >Invio e-mail riuscito!</h2>
-		<p><a class="buttons" href="#insert" data-role="button" data-rel="dialog" data-transition="flip"
-			data-theme="b">Home</a></p>
+		<h2 >Sending e-mail confirmed!</h2>
+		<p><a class="buttons" href="#insert" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
 	</div><!-- /content -->
-<!--
-	<div  data-role="footer">
-		<h4>Page Footer</h4>
-	</div> /footer -->
 </div><!-- /page -->
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+<script src=""></script>
 </body>

@@ -16,3 +16,4 @@ exports.query_select_section="SELECT * FROM Sections";
 exports.query_select_exhibition="SELECT * FROM Exhibitions";
 exports.query_select_autor="SELECT * FROM Autors";
 exports.query_select_object="SELECT * FROM Objects WHERE id=?";
+expors.query_insert_mail="INSERT INTO User(email,password) VALUES (?, ?)";

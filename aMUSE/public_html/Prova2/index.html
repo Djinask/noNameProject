@@ -41,7 +41,7 @@
             <div class="ui-block-a">
                 <select data-native-menu="false">
                     <option>Exhibition</option>
-                    {% for i in items -%}
+                    {% for i in exhib -%}
                     <option value="{{i.exhibition_id}}">{{i.exhibition_name}}</option>
                     {%- endfor %}
                 </select>
@@ -49,7 +49,7 @@
             <div class="ui-block-b">
                 <select data-native-menu="false">
                     <option>Autor</option>
-                    {% for i in items -%}
+                    {% for i in autor -%}
                     <option value="{{i.autor_id}}">{{i.autor_name}}</option>
                     {%- endfor %}
 
@@ -58,9 +58,9 @@
             <div class="ui-block-c">
                 <select data-native-menu="false">
                     <option>Section</option>
-                     {% for i in items -%}
+                    {% for i in section -%}
                     <option value="{{i.section_id}}">{{i.section_name}}</option>
-             {%- endfor %}
+                    {%- endfor %}
                 </select>
             </div>
             <div class="ui-block-d">
@@ -70,18 +70,20 @@
                 <a href="#" data-role="button" data-theme="b">I'm done</a>
             </div>
         </div>
-
+ {% for i in items -%}
         <div class="ui-grid-c">
             <div class="ui-block-a">
+                {% for i in items -%}
                 <div class="ui-bar ui-bar-e" style="height:60px">
-                    <a href="pagina.html" data-role="button" data-transition="slide" data-inline="true">page</a>
+                     <a href="#img{{i.object_id}}"  role="button"  data-toggle="modal" class="thumbnail">
                 </div>
+                {%- endfor %}
             </div>
-            <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-            <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
-            <div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:60px">D</div></div>
+
 
         </div>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     </body>
 </html>
+
+<!--String.fromCharCode(car.charCodeAt(0)+1)-->

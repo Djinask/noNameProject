@@ -18,8 +18,13 @@ app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', require('./object.js'));
 app.get('/signup/:email', require('./account.js').app);
+
+//var gallery = require('./gallery.js');
+//app.get('/gallery/:selection', gallery);
+//app.get('/gallery', gallery);
+
 var home = require('./home.js');
-app.get('/:selection', home);
 app.get('/', home);
+app.get('/:selection', home);
 
 app.listen(8288);

@@ -1,0 +1,2 @@
+<p>Ciao! La tua password è: {{password}}</p>
+<p>Per visualizzare il tuo photobook vai al seguente link: <a herf="http://www.amusethemuse.com/{{email}}">http://www.amusethemuse.com/{{email}}</a></p>

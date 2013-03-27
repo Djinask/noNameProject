@@ -8,10 +8,12 @@ module.exports = function(to, pass) {
     domain : "[localhost]",            // domain used by client to identify itself to server
     to : to,
     from : "amuse.registrazione@gmail.com",
-    subject : "node_mailer test email",
-    template: "./sample.txt",
+    subject : "aMuse - Registration data",
+    template: "./sample-html.txt",
     data : {
-            "password": pass},
+            password: pass,
+            email: to
+        },
     authentication : "login",       // auth login is supported; anything else is no auth
     username : "amuse.registrazione@gmail.com",       // Base64 encoded username
     password : "ABCdef1234!",     // Base64 encoded password

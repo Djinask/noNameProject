@@ -1,70 +1,90 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
     <head>
-        <title>aMUSE</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
-        <link href="bootstrap/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+        <title>Inserisci e-mail</title>
+
         <style>
-            .centerContainer {
-                display: table-cell;
-                vertical-align: middle;
+            div[data-role="header"] img {
+                height: 1em;
+                width: auto;
+            }
+            h2{
                 text-align: center;
+            }
+            form div{
+                margin-right: 30%;
+                margin-left: 30%;
+                min-width: 170px;
+            }
+
+            h1{
+                margin: 10px 0;
+                font-family: inherit;
+                font-weight: bold;
+                line-height: 40px;
+                color: inherit;
+                text-rendering: optimizelegibility;
+                font-size: 38.5px;
+            }
+
+            h1 small {
+                font-weight: normal;
+                line-height: 1;
+                color: #999999;
+                font-size: 24.5px;
+            }
+            label{
+                text-align: center;
+                position:relative;
+                bottom: -20px;
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+                height: 38px;
+                clear:both;
+                min-width: 200px;
+            }
+            .buttons{
+                position: relative;
+                margin-top: 10%;
+                margin-right: 37%;
+                margin-left: 32%;
+                min-width: 100px;
             }
         </style>
     </head>
     <body>
-        <div class="container-fluid well">
-            <div class="row-fluid">
-                <div class="span3">
-                    <a class="btn btn-primary btn-large">
-                        <i class="icon-arrow-left"></i> Back
-                    </a>
+
+        <!-- Start of first page -->
+        <div data-role="page" id="insert">
+            <div data-role="header">
+                <a href="#home"><img src="./img/museum.png"></a>
+                <h1>aMuse - The Muse Experience</h1>
+            </div><!-- /header -->
+            <div>
+                <div>
+                    <a href="#" data-role="button" data-icon="back" data-iconpos="left" data-inline="true" data-theme="b">Back</a>
                 </div>
-                <div class="span9">
-                    <h1>Inserisci il tuo indirizzo E-mail</h1>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid well well-large">
-            <div class="centerContainer span5 offset3">
-
-                <form class="form-horizontal">
-                    <div class="control-group">
-                        <label class="label" for="inputEmail"><h4>Email</h4></label>
-                        <div class="controls">
-
-                            <input type="text" id="inputEmail" placeholder="Email">
-                        </div>
-
+                <form>
+                    <div >
+                        <label for="email-1">Insert your e-mail</label>
+                        <input type="email" data-clear-btn="true" name="email-1" id="email-1" value="">
                     </div>
-                    <div class="control-group">
-                        <label class="label control-label label-info" for="inputEmail"><h4>Verify Email</h4></label>
-                        <div class="controls">
-
-                            <input type="text" id="inputEmail2" placeholder="Email">
-                        </div>
-
+                    <div>
+                        <label for="email-2">Confirm your e-mail</label>
+                        <input type="email" data-clear-btn="true" name="email-2" id="email-2" value="">
                     </div>
-                    <div class="control-group">
-                        <div class="controls">
-
-                            <button type="submit" class="btn-primary btn-large">Insert</button>
-                        </div>
+                    <div>
+                        <a class="buttons" href="#ok" data-role="button" data-rel="dialog" data-transition="flip" data-theme="b" >Submit</a>
                     </div>
                 </form>
+            </div><!-- /content -->
+        </div><!-- /page -->
 
-
-            </div>
-
-        </div>
-        <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="./bootstrap/js/bootstrap-select.min.js"></script>
-        <script type="text/javascript">
-            $('.selectpicker').selectpicker();
-        </script>
+        <!-- Start of second page -->
+        <div data-role="page" id="ok">
+            <div data-role="content">
+                <h2 >Sending e-mail confirmed!</h2>
+                <p><a class="buttons" href="#insert" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
+            </div><!-- /content -->
+        </div><!-- /page -->
     </body>
-</html>

@@ -25,10 +25,10 @@ exports.app  = function(req, res) {
 	connection.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
 		if(error) {
 			console.log(error);
-			res.send(200, 'An error occurred');
+			res.send(200, 'error');
 		} else {
 			sendEmail(email, password);
-			res.send(200, 'Query executed, your email is: ' + email + 'and your password is: ' + password);
+			res.send(200, 'success');
 		}
 	});	
 	connection.end();

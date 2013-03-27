@@ -10,7 +10,8 @@
 
 
 
-exports.query_data="SELECT * FROM Object LIMIT 24";
-exports.query_select_section="";
-exports.query_select_exhibition="";
-exports.query_select_autor="";
+exports.query_data_limit="SELECT * FROM Object LIMIT 24";
+exports.query_data_="SELECT * FROM Object";
+exports.query_select_section="SELECT * FROM Sections";
+exports.query_select_exhibition="SELECT * FROM Exhibitions";
+exports.query_select_autor="SELECT * FROM Autors";

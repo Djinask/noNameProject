@@ -16,11 +16,9 @@ swig.init({
 
 app.use('/static', express.static('../public_html'));
 
-app.get('/object/:id', function(req, res) {
-    res.send(200, "BuBu: " + req.params.id);
-});
+app.get('/object/:id', require('./object.js'));
 app.get('/signup/:email', require('./account.js').app);
-var home = require('./data.js').app;
+var home = require('./home.js');
 app.get('/:selection', home);
 app.get('/', home);
 

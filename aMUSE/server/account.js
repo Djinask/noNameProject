@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var sendEmail = require('./mail.js');
 
 var generatePassword = function() {
 	var text = "";
@@ -7,6 +8,7 @@ var generatePassword = function() {
 	for(var i=0; i<passLen; i++) {
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
 	}
+
 	return text;	
 };
 
@@ -25,6 +27,7 @@ exports.app  = function(req, res) {
 			console.log(error);
 			res.send(200, 'An error occurred');
 		} else {
+			sendEmail(email, password);
 			res.send(200, 'Query executed, your email is: ' + email + 'and your password is: ' + password);
 		}
 	});	

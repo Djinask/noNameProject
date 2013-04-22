@@ -3,6 +3,7 @@ var swig = require('swig');
 var consolidate = require('consolidate');
 var app = express();
 
+app.use(express.cookieParser('muhahaha'));
 app.engine('.html', consolidate.swig);
 app.set('view engine', 'html');
 app.set('views', '../public_html');
@@ -26,5 +27,8 @@ app.get('/signup/:email', require('./account.js').app);
 var home = require('./home.js');
 app.get('/', home);
 app.get('/:selection', home);
+
+app.get('/photobook', require('./photobook.js'));
+app.get('/photobook/login', require('./login.js'))
 
 app.listen(8288);

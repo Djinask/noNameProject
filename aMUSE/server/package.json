@@ -1,0 +1,14 @@
+{
+  "name": "aMuse",
+  "version": "0.0.1",
+  "dependencies" : {
+    "express"   :  "3.x",
+    "swig" :  "0.13.x",
+    "consolidate" :  "0.8.x",
+    "mailer"    :  "0.6.x",
+    "mysql" :  "2.0.0-alpha7"
+  },
+  "engines": {
+    "node": ">=0.10.1"
+  }
+}

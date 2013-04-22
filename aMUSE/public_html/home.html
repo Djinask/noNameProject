@@ -216,25 +216,25 @@
             });
             $('#the_search_filter').change(function() {
                 var val = $(this).val();
-                $.mobile.changePage(val == '' ? '/' : ('/search-' + val), {
+                $.mobile.changePage(val == '' ? '/' : ('/items/search-' + val), {
                     transition: 'slide'
                 });
             });
             $('#exhibition_filter').change(function() {
                 var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/exhibition-' + val), {
+                $.mobile.changePage(val == 'none' ? '/' : ('/items/exhibition-' + val), {
                     transition: 'slide'
                 });
             });
             $('#author_filter').change(function() {
                 var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/author-' + val), {
+                $.mobile.changePage(val == 'none' ? '/' : ('/items/author-' + val), {
                     transition: 'slide'
                 });
             });
             $('#section_filter').change(function() {
                 var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/section-' + val), {
+                $.mobile.changePage(val == 'none' ? '/' : ('/items/section-' + val), {
                     transition: 'slide'
                 });
             });

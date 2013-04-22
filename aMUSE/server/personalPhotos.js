@@ -1,5 +1,3 @@
-var sql = require('./sql.js');
- 
 module.exports = function(req, res) {
 
 	var photo_id, title, description;

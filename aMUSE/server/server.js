@@ -24,16 +24,22 @@ http.ServerResponse.prototype.mysqlCreateConnection = function() {
 	conn.connect();
 	return conn;
 };
-http.ClientRequest.prototype.checkIfLogged = function(callback) {
+http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 	var id = this.cookies.user;
 	var hash = this.cookies.hash;
-	if(!id || !hash) callback(false);
-	else {
+	if(!id || !hash) {
+		res.redirect('/photobook/login');
+	} else {
 		var conn = mysqlCreateConnection();
-		conn.query(query.query_get_hash, [id], function(err, results) {
-			if(err) callback(err);
-			else {
-				callback(results[0].hash == hash);
+		conn.query(query.query_get_user, [id], function(err, results) {
+			if(err) {
+				res.send('Fatal error');
+			} else {
+				if(results[0].hash == hash) {
+					callback(results[0]);
+				} else {
+					res.redirect('/photobook/login');
+				}
 			}
 		});
 		conn.end();

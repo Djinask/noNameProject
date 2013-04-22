@@ -1,8 +1,6 @@
-var sql = require('./sql.js');
-
 module.exports = function(req, res) {
 	var conn = res.mysqlCreateConnection();
-	conn.query(sql.query_select_object, [req.params.id], function(error, results) {
+	conn.query(res.query.query_select_object, [req.params.id], function(error, results) {
 		if(error) {
 			console.log(error);
 			res.render('404.html');

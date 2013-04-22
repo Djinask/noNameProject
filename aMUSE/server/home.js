@@ -2,13 +2,7 @@ var sql = require('./sql.js');
 var mysql = require('mysql');
 
 module.exports = function(req, res) {
-	var connection = mysql.createConnection({
-		host: 'amuse.db.8861958.hostedresource.com',
-		user: 'amuse',
-		password: 'ABCdef123!',
-		database: 'amuse'
-	});
-	connection.connect();
+	var connection = res.mysqlCreateConnection();
 	var exhibitions, authors, sections, items;
 	connection.query(sql.query_select_exhibitions, function(error, result) {
 		if(error) console.log(error);

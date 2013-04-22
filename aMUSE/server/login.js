@@ -1,23 +1,24 @@
-var mysql = require('mysql');
 var sqls = require('./sql.js');
 
 // GET REQUIRED BOUNDS FOR LOG IN
 module.exports = function (req,res) {
-	var email = "";
-	var pass = "";
+	var email = req.body.email;
+	var pass = req.body.password;
 	
-	var connection = mysql.createConnection({
-		host: 'amuse.db.8861958.hostedresource.com',
-		user: 'amuse',
-		password: 'ABCdef123!',
-		database: 'amuse'
-	});
-
-	connection.createConnection(sqls.query_login,[email, pass], function(err, results) {
-		if(err || results.length == 0)	{
-			res.send('false');
-		} else {
-			res.send('true');
-		}
-	});
+	if(email && pass) {
+		var conn = res.mysqlCreateConnection();
+		conn.query('SELECT * FROM User WHERE email=? AND password=?', [email, pass], function(err, results) {
+			if(err || results.length == 0)	{
+				res.render('photobook/login.html', {error: true});
+			} else {
+				res.cookie('user', results[0].user_id);
+				res.redirect('/photobook');
+			}
+		});
+		conn.end();
+	} else if(req.cookies.user) {
+		res.redirect('/photobook');
+	} else {
+		res.render('photobook/login.html', {error: false});
+	}	
 };

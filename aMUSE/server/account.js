@@ -1,4 +1,3 @@
-var mysql = require('mysql');
 var sendEmail = require('./mail.js');
 
 var generatePassword = function() {
@@ -12,17 +11,11 @@ var generatePassword = function() {
 	return text;	
 };
 
-exports.app  = function(req, res) {
-	var connection = mysql.createConnection({
-		host: 'amuse.db.8861958.hostedresource.com',
-		user: 'amuse',
-		password: 'ABCdef123!',
-		database: 'amuse'
-	});
-	connection.connect();
+module.exports  = function(req, res) {
 	var email = req.params.email;
 	var password = generatePassword();
-	connection.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
+	var conn = res.mysqlCreateConnection();
+	conn.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
 		if(error) {
 			console.log(error);
 			res.send(200, 'error');
@@ -30,6 +23,6 @@ exports.app  = function(req, res) {
 			sendEmail(email, password);
 			res.send(200, 'success');
 		}
-	});	
-	connection.end();
+	});
+	conn.end();
 };

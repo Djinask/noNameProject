@@ -13,20 +13,18 @@
     		</div>
     		<div data-role="content">
                 {% if error %}
-                <div data-theme="b">
-                    <h2>Login data not aren't correct</h2>
+                <div data-theme="e">
+                    <h2>Login data aren't correct</h2>
                 </div>
                 {% endif %}
-    			<form action="/photobook/login" method="post">
-    				<div style="padding:10px 20px;">
-    					<h3>Please sign in</h3>
-    					<label for="em" class="ui-hidden-accessible">E-Mail:</label>
-    					<input type="text" name="email" id="em" value="" placeholder="e-mail">
-    					<label for="pw" class="ui-hidden-accessible">Password:</label>
-    					<input type="password" name="password" id="pw" value="" placeholder="password">
-    					<a id="submit_button" data-role="button" data-theme="b">Login</a>
-    				</div>
-    			</form>
+                <form action="/photobook/login" method="post" data-ajax="false">
+                   <h3>Please sign in</h3>
+                   <label for="em" class="ui-hidden-accessible">E-Mail:</label>
+                   <input type="text" name="email" id="em" value="" placeholder="e-mail">
+                   <label for="pw" class="ui-hidden-accessible">Password:</label>
+                   <input type="password" name="password" id="pw" value="" placeholder="password">
+                   <input type="submit" id="submit_button" data-role="button" data-theme="b" value="Login">
+    		  </form>
     		</div>
     	</div>
     </body>

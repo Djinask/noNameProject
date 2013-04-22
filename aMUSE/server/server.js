@@ -4,6 +4,7 @@ var consolidate = require('consolidate');
 var http = require('http');
 var app = express();
 var mysql = require('mysql');
+var query = require('./sql.js');
 
 var connection_data = {
 	host: 'amuse.db.8861958.hostedresource.com',
@@ -11,10 +12,32 @@ var connection_data = {
 	password: 'ABCdef123!',
 	database: 'amuse'
 };
+var mysqlCreateConnection = function() {
+	var conn = mysql.createConnection(connection_data);
+	conn.connect();
+	return conn;
+};
+http.ServerResponse.prototype.mysqlCreateConnection = mysqlCreateConnection;
+http.ServerResponse.prototype.query = query;
 http.ServerResponse.prototype.mysqlCreateConnection = function() {
 	var conn = mysql.createConnection(connection_data);
 	conn.connect();
 	return conn;
+};
+http.ClientRequest.prototype.checkIfLogged = function(callback) {
+	var id = this.cookies.user;
+	var hash = this.cookies.hash;
+	if(!id || !hash) callback(false);
+	else {
+		var conn = mysqlCreateConnection();
+		conn.query(query.query_get_hash, [id], function(err, results) {
+			if(err) callback(err);
+			else {
+				callback(results[0].hash == hash);
+			}
+		});
+		conn.end();
+	}
 };
 
 app.use(express.cookieParser('muhahaha'));

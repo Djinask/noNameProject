@@ -35,7 +35,7 @@ exports.query_login="SELECT * FROM User WHERE email = ? AND password = ? ";
 
 //INSERIMENTO PHOTO PERSONALI
 
-exports.query_photo_insert="INSERT INTO PersonalPhoto(user_id, comment) VALUES(?,?)";
+exports.query_photo_insert="INSERT INTO PersonalPhoto(user_id, comment, title) VALUES(?,?,?)";
 
 //VISUALIZZAZIONE FOTO PERSONALI
 

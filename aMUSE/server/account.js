@@ -15,7 +15,7 @@ module.exports  = function(req, res) {
 	var email = req.params.email;
 	var password = generatePassword();
 	var conn = res.mysqlCreateConnection();
-	conn.query("INSERT INTO User(email,password) VALUES (?, ?)", [email, password], function(error) {
+	conn.query(query.query_insert_mail, [email, password], function(error) {
 		if(error) {
 			console.log(error);
 			res.send(200, 'error');

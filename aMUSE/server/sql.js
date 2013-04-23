@@ -36,9 +36,13 @@ exports.query_get_user_data="SELECT * FROM User WHERE user_id = ?";
 exports.query_change_hash="UPDATE User SET hash = ? WHERE user_id = ?";
 exports.query_get_user="SELECT * FROM User WHERE user_id = ?";
 
+// UPDATE USER DATA
+exports.query_change_password="UPDATE User SET password = ? WHERE user_id = ?";
+exports.query_change_email="UDATE User SET email = ? WHERE user_id = ?";
+
 //INSERIMENTO PHOTO PERSONALI
 
-exports.query_photo_insert="INSERT INTO PersonalPhoto(user_id, comment, title) VALUES(?,?,?)";
+exports.query_insert_photo="INSERT INTO PersonalPhoto(user_id, comment, title) VALUES(?,?,?)";
 
 //VISUALIZZAZIONE FOTO PERSONALI
 

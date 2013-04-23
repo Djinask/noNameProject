@@ -17,6 +17,7 @@ module.exports = function (req,res) {
 			} else {
 				var h = hash();
 				var user_id = results[0].user_id;
+				var conn = res.mysqlCreateConnection();
 				conn.query(res.query.query_change_hash, [h, user_id], function(err, results) {
 					if(!err) {
 						res.cookie('user', user_id);
@@ -26,10 +27,12 @@ module.exports = function (req,res) {
 						console.log(err);
 						res.send('Fatal error');
 					}
-					conn.end();
+					
 				});
+				conn.end();
 			}
 		});
+		conn.end();
 	} else if(req.cookies.user) {
 		res.redirect('/photobook');
 	} else {

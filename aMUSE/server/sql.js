@@ -27,7 +27,7 @@ exports.query_select_object_by_section="SELECT * FROM Object inner join Sections
 exports.query_select_object_by_exhibition="SELECT * FROM Object inner join Exhibitions on Object.exhibition=Exhibitions.id_exhibition WHERE id_exhibition=? LIMIT ?, 24";
 
 
-exports.query_search = "SELECT DISTINCT object_id, name FROM Object inner join Autors on Object.autor=Autors.id_autor inner join Sections on Object.section=Sections.id_section inner join Exhibitions on Object.exhibition=Exhibitions.id_exhibition WHERE autor_name LIKE ? or section_name like ? or exhibition_name like ? or name = ? or description = ? LIMIT ?, 24";
+exports.query_search = "SELECT DISTINCT object_id, name FROM Object inner join Autors on Object.autor=Autors.id_autor inner join Sections on Object.section=Sections.id_section inner join Exhibitions on Object.exhibition=Exhibitions.id_exhibition WHERE autor_name LIKE ? or section_name LIKE ? or exhibition_name LIKE ? or name LIKE ? LIMIT ?, 24";
 
 //LOGIN
 
@@ -43,7 +43,7 @@ exports.query_photo_insert="INSERT INTO PersonalPhoto(user_id, comment, title) V
 //VISUALIZZAZIONE FOTO PERSONALI
 
 exports.query_photo_view="SELECT * FROM PersonalPhoto WHERE user_id=?";
-exports.query_get_bookmarks="SELECT * FROM UserBookmark NATURAL JOIN Object WHERE user_id = ?";
+exports.query_get_bookmarks="SELECT * FROM UserBookmark NATURAL JOIN Object JOIN Exhibitions ON exhibition = id_exhibition JOIN Autors ON autor = id_autor WHERE user_id = ?";
 
 //ADD PHOTOBOOK
 

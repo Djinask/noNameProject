@@ -38,6 +38,8 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 				if(results[0].hash == hash) {
 					callback(results[0]);
 				} else {
+					res.clearCookie('user');
+					res.clearCookie('hash');
 					res.redirect('/photobook/login');
 				}
 			}
@@ -73,6 +75,7 @@ app.get('/', home);
 app.get('/items/:selection', home);
 
 app.get('/photobook', require('./photobook.js'));
+app.get('/photobook/bookmarks', require('./bookmarks.js'));
 app.get('/photobook/login', require('./login.js'));
 app.post('/photobook/login', require('./login.js'));
 app.get('/photobook/logout', require('./logout.js'));

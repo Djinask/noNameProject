@@ -3,15 +3,18 @@ var fs = require('fs');
 var messages = [
 	'Photo successfully uploaded',
 	'Invalid fields',
-	'An error occurred during the upload',
-	'Fata error'
+	'An error occurred during the upload'
 ];
 
 module.exports = function(req, res) {
-	res.checkIfLogged(function(user){
-		var photo = req.files.photo;
+	req.checkIfLogged(res, function(user){
+		var photo = req.files ? req.files.photo : null;
 		var title = req.body.title;
 		var desc = req.body.description;
+		var output = {
+			email: user.email
+		};
+		console.log(req.files);
 		if(photo && title && desc) {
 			var conn = res.mysqlCreateConnection();
 			conn.query(sql.query_insert_photo, [user.user_id, desc, title], function(error, results) {
@@ -27,20 +30,27 @@ module.exports = function(req, res) {
 						strip: false
 					}, function(err) {
 						if(err) {
-							res.render('photobook/addphoto.html', {message: messages[2]});
+							output.message = messages[2];
 							console.log(err);
 						} else {
-							res.render('photobook/addphoto.html', {message: messages[0]});
+							output.message = messages[0];
 						}
 						fs.unlink(photo.path);
+						res.render('photobook/addphoto.html', output);
 					});
 				}
 			});
 			conn.end();
 		} else if(photo) {
 			fs.unlink(photo.path);
-		} else {
-			res.render('photobook/addphoto.html', {success: false});
+			output.message = messages[1];
+			res.render('photobook/addphoto.html', output);
+		} else if(req.method == 'POST') {
+			output.message = messages[1];
+			res.render('photobook/addphoto.html', output);
+		} else if(req.method == 'GET') {
+			output.message = false;
+			res.render('photobook/addphoto.html', output);
 		}
 	});
 };

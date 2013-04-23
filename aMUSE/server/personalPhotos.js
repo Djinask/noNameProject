@@ -1,5 +1,11 @@
 var imagemagick = require('imagemagick');
 var fs = require('fs');
+var messages = [
+	'Photo successfully uploaded',
+	'Invalid fields',
+	'An error occurred during the upload',
+	'Fata error'
+];
 
 module.exports = function(req, res) {
 	res.checkIfLogged(function(user){
@@ -21,9 +27,11 @@ module.exports = function(req, res) {
 						strip: false
 					}, function(err) {
 						if(err) {
-							res.send('Fatal error');
+							res.render('photobook/addphoto.html', {message: messages[2]});
 							console.log(err);
-						} else res.send('success');
+						} else {
+							res.render('photobook/addphoto.html', {message: messages[0]});
+						}
 						fs.unlink(photo.path);
 					});
 				}
@@ -31,6 +39,8 @@ module.exports = function(req, res) {
 			conn.end();
 		} else if(photo) {
 			fs.unlink(photo.path);
+		} else {
+			res.render('photobook/addphoto.html', {success: false});
 		}
 	});
 };

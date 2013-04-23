@@ -47,7 +47,10 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 };
 
 app.use(express.cookieParser('muhahaha'));
-app.use(express.bodyParser());
+app.use(express.bodyParser({
+	keepExtensions: true,
+	uploadDir: '../tmp'
+}));
 app.engine('.html', consolidate.swig);
 app.set('view engine', 'html');
 app.set('views', '../public_html');
@@ -75,6 +78,7 @@ app.get('/items/:selection', home);
 app.get('/photobook', require('./photobook.js'));
 app.get('/photobook/login', require('./login.js'));
 app.post('/photobook/login', require('./login.js'));
+app.post('/photobook/addphoto', require('./personalPhoto.js'));
 app.get('/photobook/logout', require('./logout.js'));
 
 app.listen(8288);

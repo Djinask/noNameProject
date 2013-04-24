@@ -30,6 +30,9 @@ module.exports = function(req, res) {
 					}, function(err, stdout, stderr) {
 						if(err) {
 							output.message = messages[2];
+							var conn = res.mysqlCreateConnection();
+							conn.query();
+							conn.end();
 						} else {
 							output.message = messages[0];
 						}

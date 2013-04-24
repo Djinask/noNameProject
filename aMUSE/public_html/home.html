@@ -3,6 +3,8 @@
         <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="/static/js/kiosk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
@@ -13,10 +15,10 @@
                 <h1>aMuse - The Muse Experience</h1>
             </div>
             <div data-role="content">
-                <input id="the_search_filter" type="search" placeholder="Search something...">
+                <input type="search" placeholder="Search something..." onchange="search_fn.call(this)">
                 <div class="ui-grid-d ui-responsive">
                     <div class="ui-block-a">
-                        <select id="exhibition_filter">
+                        <select onchange="exhibition_fn.call(this)">
                             <option value="none">Exhibition</option>
                             {% for i in exhibitions -%}
                             <option value="{{i.id_exhibition}}">{{i.exhibition_name}}</option>
@@ -24,16 +26,15 @@
                         </select>
                     </div>
                     <div class="ui-block-b">
-                        <select id="author_filter">
+                        <select onchange="author_fn.call(this)">
                             <option value="none">Autor</option>
                             {% for i in authors -%}
                             <option value="{{i.id_autor}}">{{i.autor_name}}</option>
                             {%- endfor %}
-
                         </select>
                     </div>
                     <div class="ui-block-c">
-                        <select id="section_filter">
+                        <select onchange="section_fn.call(this)">
                             <option value="none">Section</option>
                             {% for i in sections -%}
                             <option value="{{i.id_section}}">{{i.section_name}}</option>
@@ -58,7 +59,7 @@
                         </div>
                         <form>
                             <label>
-                                <input class="stellina" type="checkbox">Check me
+                                <input class="stellina" type="checkbox" data-amuse-id="{{i[0].object_id}}">{{ i[0].name }}
                             </label>
                         </form>
                     </div>
@@ -72,7 +73,7 @@
                         </div>
                         <form>
                             <label>
-                                <input class="stellina" type="checkbox">Check me
+                                <input class="stellina" type="checkbox" data-amuse-id="{{i[1].object_id}}">{{ i[1].name }}
                             </label>
                         </form>
                     </div>
@@ -86,7 +87,7 @@
                         </div>
                         <form>
                             <label>
-                                <input class="stellina" type="checkbox">Check me
+                                <input class="stellina" type="checkbox" data-amuse-id="{{i[2].object_id}}">{{ i[2].name }}
                             </label>
                         </form>
                     </div>
@@ -100,7 +101,7 @@
                         </div>
                         <form>
                             <label>
-                                <input class="stellina" type="checkbox">Check me
+                                <input class="stellina" type="checkbox" data-amuse-id="{{i[3].object_id}}">{{ i[3].name }}
                             </label>
                         </form>
                     </div>
@@ -129,16 +130,7 @@
                     </div>
                 </form>
             </div><!-- /content -->
-        </div>
-        <div data-role="page" id="ok">
-            <div data-role="content">
-                <h2 >Sending e-mail confirmed!</h2>
-                <p><a href="#home" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
-            </div><!-- /content -->
-        </div>
-        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-        <script type="text/javascript">
-        $(function(){
+            <script>
             $('#submit_button').click(function(e) {
                 var email = $('#email-1').val();
                 if($('#email-2').val() == email && email) {
@@ -153,31 +145,13 @@
                     alert('The two emails do not match');
                 }
             });
-            $('#the_search_filter').change(function() {
-                var val = $(this).val();
-                $.mobile.changePage(val == '' ? '/' : ('/items/search-' + val), {
-                    transition: 'slide'
-                });
-            });
-            $('#exhibition_filter').change(function() {
-                var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/items/exhibition-' + val), {
-                    transition: 'slide'
-                });
-            });
-            $('#author_filter').change(function() {
-                var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/items/author-' + val), {
-                    transition: 'slide'
-                });
-            });
-            $('#section_filter').change(function() {
-                var val = $(this).val();
-                $.mobile.changePage(val == 'none' ? '/' : ('/items/section-' + val), {
-                    transition: 'slide'
-                });
-            });
-        });
-        </script>
+            </script>
+        </div>
+        <div data-role="page" id="ok">
+            <div data-role="content">
+                <h2 >Sending e-mail confirmed!</h2>
+                <p><a href="#home" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
+            </div><!-- /content -->
+        </div>
     </body>
 </html>

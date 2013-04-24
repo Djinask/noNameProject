@@ -12,19 +12,25 @@
     			<h1>Login to aMUSE</h1>
     		</div>
     		<div data-role="content">
-                {% if error %}
-                <div data-theme="e">
-                    <h2>Login data aren't correct</h2>
-                </div>
-                {% endif %}
+            {% if error %}
+            <div data-theme="e">
+                <h2>Login data aren't correct</h2>
+            </div>
+            {% endif %}
+            <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a" style="text-align: center">
+                <img src="/static/img/amuse_logo.png" style="max-width: 100%; max-height: 200px">
+              </div>
+              <div class="ui-block-b" style="text-align: center">
                 <form action="/photobook/login" method="post" data-ajax="false">
-                   <h3>Please sign in</h3>
-                   <label for="em" class="ui-hidden-accessible">E-Mail:</label>
-                   <input type="text" name="email" id="em" value="" placeholder="e-mail">
-                   <label for="pw" class="ui-hidden-accessible">Password:</label>
-                   <input type="password" name="password" id="pw" value="" placeholder="password">
-                   <input type="submit" id="submit_button" data-role="button" data-theme="b" value="Login">
-    		  </form>
+                 <label for="em" class="ui-hidden-accessible">E-Mail:</label>
+                 <input type="text" name="email" id="em" value="" placeholder="e-mail" data-inline="true">
+                 <label for="pw" class="ui-hidden-accessible">Password:</label>
+                 <input type="password" name="password" id="pw" value="" placeholder="password" data-inline="true">
+                 <input type="submit" id="submit_button" data-role="button" data-theme="b" value="Login" data-inline="true">
+               </form>
+              </div>
+            </div>
     		</div>
     	</div>
     </body>

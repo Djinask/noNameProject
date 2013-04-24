@@ -14,8 +14,18 @@
                 <h1>My aMUSE</h1>
                 <a href="#panel" data-role="button" data-icon="gear">{{ email }}</a>
             </div>
-    		<div data-role="content">
-    			Home
+    		<div data-role="content" style="text-align: center">
+                <h2>Welcome in your meuseum experience!</h2>
+                <p>
+                    Here you can review your bookmarks, add your photos and share your experience!
+                </p>
+                <img src="/static/img/amuse_logo.png" style="max-width: 100%; max-height: 200px; display: block; margin: auto">
+
+                <a data-role="button" data-inline="true" href="/photobook/bookmarks" data-icon="star">My bookmarks</a>
+                <br>
+                <a data-role="button" data-inline="true" href="/photobook/myphotos" data-icon="grid">My photos</a>
+                <br>
+                <a data-role="button" data-inline="true" href="/photobook/addphoto" data-icon="plus">Add photo</a>
     		</div>
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">

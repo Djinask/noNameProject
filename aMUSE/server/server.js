@@ -81,8 +81,10 @@ app.get('/photobook', require('./photobook.js'));
 app.get('/photobook/bookmarks', require('./bookmarks.js'));
 app.get('/photobook/login', require('./login.js'));
 app.post('/photobook/login', require('./login.js'));
-app.post('/photobook/addphoto', require('./personalPhotos.js'));
+app.post('/photobook/addphoto', require('./addphoto.js'));
 app.get('/photobook/logout', require('./logout.js'));
-app.get('/photobook/addphoto', require('./personalPhotos.js'));
+app.get('/photobook/addphoto', require('./addphoto.js'));
+app.get('/photobook/photos/:name', require('./userphoto.js'));
+app.get('/photobook/myphotos', require('./myphotos.js'));
 
 app.listen(8288);

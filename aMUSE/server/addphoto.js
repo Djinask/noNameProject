@@ -14,10 +14,9 @@ module.exports = function(req, res) {
 		var output = {
 			email: user.email
 		};
-		console.log(req.files);
 		if(photo && title && desc) {
 			var conn = res.mysqlCreateConnection();
-			conn.query(sql.query_insert_photo, [user.user_id, desc, title], function(error, results) {
+			conn.query(res.query.query_insert_photo, [user.user_id, desc, title], function(error, results) {
 				if(error) res.send('Fatal error');
 				else {
 					imagemagick.resize({
@@ -28,10 +27,9 @@ module.exports = function(req, res) {
 						progressive: false,
 						width: 300,
 						strip: false
-					}, function(err) {
+					}, function(err, stdout, stderr) {
 						if(err) {
 							output.message = messages[2];
-							console.log(err);
 						} else {
 							output.message = messages[0];
 						}

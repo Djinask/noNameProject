@@ -46,7 +46,7 @@ exports.query_insert_photo="INSERT INTO PersonalPhoto(user_id, comment, title) V
 
 //VISUALIZZAZIONE FOTO PERSONALI
 
-exports.query_photo_view="SELECT * FROM PersonalPhoto WHERE user_id=?";
+exports.query_select_photos="SELECT * FROM PersonalPhoto WHERE user_id=?";
 exports.query_get_bookmarks="SELECT * FROM UserBookmark NATURAL JOIN Object JOIN Exhibitions ON exhibition = id_exhibition JOIN Autors ON autor = id_autor WHERE user_id = ?";
 
 //ADD PHOTOBOOK

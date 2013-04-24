@@ -18,7 +18,7 @@
                 {% if message %}
                 <h2>{{ message }}</h2>
                 {% endif %}
-    			<form action="/photobook/addphoto" method="post" enctype="multipart/form-data">
+    			<form action="/photobook/addphoto" method="post" enctype="multipart/form-data" data-ajax="false">
                     <label for="title">Title</label>
                     <input type="text" id="title" name="title">
                     <label for="description">Description</label>
@@ -32,8 +32,7 @@
                 <ul data-role="listview" data-inset="false" data-theme="a">
                     <li data-icon="home"><a href="/photobook">Home</a></li>
                     <li data-icon="star"><a href="/photobook/bookmarks">My bookmarks</a></li>
-                    <li data-icon="grid"><a href="#">My photos</a></li>
-                    <li data-icon="plus"><a href="#">Add bookmark</a></li>
+                    <li data-icon="grid"><a href="/photobook/myphotos">My photos</a></li>
                 </ul>
             </div>
             <div data-role="panel" id="panel" data-position="right" data-display="overlay" data-theme="a">

@@ -86,5 +86,6 @@ app.get('/photobook/logout', require('./logout.js'));
 app.get('/photobook/addphoto', require('./addphoto.js'));
 app.get('/photobook/photos/:name', require('./userphoto.js'));
 app.get('/photobook/myphotos', require('./myphotos.js'));
+app.get('/photobook/object/:id', require('./bookmark.js'));
 
 app.listen(8288);

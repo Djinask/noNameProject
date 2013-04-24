@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    	<div data-role="page">
+    		<div data-role="header">
+    			<h1>Login to aMUSE</h1>
+    		</div>
+    		<div data-role="content">
+            {% if error %}
+            <div data-theme="e">
+                <h2>Login data aren't correct</h2>
+            </div>
+            {% endif %}
+            <div class="ui-grid-a ui-responsive">
+              <div class="ui-block-a" style="text-align: center">
+                <img src="/static/img/amuse_logo.png" style="max-width: 100%; max-height: 200px">
+              </div>
+              <div class="ui-block-b" style="text-align: center">
+                <form action="/photobook/login" method="post" data-ajax="false">
+                 <label for="em" class="ui-hidden-accessible">E-Mail:</label>
+                 <input type="text" name="email" id="em" value="" placeholder="e-mail" data-inline="true">
+                 <label for="pw" class="ui-hidden-accessible">Password:</label>
+                 <input type="password" name="password" id="pw" value="" placeholder="password" data-inline="true">
+                 <input type="submit" id="submit_button" data-role="button" data-theme="b" value="Login" data-inline="true">
+               </form>
+              </div>
+            </div>
+    		</div>
+    	</div>
+    </body>
+</html>

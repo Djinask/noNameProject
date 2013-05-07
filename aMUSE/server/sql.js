@@ -13,7 +13,7 @@ exports.query_select_sections="SELECT * FROM Sections ORDER BY section_name";
 exports.query_select_exhibitions="SELECT * FROM Exhibitions ORDER BY exhibition_name";
 exports.query_select_authors="SELECT * FROM Autors ORDER BY autor_name";
 exports.query_select_object="SELECT * FROM Object JOIN Autors ON autor = id_autor JOIN Exhibitions ON exhibition = id_exhibition JOIN Sections ON section = id_section WHERE object_id=?";
-
+exports.query_get_exhibitions="SELECT * FROM Exhibitions";
 
 exports.query_insert_mail="INSERT INTO User(email,password) VALUES (?, ?)";
 //QUERY LIMIT

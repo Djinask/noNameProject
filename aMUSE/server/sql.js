@@ -54,9 +54,9 @@ exports.query_photobook_add="INSERT INTO UserBookmark(user_id, object_id) VALUES
 
 //REMOVING
 //remove bookmark
-exports.query_del_bookmark="DELETE FROM UserBookmark WHERE user_id = ?  AND object_id=?";
+exports.query_del_bookmark="DELETE * FROM UserBookmark WHERE user_id = ?  AND object_id=?";
 //remove PersonalPhoto
-exports.query_del_photo="DELETE FROM PersonalPhoto WHERE user_id = ? AND personal_photo_id=?";
+exports.query_del_photo="DELETE * FROM PersonalPhoto WHERE user_id = ? AND personal_photo_id = ?";
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
 
@@ -64,13 +64,19 @@ exports.query_del_photo="DELETE FROM PersonalPhoto WHERE user_id = ? AND persona
 exports.query_get_exhibitions="SELECT * FROM Exhibitions";
 exports.query_get_exhibition_by_id="SELECT * FROM Exhibitions WHERE id_exhibition = ?";
 exports.query_get_users="SELECT * FROM User";
-exports.query_get_single_user="SELECT * FROM User WHERE user_id = ?";
+exports.query_get_user_by_id="SELECT * FROM User WHERE user_id = ?";
+exports.query_get_sections="SELECT * FROM Sections";
+exports.query_get_section_by_id="SELECT section_name FROM Sections WHERE id_section = ?";
+exports.query_get_operas="SELECT * FROM Object";
+exports.query_get_opera_by_id="SELECT * FROM Object WHERE object_id = ?";
+exports.query_get_personal_photos="SELECT * FROM PersonalPhoto";
+exports.query_get_personal_photos_by_id="SELECT * FROM PersonalPhoto WHERE personal_photo_id = ?";
 
 // ADD QUERY
-exports.query_add_opera="INSERT INTO Object(name,autor) VALUES (?,?)";
-exports.query_add_desc_to_opera="INSERT INTO Object(description) VALUES (?)";
-exports.query_add_exhibition_to_opera="INSERT INTO Object(exhibition) VALUES (?)";
-exports.query_add_section_to_opera="INSERT INTO Object(section) VALUES (?)";
+exports.query_add_opera="INSERT INTO Object(name,autor,description,exhibition,section) VALUES (?,?,?,?,?)";
+exports.query_add_author="INSERT INTO Autors(autor_name) VALUES (?)";
+exports.query_add_exhibition="INSERT INTO Exhibitions(exhibition_name,beginning_date,end_date,description) VALUES (?,?,?,?)";
+exports.query_add_section="INSERT INTO Sections(section_name) VALUES (?)";
 
 // CHANGES QUERY
 	// Exhibition
@@ -84,5 +90,10 @@ exports.query_reset_opera_author="UPDATE Object SET autor = ? WHERE object_id = 
 exports.query_reset_opera_exhibition="UPDATE Object SET exhibition = ? WHERE object_id = ?";
 exports.query_reset_opera_section="UPDATE Object SET section = ? WHERE object_id = ?";
 exports.query_reset_opera_description="UPDATE Object SET description = ? WHERE object_id = ?";
+exports.query_reset_author_name="UPDATE Autors SET autor_name = ? WHERE id_autor = ?";
 	// Sections
 exports.query_reset_section_name="UPDATE Sections SET section_name = ? WHERE id_section = ?";
+	// BAN User
+exports.query_remove_user="DELETE * FROM User WHERE user_id = ?";
+exports.query_remove_bookmarked="DELETE * FROM UserBookmark WHERE user_id = ?";
+exports.query_remove_personal_photos="DELETE * FROM PersonalPhoto WHERE user_id = ?"

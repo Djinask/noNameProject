@@ -13,7 +13,6 @@ exports.query_select_sections="SELECT * FROM Sections ORDER BY section_name";
 exports.query_select_exhibitions="SELECT * FROM Exhibitions ORDER BY exhibition_name";
 exports.query_select_authors="SELECT * FROM Autors ORDER BY autor_name";
 exports.query_select_object="SELECT * FROM Object JOIN Autors ON autor = id_autor JOIN Exhibitions ON exhibition = id_exhibition JOIN Sections ON section = id_section WHERE object_id=?";
-exports.query_get_exhibitions="SELECT * FROM Exhibitions";
 
 exports.query_insert_mail="INSERT INTO User(email,password) VALUES (?, ?)";
 //QUERY LIMIT
@@ -58,3 +57,32 @@ exports.query_photobook_add="INSERT INTO UserBookmark(user_id, object_id) VALUES
 exports.query_del_bookmark="DELETE FROM UserBookmark WHERE user_id = ?  AND object_id=?";
 //remove PersonalPhoto
 exports.query_del_photo="DELETE FROM PersonalPhoto WHERE user_id = ? AND personal_photo_id=?";
+
+// ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
+
+// GET QUERY
+exports.query_get_exhibitions="SELECT * FROM Exhibitions";
+exports.query_get_exhibition_by_id="SELECT * FROM Exhibitions WHERE id_exhibition = ?";
+exports.query_get_users="SELECT * FROM User";
+exports.query_get_single_user="SELECT * FROM User WHERE user_id = ?";
+
+// ADD QUERY
+exports.query_add_opera="INSERT INTO Object(name,autor) VALUES (?,?)";
+exports.query_add_desc_to_opera="INSERT INTO Object(description) VALUES (?)";
+exports.query_add_exhibition_to_opera="INSERT INTO Object(exhibition) VALUES (?)";
+exports.query_add_section_to_opera="INSERT INTO Object(section) VALUES (?)";
+
+// CHANGES QUERY
+	// Exhibition
+exports.query_reset_exhibition_name="UDATE Exhibitions SET exhibition_name = ? WHERE id_exhibition = ?";
+exports.query_reset_exhibition_beginning="UDATE Exhibitions SET beginning_date = ? WHERE id_exhibition = ?";
+exports.query_reset_exhibition_end="UDATE Exhibitions SET end_date = ? WHERE id_exhibition = ?";
+exports.query_reset_exhibition_description="UDATE Exhibitions SET description = ? WHERE id_exhibition = ?";
+	// Opera
+exports.query_reset_opera_name="UPDATE Object SET name = ? WHERE object_id = ?";
+exports.query_reset_opera_author="UPDATE Object SET autor = ? WHERE object_id = ?";
+exports.query_reset_opera_exhibition="UPDATE Object SET exhibition = ? WHERE object_id = ?";
+exports.query_reset_opera_section="UPDATE Object SET section = ? WHERE object_id = ?";
+exports.query_reset_opera_description="UPDATE Object SET description = ? WHERE object_id = ?";
+	// Sections
+exports.query_reset_section_name="UPDATE Sections SET section_name = ? WHERE id_section = ?";

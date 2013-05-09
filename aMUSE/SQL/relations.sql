@@ -9,44 +9,70 @@ UserComment(user_id, object_id, comment, verified)
 USE `amuse`; 
 /*seleziona il database in cui creare le tabelle*/
 
-CREATE TABLE `User` (
+CREATE TABLE `aMuseUser` (
 `user_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-`email` VARCHAR(255) UNIQUE KEY NOT NULL,
-`password` CHAR(32) NOT NULL
-) ENGINE=INNODB;
+`user_email` VARCHAR(255) UNIQUE KEY NOT NULL,
+`user_password` CHAR(32) NOT NULL
+) ENGINE=MYISAM;
 
-CREATE TABLE `Object` (
+CREATE TABLE `aMuseObject` (
 `object_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-`name` VARCHAR(255) UNIQUE KEY NOT NULL,
-`exhibition` INT UNSIGNED NOT NULL,
-`section` INT UNSIGNED NOT NULL,
-INDEX(`exhibition`, `section`)
-) ENGINE=INNODB;
+`object_name` VARCHAR(255) NOT NULL,
+`exhibition_id` INT UNSIGNED NOT NULL,
+`section_id` INT UNSIGNED NOT NULL,
+`author_id` INT UNSIGNED NOT NULL,
+`object_description` TEXT,
+INDEX(`exhibition_id`, `section_id`, `author_id`, `object_name`),
+FULLTEXT INDEX(`object_name`,`object_description`)
+) ENGINE=MYISAM;
 
-CREATE TABLE `PersonalPhoto` (
-`personal_photo_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE `aMuseExhibition` (
+`exhibition_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+`exhibition_name` VARCHAR(255),
+`exhibition_begin` DATE,
+`exhibition_end` DATE,
+`exhibition_description` TEXT,
+INDEX(`exhibition_name`, `exhibition_begin`, `exhibition_end`),
+FULLTEXT INDEX(`exhibition_name`,`exhibition_description`)
+) ENGINE=MYISAM;
+
+CREATE TABLE `aMuseSection` (
+`section_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+`section_name` VARCHAR(255),
+INDEX(`section_name`),
+FULLTEXT INDEX(`section_name`)
+) ENGINE=MYISAM;
+
+CREATE TABLE `aMuseAuthor` (
+`author_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+`author_name` VARCHAR(255),
+INDEX(`author_name`),
+FULLTEXT INDEX(`author_name`)
+) ENGINE=MYISAM;
+
+CREATE TABLE `aMusePersonalPhoto` (
+`personalphoto_id` INT UNSIGNED AUTO_INCREMENT,
 `user_id` INT UNSIGNED NOT NULL,
 `object_id` INT UNSIGNED NOT NULL,
-`comment` TEXT,
-CONSTRAINT FOREIGN KEY (`object_id`) REFERENCES `Object`(`object_id`) ON UPDATE CASCADE,
-CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON UPDATE CASCADE
-) ENGINE=INNODB;
+`visit_id` INT UNSIGNED NOT NULL,
+`personalphoto_name` VARCHAR(255),
+`personalphoto_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`personalphoto_comment` TEXT,
+PRIMARY KEY (`personalphoto_id`),
+INDEX(`user_id`,`visit_id`,`object_id`,`personalphoto_time`)
+) ENGINE=MYISAM;
 
-CREATE TABLE `UserBookmark` (
+CREATE TABLE `aMuseVisit` (
+`visit_id` INT UNSIGNED AUTO_INCREMENT,
+`user_id` INT UNSIGNED,
+`visit_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+PRIMARY KEY (`user_id`, `visit_id`)
+) ENGINE=MYISAM;
+
+CREATE TABLE `aMuseUserBookmark` (
 `user_id` INT UNSIGNED,
 `object_id` INT UNSIGNED,
+`visit_id` INT UNSIGNED,
 PRIMARY KEY (`user_id`, `object_id`),
-CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON UPDATE CASCADE,
-CONSTRAINT FOREIGN KEY (`object_id`) REFERENCES `Object`(`object_id`) ON UPDATE CASCADE
-) ENGINE=INNODB;
-
-CREATE TABLE `UserComment` (
-`user_id` INT UNSIGNED,
-`object_id` INT UNSIGNED,
-`comment` TEXT NOT NULL,
-`verified` BOOLEAN NOT NULL,
-INDEX(`verified`),
-PRIMARY KEY (`user_id`, `object_id`),
-CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON UPDATE CASCADE,
-CONSTRAINT FOREIGN KEY (`object_id`) REFERENCES `Object`(`object_id`) ON UPDATE CASCADE
-) ENGINE=INNODB;
+INDEX(`visit_id`)
+) ENGINE=MYISAM;

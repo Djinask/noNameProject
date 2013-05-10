@@ -88,4 +88,16 @@ app.get('/photobook/photos/:name', require('./userphoto.js'));
 app.get('/photobook/myphotos', require('./myphotos.js'));
 app.get('/photobook/object/:id', require('./bookmark.js'));
 
+
+//ADMIN SECTION
+app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
+app.get('/admin', require ('./admin/home.js'));
+app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
+app.get('/admin/items', require ('./admin/items.js'));
+app.get('/admin/items/:id', require('./admin/item_info.js'));
+app.get('/admin/authors', require ('./admin/authors.js'));
+app.get('/admin/users', require ('./admin/users.js'));
+app.get('/admin/sections', require ('./admin/sections.js'));
+
+
 app.listen(8288);

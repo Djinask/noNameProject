@@ -1,3 +1,5 @@
+$.cookie.json = true;
+
 function search_fn() {
     var val = $(this).val();
     $.mobile.changePage(val == '' ? '/' : ('/items/search-' + val), {
@@ -26,6 +28,18 @@ function section_fn() {
     });
 }
 
-function check_fn() {
-    
+function checkbox_fn() {
+    var cookie = $.cookie('bookmarks');
+    var id = $(this).data('amuse-id') + '';
+    if(!cookie) cookie = {};
+    cookie[id] = undefined;
+    if(this.checked) {
+        cookie[id] = 1;
+    }
+    $.cookie('bookmarks', cookie);
+}
+
+function clear_fn() {
+    $.cookie('bookmarks', '{}');
+    $('input:checkbox[data-amuse-id]:checked').click();
 }

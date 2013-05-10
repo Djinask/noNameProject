@@ -99,5 +99,7 @@ app.get('/admin/authors', require ('./admin/authors.js'));
 app.get('/admin/users', require ('./admin/users.js'));
 app.get('/admin/sections', require ('./admin/sections.js'));
 
+//mobileapi
+app.get('/mobileapi/login/:email/:pass', require('./mobileapi/login.js'));
 
-app.listen(8288);
+app.listen(process.env.PORT || 8288);

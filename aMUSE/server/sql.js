@@ -33,7 +33,6 @@ exports.query_search = "SELECT DISTINCT * FROM aMuseObject NATURAL JOIN aMuseAut
 exports.query_login="SELECT * FROM aMuseUser WHERE user_email = ? AND user_password = ? ";
 exports.query_get_user_data="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_change_hash="UPDATE aMuseUser SET hash = ? WHERE user_id = ?";
-exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";
 
 // UPDATE USER DATA
 exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ?";
@@ -73,6 +72,7 @@ exports.query_get_personal_photos="SELECT * FROM aMusePersonalPhoto";
 exports.query_get_personal_photos_by_id="SELECT * FROM aMusePersonalPhoto WHERE personalphoto_id = ?";
 exports.query_get_authors="SELECT * FROM aMuseAuthor";
 exports.query_get_authors_by_id="SELECT author_name FROM aMuseAuthor WHERE author_id = ?";
+exports.query_get_authors_in_alpha_order="SELECT * FROM aMuseAuthor ORDER BY author_name";
 
 // ADD QUERY
 exports.query_add_opera="INSERT INTO aMuseObject(object_name,exhibition_id,section_id,author_id,object_description) VALUES (?,?,?,?,?)";

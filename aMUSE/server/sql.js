@@ -80,6 +80,18 @@ exports.query_add_author="INSERT INTO aMuseAuthor(author_name) VALUES (?)";
 exports.query_add_exhibition="INSERT INTO aMuseExhibition(exhibition_name,exhibition_begin,exhibition_end,exhibition_description) VALUES (?,?,?,?)";
 exports.query_add_section="INSERT INTO aMuseSection(section_name) VALUES (?)";
 
+// REMOVE QUERY
+	// Ban aMuseUser
+exports.query_remove_user="DELETE * FROM aMuseUser WHERE user_id = ?";
+exports.query_remove_bookmarked="DELETE * FROM aMuseUserBookmark WHERE user_id = ?";
+exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?";
+	// Various removal
+exports.query_remove_opera_by_id="DELETE FROM aMuseObject WHERE object_id = ?";
+exports.query_remove_author_by_id="DELETE FROM aMuseAuthor WHERE author_id = ?";
+exports.query_remove_section_by_id="DELETE FROM aMuseSection WHERE section_id = ?";
+exports.query_remove_visit_by_id="DELETE FROM aMuseVisit WHERE visit_id = ?";
+exports.query_remove_exhibition_by_id="DELETE FROM aMuseExhibition WHERE exhibition_id = ?";
+
 // CHANGES QUERY
 	// Exhibition
 exports.query_reset_exhibition_name="UDATE aMuseExhibition SET exhibition_name = ? WHERE exhibition_id = ?";
@@ -95,9 +107,3 @@ exports.query_reset_opera_description="UPDATE aMuseObject SET object_description
 exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE author_id = ?";
 	// aMuseSection
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";
-	// Ban aMuseUser
-exports.query_remove_user="DELETE * FROM aMuseUser WHERE user_id = ?";
-exports.query_remove_bookmarked="DELETE * FROM aMuseUserBookmark WHERE user_id = ?";
-exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?";
-	// Various removal
-exports.query_remove_opera_by_id="DELETE * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseVisit NATURAL JOIN aMuseUserBookmark WHERE object_id = ?";

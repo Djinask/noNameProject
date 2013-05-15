@@ -95,7 +95,9 @@ exports.query_reset_opera_description="UPDATE aMuseObject SET object_description
 exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE author_id = ?";
 	// aMuseSection
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";
-	// BAN aMuseUser
+	// Ban aMuseUser
 exports.query_remove_user="DELETE * FROM aMuseUser WHERE user_id = ?";
 exports.query_remove_bookmarked="DELETE * FROM aMuseUserBookmark WHERE user_id = ?";
-exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?"
+exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?";
+	// Various removal
+exports.query_remove_opera_by_id="DELETE * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseVisit NATURAL JOIN aMuseUserBookmark WHERE object_id = ?";

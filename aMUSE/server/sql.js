@@ -79,6 +79,7 @@ exports.query_add_opera="INSERT INTO aMuseObject(object_name,exhibition_id,secti
 exports.query_add_author="INSERT INTO aMuseAuthor(author_name) VALUES (?)";
 exports.query_add_exhibition="INSERT INTO aMuseExhibition(exhibition_name,exhibition_begin,exhibition_end,exhibition_description) VALUES (?,?,?,?)";
 exports.query_add_section="INSERT INTO aMuseSection(section_name) VALUES (?)";
+exports.query_add_visit="INSERT INTO aMuseVisit(user_id) VALUES (?)";
 
 // REMOVE QUERY
 	// Ban aMuseUser
@@ -105,5 +106,7 @@ exports.query_reset_opera_exhibition="UPDATE aMuseObject SET exhibition_id = ? W
 exports.query_reset_opera_section="UPDATE aMuseObject SET section_id = ? WHERE object_id = ?";
 exports.query_reset_opera_description="UPDATE aMuseObject SET object_description = ? WHERE object_id = ?";
 exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE author_id = ?";
-	// aMuseSection
+	// Section
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";
+	// visit
+exports.query_reset_visit_user="UPDATE aMuseVisit SET user_id = ? WHERE visit_id = ?";

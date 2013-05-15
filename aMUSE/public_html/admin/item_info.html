@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="/static/js/admin.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
@@ -22,32 +23,51 @@
                 </h1>
 
 
-    <form>
+    <form data-ajax="false">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="name2">Name:</label>
                 <input type="text" name="name2" id="name2" value="{{it_info.object_name}}" data-clear-btn="true">
             </li>
             <li data-role="fieldcontain">
-                <label for="name2">Author:</label>
-                <input type="text" name="name2" id="name2" value="{{it_info.author_name}}" data-clear-btn="true">
+                <div data-role="fieldcontain">
+                    <label for="select-native-1">Author:<br>Current: {{it_info.author_name}}</label>
+                    <select name="select-native-1" id="select-native-1">
+                        {% for e in authors %}
+                        <option value="1">{{e.author_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </li>
             <li data-role="fieldcontain">
                 <label for="name2">Decsription:</label>
                 <textarea>{{it_info.object_description}}</textarea>
             </li>
             <li data-role="fieldcontain">
-                <label for="name2">Exhibition:</label>
-                <input type="text" name="name2" id="name2" value="{{it_info.exhibition_name}}" data-clear-btn="true">
+                <div data-role="fieldcontain">
+                    <label for="select-native-1">Exhibition:<br>Current: {{it_info.exhibition_name}}</label>
+                    <select name="select-native-1" id="select-native-1">
+                        {% for e in exhibitions %}
+                        <option value="1">{{e.exhibition_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </li>
              <li data-role="fieldcontain">
-                <label for="name2">Section:</label>
-                <input type="text" name="name2" id="name2" value="{{it_info.section_name}}" data-clear-btn="true">
+                <div data-role="fieldcontain">
+                    <label for="select-native-1">Section:<br>Current: {{it_info.section_name}}</label>
+                    <select name="select-native-1" id="select-native-1">
+                        {% for e in sections %}
+                        <option value="1">{{e.section_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
             </li>
             <li data-role="fieldcontain">
-                                <label for="file">Image:</label>
-                                <input type="file" name="file" id="file" value="">
-                            </li>
+                <img src="/static/photos/{{it_info.object_id}}.jpg">
+                <label for="file">Image:</label>
+                <input type="file" name="file" id="file" value="">
+            </li>
             <li class="ui-body ui-body-b">
                 <fieldset class="ui-grid-a">
                         <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
@@ -60,8 +80,8 @@
 
     		<div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                     <ul data-role="listview" data-inset="false" data-theme="a">
-                        <li data-icon="plus"><a href="#">Add Items</a></li>
-                        <li data-icon="plus"><a href="/admin/users">aMUse accounts</a></li>
+                        <li data-icon="plus"><a href="/admin/add_menu">Add Menu</a></li>
+                        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
                         <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
                         <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
                         <li data-icon="plus"><a href="/admin/authors">Authors</a></li>

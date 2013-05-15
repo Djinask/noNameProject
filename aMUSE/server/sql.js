@@ -100,4 +100,4 @@ exports.query_remove_user="DELETE * FROM aMuseUser WHERE user_id = ?";
 exports.query_remove_bookmarked="DELETE * FROM aMuseUserBookmark WHERE user_id = ?";
 exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?";
 	// Various removal
-exports.query_remove_opera_by_id="DELETE * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseVisit NATURAL JOIN aMuseUserBookmark WHERE object_id = ?";
+exports.query_remove_opera_by_id="DELETE FROM aMuseObject WHERE object_id = ?";

@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="/static/js/admin.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
@@ -21,25 +22,47 @@
                 </p>
                 <br>
 
-                <div data-role="collapsible" data-theme="b" data-content-theme="c">
-                    <h2>Filter by Exhibition</h2>
-                    <ul data-role="listview" data-filter="true">
+                <div data-role="fieldcontain">
+                    <label>Filter by Exhibition:  </label>
+                    <select onchange = "exhibition_fn.call(this)">
+                        <option disabled selected="selected">Exhibition</option>
                         {% for e in exhibitions %}
-                        <li><a href="">{{e.exhibition_name}}</a></li>
+                        <option value="{{e.exhibition_id}}">{{e.exhibition_name}}</option>
                         {% endfor %}
-                    </ul>
+                    </select>
                 </div>
-                <br>
-                <br>
 
+                <div data-role="fieldcontain">
+                    <label>Filter by Author:  </label>
+                    <select onchange = "author_fn.call(this)">
+                         <option disabled selected="selected">Author</option>
+                        {% for e in authors %}
+                        <option value="{{e.author_id}}">{{e.author_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
 
+                <div data-role="fieldcontain">
+                    <label>Filter by Section:  </label>
+                    <select onchange = "section_fn.call(this)">
+                         <option disabled selected="selected">Section</option>
+                        {% for e in sections %}
+                        <option value="{{e.section_id}}">{{e.section_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
                     <ul data-role="listview" data-split-icon="delete" data-split-theme="d" data-inset="true">
                         {% for e in operas %}
-                        <li><a href="/admin/items/{{ e.object_id }}">
-                            <img src="http://artigianeide.files.wordpress.com/2012/06/libro-icona.jpg">
-                            <h2>{{ e.object_name }}</h2>
-                            <p>{{e.author_name}}</p></a>
-                            <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Delete</a>
+                        <li>
+                            <a href="/admin/items/{{ e.object_id }}">
+                                <img src="/static/photos/{{e.object_id}}.jpg">
+                                <h2>{{ e.object_name }}</h2>
+                                <p>{{e.author_name}}</p>
+                            </a>
+                            <a href="/admin/items/remove/{{"object"}}/{{e.object_id}}" data-rel ="dialog">
+                                Delete
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -48,8 +71,7 @@
 
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                     <ul data-role="listview" data-inset="false" data-theme="a">
-                        <li data-icon="plus"><a href="#">Add Items</a></li>
-                        <li data-icon="plus"><a href="/admin/users">aMUse accounts</a></li>
+                        <li data-icon="plus"><a href="/admin/add_ms">aMuse accounts</a></li>
                         <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
                         <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
                         <li data-icon="plus"><a href="/admin/authors">Authors</a></li>

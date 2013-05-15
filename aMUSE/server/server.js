@@ -93,11 +93,26 @@ app.get('/photobook/object/:id', require('./bookmark.js'));
 app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
 app.get('/admin', require ('./admin/home.js'));
 app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
-app.get('/admin/items', require ('./admin/items.js'));
+
+var admin_items = require ('./admin/items.js');
+
+app.get('/admin/items', admin_items);
+app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));
+app.get('/admin/authors/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/authors/remove/c/:type/:id', require ('./admin/remove_c.js'));
+app.get('/admin/items/:filter/:id', admin_items);
 app.get('/admin/items/:id', require('./admin/item_info.js'));
 app.get('/admin/authors', require ('./admin/authors.js'));
 app.get('/admin/users', require ('./admin/users.js'));
 app.get('/admin/sections', require ('./admin/sections.js'));
+app.get('/admin/authors/:id', require ('./admin/author_info.js'));
+app.get('/admin/sections/:id', require('./admin/section_info.js'));
+app.get('/admin/add_menu', require ('./admin/add_menu.js'));
+app.get('/admin/add_menu/author_add', require ('./admin/author_add.js'));
+app.get('/admin/add_menu/ex_add', require ('./admin/ex_add.js'));
+app.get('/admin/add_menu/item_add', require ('./admin/item_add.js'));
+app.get('/admin/add_menu/section_add', require ('./admin/section_add.js'));
 
 //mobileapi
 app.get('/mobileapi/login/:email/:pass', require('./mobileapi/login.js'));

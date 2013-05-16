@@ -12,7 +12,8 @@ USE `amuse`;
 CREATE TABLE `aMuseUser` (
 `user_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 `user_email` VARCHAR(255) UNIQUE KEY NOT NULL,
-`user_password` CHAR(32) NOT NULL
+`user_password` CHAR(32) NOT NULL,
+`user_reg_time` TIMESTAMP CURRENT_TIMESTAMP
 ) ENGINE=MYISAM;
 
 CREATE TABLE `aMuseObject` (

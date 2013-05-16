@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="/static/js/admin.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
@@ -27,15 +28,17 @@
                     	<img src="http://artigianeide.files.wordpress.com/2012/06/libro-icona.jpg">
                     	<h2>{{ e.exhibition_name }}</h2>
                     	<p>{{e.exhibition_name}}</p></a>
-                    	<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Delete</a>
+                    	 <a href="/admin/exhibitions/remove/exhibitions/{{e.exhibition_id}}" data-rel ="dialog">
+                                Delete
+                        </a>
                 	</li>
                 	{% endfor %}
             	</ul>
 
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                     <ul data-role="listview" data-inset="false" data-theme="a">
-                        <li data-icon="plus"><a href="#">Add Items</a></li>
-                        <li data-icon="plus"><a href="/admin/users">aMUse accounts</a></li>
+                        <li data-icon="plus"><a href="/admin/add_menu">Add Menu</a></li>
+                        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
                         <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
                         <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
                         <li data-icon="plus"><a href="/admin/authors">Authors</a></li>

@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="/static/js/admin.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
@@ -24,24 +25,24 @@
                     <form>
                         <ul data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
-                                <label for="name2">Name:</label>
-                                <input type="text" name="name2" id="name2" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
+                                <label for="ex_info_name">Name:</label>
+                                <input type="text" name="name2" id="ex_info_name" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="textarea2">Description:</label>
-                            <textarea cols="40" rows="8" name="textarea2" id="textarea2">{{exhibitions.description}}</textarea>
+                                <label for="ex_info_description">Description:</label>
+                            <textarea cols="40" rows="8" name="textarea2" id="ex_info_description">{{exhibitions.exhibition_description}}
+                            </textarea>
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="file">Image:</label>
-                                <input type="file" name="file" id="file" value="">
+                                <label for="ex_info_begin_date">Begin Date: <br> Current: {{exhibitions.exhibition_begin | date("d/m/Y")}} 
+                                </label>
+                                <input type="date" name="date" id="ex_info_begin_date" value="">
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="date">Begin Date:</label>
-                                <input type="date" name="date" id="date" value="">
-                            </li>
-                            <li data-role="fieldcontain">
-                               <label for="date">End Date:</label>
-                               <input type="date" name="date" id="date" value="">
+                               <label for="ex_info_end_date"> 
+                                    End Date: <br> Current: {{exhibitions.exhibition_end | date("d/m/Y")}}
+                               </label>
+                               <input type="date" name="date" id="ex_info_end_date" value="">
                             </li>
                             <li class="ui-body ui-body-b">
                                 <fieldset class="ui-grid-a">
@@ -53,11 +54,10 @@
                     </form>
 
 
-
 					<div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                     <ul data-role="listview" data-inset="false" data-theme="a">
                         <li data-icon="plus"><a href="#">Add Items</a></li>
-                        <li data-icon="plus"><a href="/admin/users">aMUse accounts</a></li>
+                        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
                         <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
                         <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
                         <li data-icon="plus"><a href="/admin/authors">Authors</a></li>

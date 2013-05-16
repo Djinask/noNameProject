@@ -6,6 +6,8 @@ module.exports = function(req,res){
 			console.log(error);
 			res.send('Fatal error');
 		} else {
+			result[0].exhibition_begin = new Date(result[0].exhibition_begin);
+			result[0].exhibition_end = new Date(result[0].exhibition_end);
 			res.render('admin/ex_info.html', {
 				exhibitions: result[0]
 			});

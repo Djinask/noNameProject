@@ -28,7 +28,9 @@
                     	<img src="http://artigianeide.files.wordpress.com/2012/06/libro-icona.jpg">
                     	<h2>{{ e.exhibition_name }}</h2>
                     	<p>{{e.exhibition_name}}</p></a>
-                    	<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Delete</a>
+                    	 <a href="/admin/exhibitions/remove/exhibitions/{{e.exhibition_id}}" data-rel ="dialog">
+                                Delete
+                        </a>
                 	</li>
                 	{% endfor %}
             	</ul>

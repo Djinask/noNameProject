@@ -29,8 +29,10 @@
                 <li><a href="/admin/authors/{{e.author_id}}">
                     <img src="http://artigianeide.files.wordpress.com/2012/06/libro-icona.jpg">
                     <h2>{{ e.author_name }}</h2>
-                    <p></p></a>
-                    <a href="/admin/authors/remove/{{"author"}}/{{e.author_id}}" data-rel="popup" data-position-to="window" data-transition="pop">Delete</a>
+                    </a>
+                    <a href="/admin/authors/remove/authors/{{e.author_id}}" data-rel ="dialog">
+                                Delete
+                    </a>
                 </li>
                 {% endfor %}
             </ul>

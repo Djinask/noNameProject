@@ -25,24 +25,24 @@
                     <form>
                         <ul data-role="listview" data-inset="true">
                             <li data-role="fieldcontain">
-                                <label for="name2">Name:</label>
-                                <input type="text" name="name2" id="name2" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
+                                <label for="ex_info_name">Name:</label>
+                                <input type="text" name="name2" id="ex_info_name" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="textarea2">Description:</label>
-                            <textarea cols="40" rows="8" name="textarea2" id="textarea2">{{exhibitions.description}}</textarea>
+                                <label for="ex_info_description">Description:</label>
+                            <textarea cols="40" rows="8" name="textarea2" id="ex_info_description">{{exhibitions.exhibition_description}}
+                            </textarea>
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="file">Image:</label>
-                                <input type="file" name="file" id="file" value="">
+                                <label for="ex_info_begin_date">Begin Date: <br> Current: {{exhibitions.exhibition_begin | date("d/m/Y")}} 
+                                </label>
+                                <input type="date" name="date" id="ex_info_begin_date" value="">
                             </li>
                             <li data-role="fieldcontain">
-                                <label for="date">Begin Date:</label>
-                                <input type="date" name="date" id="date" value="{{exhibitions.begin}}">
-                            </li>
-                            <li data-role="fieldcontain">
-                               <label for="date">End Date:</label>
-                               <input type="date" name="date" id="date" value="{{exhibition.end}}">
+                               <label for="ex_info_end_date"> 
+                                    End Date: <br> Current: {{exhibitions.exhibition_end | date("d/m/Y")}}
+                               </label>
+                               <input type="date" name="date" id="ex_info_end_date" value="">
                             </li>
                             <li class="ui-body ui-body-b">
                                 <fieldset class="ui-grid-a">
@@ -52,7 +52,6 @@
                             </li>
                         </ul>
                     </form>
-
 
 
 					<div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">

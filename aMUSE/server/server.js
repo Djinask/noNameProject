@@ -90,17 +90,26 @@ app.get('/photobook/object/:id', require('./bookmark.js'));
 
 
 //ADMIN SECTION
-app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
-app.get('/admin', require ('./admin/home.js'));
-app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
 
 var admin_items = require ('./admin/items.js');
 
-app.get('/admin/items', admin_items);
+
+// remove section
 app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));
 app.get('/admin/authors/remove/:type/:id', require ('./admin/remove.js'));
-app.get('/admin/authors/remove/c/:type/:id', require ('./admin/remove_c.js'));
+app.get('/admin/sections/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/exhibitions/remove/:type/:id', require ('./admin/remove.js'));
+// add section
+app.post('/admin/add_menu/exhibition_add', require ("./admin/ex_add_c.js"));
+app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));
+app.post('/admin/add_menu/section_add', require ("./admin/section_add_c.js"));
+
+// get section
+app.get('/admin/items', admin_items);
+app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
+app.get('/admin', require ('./admin/home.js'));
+app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
 app.get('/admin/items/:filter/:id', admin_items);
 app.get('/admin/items/:id', require('./admin/item_info.js'));
 app.get('/admin/authors', require ('./admin/authors.js'));

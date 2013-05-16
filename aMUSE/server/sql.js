@@ -15,12 +15,14 @@ exports.query_select_authors="SELECT * FROM aMuseAuthor ORDER BY author_name";
 exports.query_select_object="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection WHERE object_id = ?";
 
 exports.query_insert_mail="INSERT INTO aMuseUser(user_email,user_password) VALUES (?, ?)";
+
 //QUERY LIMIT
 
 exports.query_select_objects="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition LIMIT ?, 24";
 
 
 //FILTER
+
 exports.query_select_object_by_author="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE author_id = ? LIMIT ?, 24";
 exports.query_select_object_by_section="SELECT * FROM aMuseObject NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor WHERE section_id = ? LIMIT ?, 24";
 exports.query_select_object_by_exhibition="SELECT * FROM aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor WHERE exhibition_id = ? LIMIT ?, 24";
@@ -35,6 +37,7 @@ exports.query_get_user_data="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_change_hash="UPDATE aMuseUser SET hash = ? WHERE user_id = ?";
 
 // UPDATE USER DATA
+
 exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ?";
 exports.query_change_email="UDATE aMuseUser SET user_email = ? WHERE user_id = ?";
 
@@ -52,9 +55,9 @@ exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseO
 exports.query_photobook_add="INSERT INTO aMuseUserBookmark(user_id, object_id) VALUES(?,?)";
 
 //REMOVING
-//remove bookmark
+	//remove bookmark
 exports.query_del_bookmark="DELETE * FROM aMuseUserBookmark WHERE user_id = ?  AND object_id = ?";
-//remove aMusePersonalPhoto
+	//remove aMusePersonalPhoto
 exports.query_del_photo="DELETE * FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
@@ -73,6 +76,7 @@ exports.query_get_personal_photos_by_id="SELECT * FROM aMusePersonalPhoto WHERE 
 exports.query_get_authors="SELECT * FROM aMuseAuthor";
 exports.query_get_authors_by_id="SELECT author_name FROM aMuseAuthor WHERE author_id = ?";
 exports.query_get_authors_in_alpha_order="SELECT * FROM aMuseAuthor ORDER BY author_name";
+exports.query_get_last_opera_id="SELECT MAX(object_id) FROM aMuseObject"
 
 // ADD QUERY
 exports.query_add_opera="INSERT INTO aMuseObject(object_name,exhibition_id,section_id,author_id,object_description) VALUES (?,?,?,?,?)";

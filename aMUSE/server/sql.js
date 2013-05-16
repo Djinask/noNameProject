@@ -14,7 +14,7 @@ exports.query_select_exhibitions="SELECT * FROM aMuseExhibition ORDER BY exhibit
 exports.query_select_authors="SELECT * FROM aMuseAuthor ORDER BY author_name";
 exports.query_select_object="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection WHERE object_id = ?";
 
-exports.query_insert_mail="INSERT INTO aMuseUser(user_email,user_password) VALUES (?, ?)";
+exports.query_insert_user="INSERT INTO aMuseUser(user_email,user_password) VALUES (?, ?)";
 //QUERY LIMIT
 
 exports.query_select_objects="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition LIMIT ?, 24";
@@ -26,13 +26,13 @@ exports.query_select_object_by_section="SELECT * FROM aMuseObject NATURAL JOIN a
 exports.query_select_object_by_exhibition="SELECT * FROM aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor WHERE exhibition_id = ? LIMIT ?, 24";
 
 
-exports.query_search = "SELECT DISTINCT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE MATCH(author_name, exhibition_name, section_name, object_name, object_description, exhibition_description) AGAINST (?) LIMIT ?, 24";
+exports.query_search = "SELECT DISTINCT * FROM aMuseObject WHERE MATCH(object_name, object_description) AGAINST(?) LIMIT ?, 24";
 
 //LOGIN
 
 exports.query_login="SELECT * FROM aMuseUser WHERE user_email = ? AND user_password = ? ";
 exports.query_get_user_data="SELECT * FROM aMuseUser WHERE user_id = ?";
-exports.query_change_hash="UPDATE aMuseUser SET hash = ? WHERE user_id = ?";
+exports.query_change_hash="UPDATE aMuseUser SET user_hash = ? WHERE user_id = ?";
 exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";
 
 // UPDATE USER DATA
@@ -46,11 +46,13 @@ exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphot
 //VISUALIZZAZIONE FOTO PERSONALI
 
 exports.query_select_photos="SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseObject NATURAL JOIN aMuseVisit WHERE user_id = ?";
-exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor WHERE user_id = ?";
+exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ?";
 
 //ADD PHOTOBOOK
 
-exports.query_photobook_add="INSERT INTO aMuseUserBookmark(user_id, object_id) VALUES(?,?)";
+exports.query_insert_bookmark="INSERT INTO aMuseUserBookmark(user_id, object_id, visit_id) VALUES(?,?,?)";
+exports.query_get_last_visit = "SELECT * FROM aMuseVisit WHERE user_id = ? ORDER BY visit_id DESC LIMIT 0, 1";
+exports.query_insert_visit = "INSERT INTO aMuseVisit(user_id) VALUES(?)";
 
 //REMOVING
 //remove bookmark
@@ -65,6 +67,7 @@ exports.query_get_exhibitions="SELECT * FROM aMuseExhibition";
 exports.query_get_exhibition_by_id="SELECT * FROM aMuseExhibition WHERE exhibition_id = ?";
 exports.query_get_users="SELECT * FROM aMuseUser";
 exports.query_get_user_by_id="SELECT * FROM aMuseUser WHERE user_id = ?";
+exports.query_get_user_by_email="SELECT * FROM aMuseUser WHERE user_email = ?";
 exports.query_get_sections="SELECT * FROM aMuseSection";
 exports.query_get_section_by_id="SELECT section_name FROM aMuseSection WHERE section_id = ?";
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */

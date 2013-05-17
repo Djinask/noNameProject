@@ -67,15 +67,10 @@ swig.init({
 app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', require('./object.js'));
-app.get('/signup/:email', require('./account.js'));
-/*
-app.get('/send', function(req, res) {
+app.post('/signup', require('./account.js'));
+app.get('/signup', function(req, res) {
 	res.render('send.html');
-})
-*/
-//var gallery = require('./gallery.js');
-//app.get('/gallery/:selection', gallery);
-//app.get('/gallery', gallery);
+});
 
 var home = require('./home.js');
 app.get('/', home);

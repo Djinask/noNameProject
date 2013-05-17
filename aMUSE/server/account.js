@@ -1,5 +1,10 @@
 var sendEmail = require('./mail.js');
 var email_regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$/;
+var email1_1 = "<p>Ciao! La tua password è: ";
+var email1_2 = "</p><p>Per visualizzare il tuo photobook vai al seguente link: <a herf=\"http://www.a-muse.herokuapp.com/photobook\">http://www.a-muse.herokuapp.com/photobook</a></p>";
+var subject1 = "aMuse - Registration";
+var subject2 = "aMuse - New bookmarks added";
+var email2 = "<h3>You have just added new bookmarks to you photobook!</h3> <p>Login to aMuse to see your updated photobook and share it with your friends!</p>"
 
 var generatePassword = function() {
 	var text = "";
@@ -76,19 +81,23 @@ module.exports  = function(req, res) {
 								message: "An error occurred! Please try again"
 							});
 						} else {
-							sendEmail(email, password);
+							sendEmail(email, subject1, email1_1 + password + email1_2);
 							insertBookmarks(result.insertId, req, res);
-							res.removeCookie('bookmarks');
-							res.redirect('/');
+							res.clearCookie('bookmarks');
+							res.render('send.html', {
+								redirect: true
+							});
 						}
 					});
 					conn.end();
 				} else if(results.length == 1) {
+					sendEmail(email, subject2, email2);
 					insertBookmarks(results[0].user_id, req, res);
-					res.removeCookie('bookmarks');
-					res.redirect('/');
+					res.clearCookie('bookmarks');
+					res.render('send.html', {
+						redirect: true
+					});
 				}
-
 			}
 		});
 		conn.end();

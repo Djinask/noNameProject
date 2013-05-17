@@ -30,7 +30,7 @@ exports.query_search = "SELECT DISTINCT * FROM aMuseObject WHERE MATCH(object_na
 
 //LOGIN
 
-exports.query_login="SELECT * FROM aMuseUser WHERE user_email = ? AND user_password = ? ";
+exports.query_login="SELECT * FROM aMuseUser WHERE user_email = ? AND user_password = ?";
 exports.query_get_user_data="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_change_hash="UPDATE aMuseUser SET user_hash = ? WHERE user_id = ?";
 exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";

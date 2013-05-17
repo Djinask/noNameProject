@@ -6,13 +6,22 @@ module.exports = function (req,res) {
 				console.log(err);
 				res.send('Fatal error');
 			} else {
-				var items = [];
-				for(var i = 0; i < results.length; i+=4) {
-					items.push(Array.prototype.slice.call(results, i, i+4));
+				var items = {};
+				var visits = {};
+				var id;
+				for(var i = 0; i < results.length; i++) {
+					id = results[i].visit_id + '';
+					if(visits[id] == undefined) {
+						items[id] = [];
+						visits[id] = new Date(results[i].visit_time).toLocaleDateString();
+					}
+					items[id].push(results[i]);
 				}
 				data = {
 					email: user.email,
-					items: items
+					items: items,
+					visits: visits,
+					empty: !results.length
 				};
 				res.render('photobook/bookmarks.html', data);
 			}

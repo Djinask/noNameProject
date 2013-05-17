@@ -12,70 +12,39 @@
     		<div data-role="header">
                 <a href="#menu" data-role="button" data-icon="bars">Menu</a>
                 <h1>My bookmarks</h1>
-                <a href="#panel" data-role="button" data-icon="gear">{{ email }}</a>
+                <a href="#panel" data-role="button" data-icon="gear">Settings</a>
             </div>
+
     		<div data-role="content">
-    			{% for i in items -%}
-                <div class="ui-grid-c ui-responsive my-responsive">
-                    {% if i[0] %}
-                    <div class="ui-block-a" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/object/{{i[0].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[0].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[0].name }} ({{ i[0].autor_name }})
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[1] %}
-                    <div class="ui-block-b" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/object/{{i[1].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[1].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[1].name }} ({{ i[1].autor_name }})
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[2] %}
-                    <div class="ui-block-c" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/object/{{i[2].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[2].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[2].name }} ({{ i[2].autor_name }})
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[3] %}
-                    <div class="ui-block-d" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/object/{{i[3].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[3].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[3].name }} ({{ i[3].autor_name }})
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
+                {% if empty %}
+                <h1>:(   Your photobook doesn't contain any bookmarks up to now!</h1>
+                <h2>You can add bookmarks by visiting the museum using the mobile app or using the Kiosks located inside the museum</h2>
+                {% endif %}
+
+                {% for v in visits %}
+                <div class="ui-bar ui-bar-b">
+                    <h2>{{v}}</h2>
                 </div>
-                {% endfor -%}
+                <div class="my-gallery-responsive">
+                    {% set visit = items[loop.key] %}
+                    {% for i in visit %}
+                    <div>
+                        <div class="ui-body ui-bar-d">
+                            <div class="contenitore-immagine">
+                                <a href="/photobook/object/{{i.object_id}}" data-transition="slide" data-inline="true">
+                                    <img class="immagine" src="/static/photos/{{i.object_id}}.jpg">
+                                </a>
+                            </div>
+                            <a data-role="button" data-mini="true" href="/photobook/object/{{i.object_id}}" data-transition="slide" data-theme="a">
+                                {{ i.object_name }}
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
     		</div>
+
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">
                     <li data-icon="home"><a href="/photobook">Home</a></li>
@@ -83,6 +52,7 @@
                     <li data-icon="plus"><a href="/photobook/addphoto">Add photo</a></li>
                 </ul>
             </div>
+            
             <div data-role="panel" id="panel" data-position="right" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">
                     <li><a href="#">Change password</a></li>

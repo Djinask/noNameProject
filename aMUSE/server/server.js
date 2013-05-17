@@ -35,7 +35,7 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 			if(err) {
 				res.send('Fatal error');
 			} else {
-				if(results[0].hash == hash) {
+				if(results[0].user_hash == hash) {
 					callback(results[0]);
 				} else {
 					res.clearCookie('user');
@@ -67,11 +67,10 @@ swig.init({
 app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', require('./object.js'));
-app.get('/signup/:email', require('./account.js'));
-
-//var gallery = require('./gallery.js');
-//app.get('/gallery/:selection', gallery);
-//app.get('/gallery', gallery);
+app.post('/signup', require('./account.js'));
+app.get('/signup', function(req, res) {
+	res.render('send.html');
+});
 
 var home = require('./home.js');
 app.get('/', home);

@@ -1,3 +1,10 @@
+/*
+$(function() {
+    $('#home').on('pagehide', function() {
+        $(this).remove();
+    });
+});
+*/
 $.cookie.json = true;
 
 function search_fn() {
@@ -13,7 +20,6 @@ function exhibition_fn() {
         transition: 'slide'
     });
 }
-
 function author_fn() {
     var val = $(this).val();
     $.mobile.changePage(val == 'none' ? '/' : ('/items/author-' + val), {
@@ -36,10 +42,15 @@ function checkbox_fn() {
     if(this.checked) {
         cookie[id] = 1;
     }
-    $.cookie('bookmarks', cookie);
+    $('input:checkbox[data-amuse-id="' + id + '"]').prop('checked', this.checked).checkboxradio('refresh');
+    $.cookie('bookmarks', cookie, {
+        path: '/'
+    });
 }
 
 function clear_fn() {
-    $.cookie('bookmarks', '{}');
-    $('input:checkbox[data-amuse-id]:checked').click();
+    $.cookie('bookmarks', {}, {
+        path: '/'
+    });
+    $('input:checkbox[data-amuse-id]:checked').prop('checked', false).checkboxradio('refresh');
 }

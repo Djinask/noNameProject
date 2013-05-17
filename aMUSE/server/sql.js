@@ -71,7 +71,7 @@ exports.query_get_sections="SELECT * FROM aMuseSection";
 exports.query_get_section_by_id="SELECT section_name FROM aMuseSection WHERE section_id = ?";
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */
 exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE object_id = ?";
-exports.query_get_personal_photos="SELECT * FROM aMusePersonalPhoto";
+exports.query_get_personal_photos_by_user_id="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";
 exports.query_get_personal_photos_by_id="SELECT * FROM aMusePersonalPhoto WHERE personalphoto_id = ?";
 exports.query_get_authors="SELECT * FROM aMuseAuthor";
 exports.query_get_authors_by_id="SELECT author_name FROM aMuseAuthor WHERE author_id = ?";

@@ -93,7 +93,7 @@ app.get('/photobook/object/:id', require('./bookmark.js'));
 
 var admin_items = require ('./admin/items.js');
 
-app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
+//app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
 
 // remove section
 app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
@@ -101,6 +101,7 @@ app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));
 app.get('/admin/authors/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/sections/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/exhibitions/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/users/remove/:type/:id', require ('./admin/remove.js'));
 // add section
 app.post('/admin/add_menu/exhibition_add', require ("./admin/ex_add_c.js"));
 app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));

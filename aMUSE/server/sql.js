@@ -90,9 +90,9 @@ exports.query_add_visit="INSERT INTO aMuseVisit(user_id) VALUES (?)";
 
 // REMOVE QUERY
 	// Ban aMuseUser
-exports.query_remove_user="DELETE * FROM aMuseUser WHERE user_id = ?";
-exports.query_remove_bookmarked="DELETE * FROM aMuseUserBookmark WHERE user_id = ?";
-exports.query_remove_personal_photos="DELETE * FROM aMusePersonalPhoto WHERE user_id = ?";
+exports.query_remove_user="DELETE  FROM aMuseUser WHERE user_id = ?";
+exports.query_remove_bookmarked="DELETE  FROM aMuseUserBookmark WHERE user_id = ?";
+exports.query_remove_personal_photos="DELETE  FROM aMusePersonalPhoto WHERE user_id = ?";
 	// Various removal
 exports.query_remove_opera_by_id="DELETE FROM aMuseObject WHERE object_id = ?";
 exports.query_remove_author_by_id="DELETE FROM aMuseAuthor WHERE author_id = ?";

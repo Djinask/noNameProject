@@ -34,6 +34,10 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 		conn.query(query.query_get_user, [id], function(err, results) {
 			if(err) {
 				res.send('Fatal error');
+			} else if(results.length == 0) {
+				res.clearCookie('user');
+				res.clearCookie('hash');
+				res.redirect('/photobook/login');
 			} else {
 				if(results[0].user_hash == hash) {
 					callback(results[0]);

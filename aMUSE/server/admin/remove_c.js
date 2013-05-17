@@ -59,19 +59,19 @@ module.exports = function(req,res){
 	else if (type == "users"){
 		var user_id = req.params.id;
 		
-		connection.query(query.query_remove_bookmarked, [user_id], function (error,result){
+		connection.query(res.query.query_remove_bookmarked, [user_id], function (error,result){
 			if (error) {
 				console.log(error);
 			} 
 		});
 		
-		connection.query(query.exports.query_get_personal_photos_by_user_id, [user_id], function(error,result){
+		connection.query(res.query.query_get_personal_photos_by_user_id, [user_id], function(error,result){
 			if (error){
 				console.log(error);
 			}
 			else {
 				for(var i = 0; i < result.length; i++) {
-					fs.unlink("../userphotos/" + result[i].userphoto_id + ".jpg");
+					fs.unlink("../userphotos/" + result[i].personalphoto_id + ".jpg");
 				}
 			}
 			var connection = res.mysqlCreateConnection();

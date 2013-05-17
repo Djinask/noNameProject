@@ -18,67 +18,22 @@
             {% if items.length == 0 %}
             <a data-role="button" data-inline="true" href="/photobook/addphoto" data-icon="plus">Add your personal photos to your photobook!</a>
             {% endif %}
-            {% for i in items -%}
-                <div class="ui-grid-c ui-responsive my-responsive">
-                    {% if i[0] %}
-                    <div class="ui-block-a" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
+            <div class="my-gallery-responsive">
+                {% for i in items %}
+                <div>
+                    <div class="ui-body ui-bar-b">
+                        <div class="contenitore-immagine">
                             <a href="/photobook/photos/{{i[0].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
                                 <img class="immagine" src="/photobook/photos/{{i[0].personalphoto_id}}.jpg">
                             </a>
                         </div>
-                        <form>
-                            <label>
-                                {{ i[0].object_name }}
-                            </label>
-                        </form>
+                        <a data-role="button" data-mini="true" href="/photobook/photos/{{i[0].personalphoto_id}}.jpg" data-transition="slide" data-theme="a">
+                            {{ i.personalphoto_name }}
+                        </a>
                     </div>
-                    {% endif %}
-                    {% if i[1] %}
-                    <div class="ui-block-b" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[1].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[1].personalphoto_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[1].title }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[2] %}
-                    <div class="ui-block-c" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[2].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[2].personalphoto_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[2].title }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[3] %}
-                    <div class="ui-block-d" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[3].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[3].personalphoto_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                {{ i[3].title }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
                 </div>
-                {% endfor -%}
-    		</div>
+                {% endfor %}
+            </div>
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">
                     <li data-icon="home"><a href="/photobook">Home</a></li>

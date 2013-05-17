@@ -10,7 +10,7 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <div data-role="page" id="home">
+        <div data-role="page" id="home" data-dom-cache="true">
             <div data-role="header">
                 <a href="#home"><img src="/static/img/museum.png"></a>
                 <h1>aMuse - The Muse Experience</h1>
@@ -45,7 +45,7 @@
                         <a href="#" data-role="button" data-theme="e" onclick="clear_fn()">Clear selections</a>
                     </div>
                     <div class="ui-block-e">
-                        <a href="#insert" data-role="button" data-transition="slide" data-theme="b">I'm done</a>
+                        <a href="/signup" data-role="button" data-transition="slide" data-theme="b">I'm done</a>
                     </div>
                 </div>
                 <input type="search" placeholder="Search by exhibition, section, author or title..." onchange="search_fn.call(this)">
@@ -73,11 +73,11 @@
         </div>
         <div data-role="page" id="insert">
             <div data-role="header">
-                <a href="#home" data-icon="back" data-iconpos="left" data-transition="slide" data-direction="reverse">Back</a>
+                <a onclick="history.back()" data-icon="back" data-iconpos="left" data-transition="slide" data-direction="reverse">Back</a>
                 <h1>aMuse - The Muse Experience</h1>
-            </div><!-- /header -->
-            <div data-role="content">
-                <form id="submit_form">
+            </div>
+            <div data-role="content" action="/signup" method="post">
+                <form>
                     <div >
                         <label for="email-1">Insert your e-mail</label>
                         <input type="email" data-clear-btn="true" name="email-1" id="email-1" value="">
@@ -87,26 +87,10 @@
                         <input type="email" data-clear-btn="true" name="email-2" id="email-2" value="">
                     </div>
                     <div>
-                        <button type="button" id="submit_button" data-role="button" data-theme="b">Submit</button>
+                        <button data-rel="dialog" type="submit" data-role="button" data-theme="b">Start sharing your experience!</button>
                     </div>
                 </form>
-            </div><!-- /content -->
-            <script>
-            $('#submit_button').click(function(e) {
-                var email = $('#email-1').val();
-                if($('#email-2').val() == email && email) {
-                    $.get('/signup/' + email, function(data) {
-                        if(data == 'success') $.mobile.changePage('#ok', {
-                            role: 'dialog',
-                            transition: 'flip'
-                        });
-                        else alert('Error');
-                    });
-                } else {
-                    alert('The two emails do not match');
-                }
-            });
-            </script>
+            </div>
         </div>
         <div data-role="page" id="ok">
             <div data-role="content">

@@ -1,77 +1,76 @@
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/css/css.css">
-        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-        <script src="/static/js/admin.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+    <script src="/static/js/admin.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+</head>
 
-    <body>
-    	<div data-role="page">
-    		<div data-role="header">
-                <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-                <h1>Exibitions</h1>
-                <a href="#panel" data-role="button" data-icon="gear">Settings</a>
-            </div>
-    		<div data-role="content" style="text-align: center">
-                <h1>
-                    Exhibition information
-                </h1>
-
-            	
-                    <form>
-                        <ul data-role="listview" data-inset="true">
-                            <li data-role="fieldcontain">
-                                <label for="ex_info_name">Name:</label>
-                                <input type="text" name="name2" id="ex_info_name" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
-                            </li>
-                            <li data-role="fieldcontain">
-                                <label for="ex_info_description">Description:</label>
-                            <textarea cols="40" rows="8" name="textarea2" id="ex_info_description">{{exhibitions.exhibition_description}}
-                            </textarea>
-                            </li>
-                            <li data-role="fieldcontain">
-                                <label for="ex_info_begin_date">Begin Date: <br> Current: {{exhibitions.exhibition_begin | date("d/m/Y")}} 
-                                </label>
-                                <input type="date" name="date" id="ex_info_begin_date" value="">
-                            </li>
-                            <li data-role="fieldcontain">
-                               <label for="ex_info_end_date"> 
-                                    End Date: <br> Current: {{exhibitions.exhibition_end | date("d/m/Y")}}
-                               </label>
-                               <input type="date" name="date" id="ex_info_end_date" value="">
-                            </li>
-                            <li class="ui-body ui-body-b">
-                                <fieldset class="ui-grid-a">
-                                        <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
-                                        <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
-                                </fieldset>
-                            </li>
-                        </ul>
-                    </form>
+<body>
+   <div data-role="page" class="ui-responsive-panel">
+      <div data-role="header">
+        <a href="#menu" data-role="button" data-icon="bars">Menu</a>
+        <h1>Exibitions</h1>
+    </div>
+    <div data-role="content" style="text-align: center">
+        <h1>
+            Exhibition information
+        </h1>
 
 
-					<div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
-                    <ul data-role="listview" data-inset="false" data-theme="a">
-                        <li data-icon="plus"><a href="#">Add Items</a></li>
-                        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
-                        <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
-                        <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
-                        <li data-icon="plus"><a href="/admin/authors">Authors</a></li>
-                        <li data-icon="plus"><a href="/admin/items">Items</a></li>
-                    </ul>
-                    </div>
+        <form>
+            <ul data-role="listview" data-inset="true">
+                <li data-role="fieldcontain">
+                    <label for="ex_info_name">Name:</label>
+                    <input type="text" name="name2" id="ex_info_name" value="{{exhibitions.exhibition_name}}" data-clear-btn="true">
+                </li>
+                <li data-role="fieldcontain">
+                    <label for="ex_info_description">Description:</label>
+                    <textarea cols="40" rows="8" name="textarea2" id="ex_info_description">{{exhibitions.exhibition_description}}
+                    </textarea>
+                </li>
+                <li data-role="fieldcontain">
+                    <label for="ex_info_begin_date">Begin Date: <br> Current: {{exhibitions.exhibition_begin | date("d/m/Y")}} 
+                    </label>
+                    <input type="date" name="date" id="ex_info_begin_date" value="">
+                </li>
+                <li data-role="fieldcontain">
+                 <label for="ex_info_end_date"> 
+                    End Date: <br> Current: {{exhibitions.exhibition_end | date("d/m/Y")}}
+                </label>
+                <input type="date" name="date" id="ex_info_end_date" value="">
+            </li>
+            <li class="ui-body ui-body-b">
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+                    <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+                </fieldset>
+            </li>
+        </ul>
+    </form>
+    </div>
 
-					<div data-role="panel" id="panel" data-position="right" data-display="overlay" data-theme="a">
-					    <ul data-role="listview" data-inset="false" data-theme="a">
-					        <li><a href="#">Change password</a></li>
-					        <li><a href="/photobook/logout">Logout</a></li>
-					    </ul>
-					</div>
-            </div>
-    	</div>
-    </body>
+
+    <div data-role="panel" id="menu" data-position-fixed="true" data-position="left" data-display="reveal" data-theme="a" data-dismissible="false">
+    <ul data-role="listview" data-inset="false" data-theme="a">
+        <li data-icon="plus"><a href="/admin/add_menu">Add Menu</a></li>
+        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
+        <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
+        <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
+        <li data-icon="plus"><a href="/admin/authors">Authors</a></li>
+        <li data-icon="plus"><a href="/admin/items">Items</a></li>
+    </ul>
+    <br>
+    <br>
+    <ul data-role="listview" data-inset="false" data-theme="b">
+        <li><a href="#">Change password</a></li>
+        <li><a href="/photobook/logout">Logout</a></li>
+    </ul>
+    </div>
+</div>
+</div>
+</body>
 </html>

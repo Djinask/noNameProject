@@ -12,21 +12,24 @@
     		<div data-role="header">
                 <a href="#menu" data-role="button" data-icon="bars">Menu</a>
                 <h1>My aMUSE</h1>
-                <a href="#panel" data-role="button" data-icon="gear">{{ email }}</a>
+                <a href="#panel" data-role="button" data-icon="gear">Settings</a>
             </div>
-    		<div data-role="content">
-	         {% for i in items -%}
+    		<div data-role="content" style="text-align: center">
+            {% if items.length == 0 %}
+            <a data-role="button" data-inline="true" href="/photobook/addphoto" data-icon="plus">Add your personal photos to your photobook!</a>
+            {% endif %}
+            {% for i in items -%}
                 <div class="ui-grid-c ui-responsive my-responsive">
                     {% if i[0] %}
                     <div class="ui-block-a" data-theme="c">
                         <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[0].personal_photo_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[0].personal_photo_id}}.jpg">
+                            <a href="/photobook/photos/{{i[0].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
+                                <img class="immagine" src="/photobook/photos/{{i[0].personalphoto_id}}.jpg">
                             </a>
                         </div>
                         <form>
                             <label>
-                                {{ i[0].title }}
+                                {{ i[0].object_name }}
                             </label>
                         </form>
                     </div>
@@ -34,8 +37,8 @@
                     {% if i[1] %}
                     <div class="ui-block-b" data-theme="c">
                         <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[1].personal_photo_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[1].personal_photo_id}}.jpg">
+                            <a href="/photobook/photos/{{i[1].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
+                                <img class="immagine" src="/photobook/photos/{{i[1].personalphoto_id}}.jpg">
                             </a>
                         </div>
                         <form>
@@ -48,8 +51,8 @@
                     {% if i[2] %}
                     <div class="ui-block-c" data-theme="c">
                         <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[2].personal_photo_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[2].personal_photo_id}}.jpg">
+                            <a href="/photobook/photos/{{i[2].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
+                                <img class="immagine" src="/photobook/photos/{{i[2].personalphoto_id}}.jpg">
                             </a>
                         </div>
                         <form>
@@ -62,8 +65,8 @@
                     {% if i[3] %}
                     <div class="ui-block-d" data-theme="c">
                         <div class="contenitore-immagine" data-theme="a">
-                            <a href="/photobook/photos/{{i[3].personal_photo_id}}.jpg" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i[3].personal_photo_id}}.jpg">
+                            <a href="/photobook/photos/{{i[3].personalphoto_id}}.jpg" data-transition="slide" data-inline="true">
+                                <img class="immagine" src="/photobook/photos/{{i[3].personalphoto_id}}.jpg">
                             </a>
                         </div>
                         <form>

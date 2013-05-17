@@ -35,7 +35,7 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 			if(err) {
 				res.send('Fatal error');
 			} else {
-				if(results[0].hash == hash) {
+				if(results[0].user_hash == hash) {
 					callback(results[0]);
 				} else {
 					res.clearCookie('user');
@@ -67,11 +67,10 @@ swig.init({
 app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', require('./object.js'));
-app.get('/signup/:email', require('./account.js'));
-
-//var gallery = require('./gallery.js');
-//app.get('/gallery/:selection', gallery);
-//app.get('/gallery', gallery);
+app.post('/signup', require('./account.js'));
+app.get('/signup', function(req, res) {
+	res.render('send.html');
+});
 
 var home = require('./home.js');
 app.get('/', home);
@@ -105,6 +104,7 @@ app.get('/admin/exhibitions/remove/:type/:id', require ('./admin/remove.js'));
 app.post('/admin/add_menu/exhibition_add', require ("./admin/ex_add_c.js"));
 app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));
 app.post('/admin/add_menu/section_add', require ("./admin/section_add_c.js"));
+app.post('/admin/add_menu/item_add', require ("./admin/item_add_c.js"));
 
 // get section
 app.get('/admin/items', admin_items);

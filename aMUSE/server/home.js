@@ -33,8 +33,7 @@ module.exports = function(req, res) {
 			objects_query = res.query.query_search;
 			break;
 		}
-		if(filter[0] == 'search') filter = ['%' + filter[1] + '%', '%' + filter[1] + '%', '%' + filter[1] + '%', '%' + filter[1] + '%'];
-		else filter = [filter[1]];
+		filter = [filter[1]];
 	}
 	filter.push(0);
 	connection.query(objects_query, filter, function(error, result) {

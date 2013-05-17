@@ -93,6 +93,7 @@ app.get('/photobook/object/:id', require('./bookmark.js'));
 
 var admin_items = require ('./admin/items.js');
 
+app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
 
 // remove section
 app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));

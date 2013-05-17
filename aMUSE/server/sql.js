@@ -43,7 +43,7 @@ exports.query_change_email="UDATE aMuseUser SET user_email = ? WHERE user_id = ?
 
 //INSERIMENTO PHOTO PERSONALI
 
-exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphoto_comment, personalphoto_name) VALUES(?,?,?)";
+exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphoto_comment, personalphoto_name, object_id) VALUES(?,?,?,?)";
 
 //VISUALIZZAZIONE FOTO PERSONALI
 

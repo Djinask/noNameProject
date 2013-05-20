@@ -43,7 +43,7 @@ module.exports = function(req, res) {
 	connection.end(function() {
 		if(exhibitions && authors && sections) {
 			var bookmarks = req.cookies.bookmarks ? JSON.parse(req.cookies.bookmarks) : new Object();
-			res.render('home.html', {
+			res.render('kiosk/home.html', {
 				exhibitions: exhibitions,
 				sections: sections,
 				authors: authors,

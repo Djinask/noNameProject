@@ -8,24 +8,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
-
     <body>
     	<div data-role="page">
     		<div data-role="header">
-    			<h1> Delete </h1>
+    			<h1> Delete Message </h1>
     		</div>
 
-    		<div data-role="content" style="text-align: center">
+    		<div data-role="content">
                 <p>
-                    Are you sure you want to delete this element?
+                    {{message}}
                 </p>
-                <br>
-            
-            <a href="/admin/items/remove/c/{{type}}/{{id}}" {% if type == "items" %} data-close-btn="none" data-rel="dialog" {% endif %}data-theme="c" data-role="button">Delete</a>
-    		<a href="/admin/{{type}}" data-theme="c" data-role="button">Cancel</a>
+                <a href="/admin/items" data-role="button">OK</a>
+            </div>
 
+    </body>
 
-    		</div>
-        </div>
-     </body>
-</html>		
+ </html

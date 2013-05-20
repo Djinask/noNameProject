@@ -8,16 +8,36 @@ module.exports = function(req,res){
 
 	if (type == "items"){
 		var object_id = req.params.id;
-		connection.query(res.query.query_remove_opera_by_id, [object_id], function(error,result){ // informazioni dell'opera con quell'id
-			if(error) {
+		connection.query(res.query.query_check_if_bookmarked, [object_id], function(error,result){
+			var data = {};
+			if (error){
 				console.log(error);
-				res.send('Fatal error');
+				data.message = "Connection error";
 			} else {
-				fs.unlink("../public_html/photos/" + object_id + ".jpg");
+				console.log(result);
+				if (result.length == 0) {
+					var conn = res.mysqlCreateConnection()
+					conn.query(res.query.query_remove_opera_by_id, [object_id], function(error,result){ // informazioni dell'opera con quell'id
+						if(error) {
+							console.log(error);
+							data.message = "Connection error";
+						} else {
+							fs.unlink("../public_html/photos/" + object_id + ".jpg", function(err) {
+								console.log(err);
+							});
+							data.message = "Object successfully removed";
+						}
+						res.render('admin/remove_message.html', data);	
+					});
+					conn.end();
+				} else {
+					data.message = "This object has already been bookmarked";
+				}
 			}
+			res.render('admin/remove_message.html', data);		
 		});
 		connection.end(function() {
-			res.redirect('admin/items');
+			//res.redirect('admin/items');
 		});
 	}
 	else if (type == "authors"){

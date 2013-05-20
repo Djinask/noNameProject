@@ -25,7 +25,7 @@ module.exports = function(req,res){
 							fs.unlink("../public_html/photos/" + object_id + ".jpg", function(err) {
 								console.log(err);
 							});
-							data.message = "Object successfully removed";
+						data.message = "Object successfully removed";
 						}
 						res.render('admin/remove_message.html', data);	
 					});

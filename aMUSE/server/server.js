@@ -122,6 +122,7 @@ app.post('/admin/add_menu/item_add', require ("./admin/item_add_c.js"));
 app.post('/admin/section_info/upd/:id', require ("./admin/section_upd.js"));
 app.post('/admin/author_info/upd/:id', require ("./admin/author_upd.js"));
 app.post('/admin/ex_info/upd/:id',require ('./admin/ex_upd.js'));
+app.post('/admin/item_info', require('./admin/item_upd.js'));
 
 // get section
 app.get('/admin/items', admin_items);

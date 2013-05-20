@@ -38,18 +38,18 @@ exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";
 
 // UPDATE USER DATA
 
-exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ?";
-exports.query_change_email="UDATE aMuseUser SET user_email = ? WHERE user_id = ?";
+exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ? AND user_password = ?";
+exports.query_change_user_email="UPDATE aMuseUser SET user_email = ? WHERE user_id = ? AND user_password = ?";
 
 //INSERIMENTO PHOTO PERSONALI
 
 exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphoto_comment, personalphoto_name, object_id) VALUES(?,?,?,?)";
-
+exports.query_is_photo_owner = "SELECT * FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 //VISUALIZZAZIONE FOTO PERSONALI
 
-exports.query_select_photos="SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseObject NATURAL JOIN aMuseVisit WHERE user_id = ?";
-exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ?";
-
+exports.query_select_photos="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";
+exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ? ORDER BY visit_id ASC";
+exports.query_get_photo = "SELECT * FROM aMusePersonalPhoto NATURAL LEFT OUTER JOIN aMuseObject WHERE personalphoto_id = ?";
 //ADD PHOTOBOOK
 
 exports.query_insert_bookmark="INSERT INTO aMuseUserBookmark(user_id, object_id, visit_id) VALUES(?,?,?)";
@@ -58,9 +58,9 @@ exports.query_insert_visit = "INSERT INTO aMuseVisit(user_id) VALUES(?)";
 
 //REMOVING
 	//remove bookmark
-exports.query_del_bookmark="DELETE * FROM aMuseUserBookmark WHERE user_id = ?  AND object_id = ?";
+exports.query_del_bookmark="DELETE FROM aMuseUserBookmark WHERE user_id = ?  AND object_id = ?";
 	//remove aMusePersonalPhoto
-exports.query_del_photo="DELETE * FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
+exports.query_del_photo="DELETE FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
 
@@ -93,6 +93,7 @@ exports.query_add_visit="INSERT INTO aMuseVisit(user_id) VALUES (?)";
 exports.query_remove_user="DELETE  FROM aMuseUser WHERE user_id = ?";
 exports.query_remove_bookmarked="DELETE  FROM aMuseUserBookmark WHERE user_id = ?";
 exports.query_remove_personal_photos="DELETE  FROM aMusePersonalPhoto WHERE user_id = ?";
+exports.query_remove_personal_photo="DELETE  FROM aMusePersonalPhoto WHERE personalphoto_id = ?";
 	// Various removal
 exports.query_remove_opera_by_id="DELETE FROM aMuseObject WHERE object_id = ?";
 exports.query_remove_author_by_id="DELETE FROM aMuseAuthor WHERE author_id = ?";

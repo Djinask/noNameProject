@@ -31,11 +31,11 @@
                     <div>
                         <div class="ui-body ui-bar-d">
                             <div class="contenitore-immagine">
-                                <a href="/photobook/object/{{i.object_id}}" data-transition="slide" data-inline="true">
+                                <a href="/photobook/bookmarks/{{i.object_id}}" data-transition="slide" data-inline="true">
                                     <img class="immagine" src="/static/photos/{{i.object_id}}.jpg">
                                 </a>
                             </div>
-                            <a data-role="button" data-mini="true" href="/photobook/object/{{i.object_id}}" data-transition="slide" data-theme="a">
+                            <a data-role="button" data-mini="true" href="/photobook/bookmarks/{{i.object_id}}" data-transition="slide" data-theme="a">
                                 {{ i.object_name }}
                             </a>
                         </div>
@@ -55,9 +55,8 @@
             
             <div data-role="panel" id="panel" data-position="right" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">
-                    <li><a href="#">Change password</a></li>
-                    <li><a href="#">Change email</a></li>
-                    <li><a href="#">Delete account</a></li>
+                    <li><a href="/photobook/changepassword">Change password</a></li>
+                    <li><a href="/photobook/changeemail">Change email</a></li>
                     <li><a href="/photobook/logout">Logout</a></li>
                 </ul>
             </div>

@@ -3,7 +3,7 @@ div[data-role="header"] img {
     width: auto;
 }
 .contenitore-immagine {
-    height: 330px;
+    height: 300px;
     text-align: center;
 }
 .contenitore-checkbox {
@@ -23,7 +23,7 @@ div[data-role="header"] img {
 
 .immagine {
     max-height: 300px;
-    max-width: 220px;
+    max-width: 300px;
 }
 
 /* 16px = 1em */

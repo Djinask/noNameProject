@@ -17,12 +17,8 @@
     <h1>Add Item</h1>
 </div>
 <div data-role="content" style="text-align: center">
-    <h1>
-        New Item
-    </h1>
-
-
-    <form data-ajax="false" method="post" action="/admin/add_menu/item_add">
+    
+    <form data-ajax="false" method="post" action="/admin/add_menu/item_add" enctype ="multipart/form-data">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="name">Name:</label>

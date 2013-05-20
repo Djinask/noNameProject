@@ -5,6 +5,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     <script src="/static/js/admin.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
 </head>
@@ -13,33 +14,30 @@
 
 <body>
  <div data-role="page" class="ui-responsive-panel">
-  <div data-role="header">
-    <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-    <h1>Section</h1>
-</div>
+    <div data-role="header">
+        <a href="#menu" data-role="button" data-icon="bars">Menu</a>
+        <h1>Section</h1>
+    </div>
 <div data-role="content" style="text-align: center">
     <h1>
         Section information
     </h1>
 
-    <form data-ajax="false">
+        <form data-ajax="false" method="post" action="/admin/section_info/upd/{{section.section_id}}">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="name2">Name:</label>
-                <input type="text" name="name2" id="name2" value="{{section.section_name}}" data-clear-btn="true">
+                <input type="text" name="section_name" id="name2" value="{{section.section_name}}" data-clear-btn="true">
             </li>
             <li class="ui-body ui-body-b">
-                <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
-                    <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
-                </fieldset>
+                <button type="submit" data-theme="a">Submit</button>
             </li>
         </ul>
     </form>
 </div>
 
 
-    <div data-role="panel" id="menu" data-position-fixed="true" data-position="left" data-display="reveal" data-theme="a" data-dismissible="false">
+   <div data-role="panel" id="menu" data-position-fixed="true" data-position="left" data-display="reveal" data-theme="a" data-dismissible="false">
         <ul data-role="listview" data-inset="false" data-theme="a">
             <li data-icon="plus"><a href="/admin/add_menu">Add Menu</a></li>
             <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
@@ -56,6 +54,6 @@
         </ul>
     </div>
 </div>
-
+</div>
 </body>
 </html>

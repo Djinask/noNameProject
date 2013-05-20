@@ -118,3 +118,4 @@ exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE au
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";
 	// visit
 exports.query_reset_visit_user="UPDATE aMuseVisit SET user_id = ? WHERE visit_id = ?";
+

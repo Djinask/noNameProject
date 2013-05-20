@@ -38,18 +38,20 @@ exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";
 
 // UPDATE USER DATA
 
-exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ?";
-exports.query_change_email="UDATE aMuseUser SET user_email = ? WHERE user_id = ?";
+exports.query_change_user_password="UPDATE aMuseUser SET user_password = ? WHERE user_id = ? AND user_password = ?";
+exports.query_change_user_email="UPDATE aMuseUser SET user_email = ? WHERE user_id = ? AND user_password = ?";
 
 //INSERIMENTO PHOTO PERSONALI
 
 exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphoto_comment, personalphoto_name, object_id) VALUES(?,?,?,?)";
-
+exports.query_is_photo_owner = "SELECT * FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 //VISUALIZZAZIONE FOTO PERSONALI
 
-exports.query_select_photos="SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseObject NATURAL JOIN aMuseVisit WHERE user_id = ?";
-exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ?";
 exports.query_check_if_bookmarked ="SELECT * FROM aMuseUserBookmark WHERE object_id = ?";
+exports.query_select_photos="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";
+exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ? ORDER BY visit_id ASC";
+exports.query_get_photo = "SELECT * FROM aMusePersonalPhoto NATURAL LEFT OUTER JOIN aMuseObject WHERE personalphoto_id = ?";
+
 //ADD PHOTOBOOK
 
 exports.query_insert_bookmark="INSERT INTO aMuseUserBookmark(user_id, object_id, visit_id) VALUES(?,?,?)";
@@ -58,9 +60,9 @@ exports.query_insert_visit = "INSERT INTO aMuseVisit(user_id) VALUES(?)";
 
 //REMOVING
 	//remove bookmark
-exports.query_del_bookmark="DELETE * FROM aMuseUserBookmark WHERE user_id = ?  AND object_id = ?";
+exports.query_del_bookmark="DELETE FROM aMuseUserBookmark WHERE user_id = ?  AND object_id = ?";
 	//remove aMusePersonalPhoto
-exports.query_del_photo="DELETE * FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
+exports.query_del_photo="DELETE FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
 
@@ -77,7 +79,7 @@ exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAutho
 exports.query_get_personal_photos_by_user_id="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";
 exports.query_get_personal_photos_by_id="SELECT * FROM aMusePersonalPhoto WHERE personalphoto_id = ?";
 exports.query_get_authors="SELECT * FROM aMuseAuthor";
-exports.query_get_authors_by_id="SELECT author_name FROM aMuseAuthor WHERE author_id = ?";
+exports.query_get_authors_by_id="SELECT * FROM aMuseAuthor WHERE author_id = ?";
 exports.query_get_authors_in_alpha_order="SELECT * FROM aMuseAuthor ORDER BY author_name";
 exports.query_get_last_opera_id="SELECT MAX(object_id) FROM aMuseObject"
 
@@ -93,6 +95,7 @@ exports.query_add_visit="INSERT INTO aMuseVisit(user_id) VALUES (?)";
 exports.query_remove_user="DELETE  FROM aMuseUser WHERE user_id = ?";
 exports.query_remove_bookmarked="DELETE  FROM aMuseUserBookmark WHERE user_id = ?";
 exports.query_remove_personal_photos="DELETE  FROM aMusePersonalPhoto WHERE user_id = ?";
+exports.query_remove_personal_photo="DELETE  FROM aMusePersonalPhoto WHERE personalphoto_id = ?";
 	// Various removal
 exports.query_remove_opera_by_id="DELETE FROM aMuseObject WHERE object_id = ?";
 exports.query_remove_author_by_id="DELETE FROM aMuseAuthor WHERE author_id = ?";
@@ -102,16 +105,10 @@ exports.query_remove_exhibition_by_id="DELETE FROM aMuseExhibition WHERE exhibit
 
 // CHANGES QUERY
 	// Exhibition
-exports.query_reset_exhibition_name="UDATE aMuseExhibition SET exhibition_name = ? WHERE exhibition_id = ?";
-exports.query_reset_exhibition_begin="UDATE aMuseExhibition SET exhibition_begin = ? WHERE exhibition_id = ?";
-exports.query_reset_exhibition_end="UDATE aMuseExhibition SET exhibition_end = ? WHERE exhibition_id = ?";
-exports.query_reset_exhibition_description="UDATE aMuseExhibition SET exhibition_description = ? WHERE exhibition_id = ?";
+exports.query_reset_exhibition_by_id="UPDATE aMuseExhibition SET exhibition_name = ?, exhibition_begin = ?, exhibition_end = ?, exhibition_description = ? WHERE exhibition_id = ?";
+
 	// Opera
-exports.query_reset_opera_name="UPDATE aMuseObject SET object_name = ? WHERE object_id = ?";
-exports.query_reset_opera_author="UPDATE aMuseObject SET author_id = ? WHERE object_id = ?";
-exports.query_reset_opera_exhibition="UPDATE aMuseObject SET exhibition_id = ? WHERE object_id = ?";
-exports.query_reset_opera_section="UPDATE aMuseObject SET section_id = ? WHERE object_id = ?";
-exports.query_reset_opera_description="UPDATE aMuseObject SET object_description = ? WHERE object_id = ?";
+exports.query_reset_opera_name="UPDATE aMuseObject SET object_name = ?, object_description = ?, author_id = ?, exhibition_id = ?, section_id = ? WHERE object_id = ?";
 exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE author_id = ?";
 	// Section
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";

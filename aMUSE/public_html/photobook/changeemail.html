@@ -6,44 +6,45 @@
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
-        <title>My aMuse - My photos</title>
+        <title>Change e-mail</title>
     </head>
     <body>
-    	<div data-role="page" data-dom-cache="false">
-    		<div data-role="header">
+        <div data-role="page" data-dom-cache="false">
+            <div data-role="header">
                 <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-                <h1>My aMuse - My photos</h1>
+                <h1>Change email</h1>
                 <a href="#panel" data-role="button" data-icon="gear">Settings</a>
             </div>
-    		<div data-role="content" style="text-align: center">
-            {% if items.length == 0 %}
-            <a data-role="button" data-inline="true" href="/photobook/addphoto" data-icon="plus">Add your personal photos to your photobook!</a>
-            {% endif %}
-            <div class="my-gallery-responsive">
-                {% for i in items %}
-                <div>
-                    <div class="ui-body ui-bar-b">
-                        <div class="contenitore-immagine">
-                            <a href="/photobook/myphotos/{{ i.personalphoto_id }}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/photobook/photos/{{i.personalphoto_id}}.jpg">
-                            </a>
-                        </div>
-                        <ul data-role="listview" data-theme="a" data-inset="true" data-split-icon="delete" data-split-theme="b">
-                            <li>
-                                <a href="/photobook/myphotos/{{i.personalphoto_id}}" data-transition="slide">
-                                    {{ i.personalphoto_name }}
-                                </a>
-                                <a href="/photobook/myphotos/delete/{{i.personalphoto_id}}" data-close-btn="none" data-rel="dialog" data-transition="pop"></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                {% endfor %}
+            <div data-role="content">
+                {% if message %}
+                <h2>{{ message }}</h2>
+                {% endif %}
+                <form action="/photobook/changeemail" method="post">
+                    <ul data-role="listview">
+                        <li data-role="fieldcontain">
+                            <label for="change_email_new">New e-mail:</label>
+                            <input type="email" id="change_email_new" name="email">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="change_email_conf">Confirm e-mail:</label>
+                            <input type="email" id="change_email_conf" name="conf">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="change_email_password">Password:</label>
+                            <input type="password" id="change_email_password" name="pass">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="change_email_submit">Submit</label>
+                            <input type="submit" value="Change e-mail" id="change_email_submit">
+                        </li>
+                    </ul>
+                </form>
             </div>
             <div data-role="panel" id="menu" data-position="left" data-display="overlay" data-theme="a">
                 <ul data-role="listview" data-inset="false" data-theme="a">
                     <li data-icon="home"><a href="/photobook">Home</a></li>
                     <li data-icon="star"><a href="/photobook/bookmarks">My bookmarks</a></li>
+                    <li data-icon="grid"><a href="/photobook/myphotos">My photos</a></li>
                     <li data-icon="plus"><a href="/photobook/addphoto">Add photo</a></li>
                 </ul>
             </div>
@@ -54,6 +55,6 @@
                     <li><a href="/photobook/logout">Logout</a></li>
                 </ul>
             </div>
-    	</div>
+        </div>
     </body>
 </html>

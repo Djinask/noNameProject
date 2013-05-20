@@ -18,7 +18,7 @@
     <div data-role="content" style="text-align: center">
     
 
-        <form method="post" action="#">
+        <form data-ajax="false" method="post" action="/admin/ex_info/upd/{{exhibitions.exhibition_id}}">
             <ul data-role="listview" data-inset="true">
                 <li data-role="fieldcontain">
                     <label for="ex_info_name">Name:</label>
@@ -32,13 +32,13 @@
                 <li data-role="fieldcontain">
                     <label for="ex_info_begin_date">Begin Date: <br> Current: {{exhibitions.exhibition_begin | date("d/m/Y")}} 
                     </label>
-                    <input type="date" name="begin_date" id="ex_info_begin_date" value="">
+                    <input type="date" name="begin_date" id="ex_info_begin_date" value="{{exhibitions.exhibition_begin | date("Y-m-d")}}">
                 </li>
                 <li data-role="fieldcontain">
                  <label for="ex_info_end_date"> 
                     End Date: <br> Current: {{exhibitions.exhibition_end | date("d/m/Y")}}
                 </label>
-                <input type="date" name="end_date" id="ex_info_end_date" value="">
+                <input type="date" name="end_date" id="ex_info_end_date" value="{{exhibitions.exhibition_end | date("Y-m-d")}}">
             </li>
             <li class="ui-body ui-body-b">
                 <fieldset class="ui-grid-a">

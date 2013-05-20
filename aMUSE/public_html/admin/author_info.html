@@ -20,16 +20,14 @@
     </div>
 <div data-role="content" style="text-align: center">
 
-    <form data-ajax="false" method="post" action="#">
+    <form data-ajax="false" method="post" action="/admin/author_info/upd/{{author.author_id}}">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="name2">Name:</label>
                 <input type="text" name="author_name" id="name2" value="{{author.author_name}}" data-clear-btn="true">
             </li>
             <li class="ui-body ui-body-b">
-                <fieldset class="ui-grid-a">
-                    <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
-                    <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+                    <button type="submit" data-theme="a">Submit</button>
                 </fieldset>
             </li>
         </ul>

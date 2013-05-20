@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/css.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    	<div data-role="page">
+    		<div data-role="content">
+                {% if empty %}
+                <h1>:(   Your photobook doesn't contain any bookmarks up to now!</h1>
+                <h2>You can add bookmarks by visiting the museum using the mobile app or using the Kiosks located inside the museum</h2>
+                {% endif %}
+
+                {% for v in visits %}
+                <div class="ui-bar ui-bar-b">
+                    <h2>{{v}}</h2>
+                </div>
+                <div class="my-gallery-responsive">
+                    {% set visit = items[loop.key] %}
+                    {% for i in visit %}
+                    <div>
+                        <div class="ui-body ui-bar-d">
+                            <div class="contenitore-immagine">
+                                <a href="/mobileviews/bookmarks/{{i.object_id}}" data-transition="slide" data-inline="true">
+                                    <img class="immagine" src="/static/photos/{{i.object_id}}.jpg">
+                                </a>
+                            </div>
+                            <a data-role="button" data-mini="true" href="/mobileviews/bookmarks/{{i.object_id}}" data-transition="slide" data-theme="a">
+                                {{ i.object_name }}
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+    		</div>
+    	</div>
+    </body>
+</html>

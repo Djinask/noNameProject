@@ -21,7 +21,7 @@
                 </p>
                 <br>
             
-            <a href="/admin/items/remove/c/{{type}}/{{id}}" data-theme="c" data-role="button">Delete</a>
+            <a href="/admin/items/remove/c/{{type}}/{{id}}" {% if type == "items" %} data-close-btn="none" data-rel="dialog" {% endif %}data-theme="c" data-role="button">Delete</a>
     		<a href="/admin/{{type}}" data-theme="c" data-role="button">Cancel</a>
 
 

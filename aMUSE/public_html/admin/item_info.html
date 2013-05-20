@@ -14,14 +14,10 @@
  <div data-role="page" class="ui-responsive-panel">
   <div data-role="header">
     <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-    <h1>Item</h1>
+    <h1>Item Info</h1>
 </div>
 <div data-role="content" style="text-align: center">
-    <h1>
-        Item information
-    </h1>
-
-
+  
     <form data-ajax="false">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
@@ -71,9 +67,14 @@
                 <input id = "item_info_image" type="file" name="file" value="">
             </li>
             <li class="ui-body ui-body-b">
-                <fieldset class="ui-grid-a">
+                <fieldset class="ui-grid-b">
                     <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
                     <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+                    <div class="ui-block-c">
+                        <a href="/admin/qrcode/{{it_info.object_id}}" download="{{it_info.object_name}}.png" data-role="button" data-theme="b">
+                            Download QR
+                        </a>
+                    </div>
                 </fieldset>
             </li>
         </ul>

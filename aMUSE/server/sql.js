@@ -49,7 +49,7 @@ exports.query_insert_photo="INSERT INTO aMusePersonalPhoto(user_id, personalphot
 
 exports.query_select_photos="SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseObject NATURAL JOIN aMuseVisit WHERE user_id = ?";
 exports.query_get_bookmarks="SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseVisit WHERE user_id = ?";
-
+exports.query_check_if_bookmarked ="SELECT * FROM aMuseUserBookmark WHERE object_id = ?";
 //ADD PHOTOBOOK
 
 exports.query_insert_bookmark="INSERT INTO aMuseUserBookmark(user_id, object_id, visit_id) VALUES(?,?,?)";
@@ -71,7 +71,7 @@ exports.query_get_users="SELECT * FROM aMuseUser";
 exports.query_get_user_by_id="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_get_user_by_email="SELECT * FROM aMuseUser WHERE user_email = ?";
 exports.query_get_sections="SELECT * FROM aMuseSection";
-exports.query_get_section_by_id="SELECT section_name FROM aMuseSection WHERE section_id = ?";
+exports.query_get_section_by_id="SELECT * FROM aMuseSection WHERE section_id = ?";
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */
 exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE object_id = ?";
 exports.query_get_personal_photos_by_user_id="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";

@@ -111,6 +111,9 @@ app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));
 app.post('/admin/add_menu/section_add', require ("./admin/section_add_c.js"));
 app.post('/admin/add_menu/item_add', require ("./admin/item_add_c.js"));
 
+//update section
+app.post('/admin/section_info/upd/:id', require ("./admin/section_upd.js"));
+
 // get section
 app.get('/admin/items', admin_items);
 app.get('/admin/exhibitions', require('./admin/exhibitions.js'));

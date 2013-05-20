@@ -16,18 +16,15 @@
  <div data-role="page" class="ui-responsive-panel">
     <div data-role="header">
         <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-        <h1>Author</h1>
+        <h1>Author Info</h1>
     </div>
 <div data-role="content" style="text-align: center">
-    <h1>
-        Author information
-    </h1>
 
-    <form data-ajax="false">
+    <form data-ajax="false" method="post" action="#">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="name2">Name:</label>
-                <input type="text" name="name2" id="name2" value="{{author.author_name}}" data-clear-btn="true">
+                <input type="text" name="author_name" id="name2" value="{{author.author_name}}" data-clear-btn="true">
             </li>
             <li class="ui-body ui-body-b">
                 <fieldset class="ui-grid-a">

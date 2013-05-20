@@ -2,14 +2,12 @@ div[data-role="header"] img {
     height: 1em;
     width: auto;
 }
-.immagine {
-    max-height:90%; 
-    margin: auto;
-    display: inline;
-    padding-bottom: 0px;
-}
 .contenitore-immagine {
-    height: 300px;
+    height: 330px;
+    text-align: center;
+}
+.contenitore-checkbox {
+    height: 30px;
 }
 .copertina{
     text-align: center;
@@ -17,44 +15,35 @@ div[data-role="header"] img {
 .testo {
     padding: 20px;
 }
-.ui-responsive img{
-    padding-top:20px;
-    width: auto;
-    height: auto;
-    max-width: 90%;
-}
-.ui-block-a, .ui-block-b,.ui-block-c,.ui-block-d,{
-    text-align: center;
-}
-.ui-grid-c.my-responsive{
-    text-align: center;
-}
 
 /* Stack all blocks to start */
-.ui-grid-c.my-responsive .ui-block-a,
-.ui-grid-c.my-responsive .ui-block-b,
-.ui-grid-c.my-responsive .ui-block-c,
-.ui-grid-c.my-responsive .ui-block-d,
-.stellina
-{ 
-    width: 100%; 
+.my-button-responsive > div, 
+.my-gallery-responsive > div,
+{ width: 100%; }
+
+.immagine {
+    max-height: 300px;
+    max-width: 220px;
 }
 
-@media all and (min-width: 35em) {
-    .ui-grid-c.my-responsive .ui-block-a { width: 50%;}
-    .ui-grid-c.my-responsive .ui-block-b { width: 50%;}
-    .ui-grid-c.my-responsive .ui-block-c { width: 50%;}
-    .ui-grid-c.my-responsive .ui-block-d { width: 50%;}
-    .stellina {max-width: 30%;}
-    .testo {width: 100%;}
+/* 16px = 1em */
+
+@media all and (min-width: 45em) {
+    .my-button-responsive > div
+    {
+        float: left;
+        width: 20%;
+    }
 }
 
-@media all and (min-width: 60em){
-    .ui-grid-c.my-responsive .ui-block-a {float:left; width: 25%;}
-    .ui-grid-c.my-responsive .ui-block-b {float:left;width: 25%;}
-    .ui-grid-c.my-responsive .ui-block-c {float:left;width: 25%;}
-    .ui-grid-c.my-responsive .ui-block-d {float:left;width: 25%;}
-    .stellina {float:left; max-width: 15%;}
-    .testo{width: 50%}
+@media all and (min-width: 32em) {
+
+    .my-gallery-responsive > div { width: 50%; float:left; }
+
+}
+
+@media all and (min-width: 66em){
+
+    .my-gallery-responsive > div {float:left; width: 25%;}
 
 }

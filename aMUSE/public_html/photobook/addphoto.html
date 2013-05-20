@@ -12,7 +12,7 @@
     		<div data-role="header">
                 <a href="#menu" data-role="button" data-icon="bars">Menu</a>
                 <h1>Add a photo</h1>
-                <a href="#panel" data-role="button" data-icon="gear">{{ email }}</a>
+                <a href="#panel" data-role="button" data-icon="gear">Settings</a>
             </div>
     		<div data-role="content">
                 {% if message %}
@@ -26,6 +26,13 @@
                     <div data-role="fieldcontain">
                         <label for="description">Description</label>
                         <textarea id="description" name="description"></textarea>
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="description">Object</label>
+                        <select>
+                            <option>
+                            </option>
+                        </select>
                     </div>
                     <div data-role="fieldcontain">
                         <label for="photo">Photo</label>

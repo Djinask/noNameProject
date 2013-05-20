@@ -16,9 +16,11 @@ module.exports = function(req, res) {
 		};
 		if(photo && title && desc) {
 			var conn = res.mysqlCreateConnection();
-			conn.query(res.query.query_insert_photo, [user.user_id, desc, title], function(error, results) {
-				if(error) res.send('Fatal error');
-				else {
+			conn.query(res.query.query_insert_photo, [user.user_id, desc, title, 1], function(error, results) {
+				if(error) {
+					console.log(error);
+					res.send('Fatal error');
+				} else {
 					imagemagick.resize({
 						srcPath: photo.path,
 						dstPath: '../userphotos/' + results.insertId + '.jpg',

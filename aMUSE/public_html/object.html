@@ -3,31 +3,35 @@
     <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/css.css">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/jquery.cookie.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     <script src="/static/js/kiosk.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" data-dom-cache="true">
     <div data-role="header" addBackBtn="true" data-position="fixed">
-        <a onclick="history.back()" data-icon="arrow-l" data-transition="slide" data-direction="reverse" addBackBtn="true">Indietro</a>
-        <h1>{{item.name}}</h1>
+        <a onclick="history.back()" data-icon="arrow-l" data-transition="slide" data-direction="reverse" addBackBtn="true">Back</a>
+        <h1>{{item.object_name}}</h1>
     </div>
     <div data-role="content">
         <div class="ui-grid-a ui-responsive" >
-            <div class="ui-block-a"  data-theme="c">
-                <div class="copertina">
-                    <img class="immmagine" src="/static/photos/{{item.object_id}}.jpg">
-                </div>
+            <div class="ui-block-a">
+                <img class="immmagine" src="/static/photos/{{item.object_id}}.jpg" style="max-width: 90%">
             </div>
-            <div class="ui-block-b testo" data-theme="c">
-                <a class="starbutton" href="#" data-role="button" data-theme="b" data-inline="true" data-icon="star">Bookmark</a>
-                <h2>{{ item.name }}</h2>
-                <h3>Author: {{ item.autor_name}}</h3>
+            <div class="ui-block-b">
+                <h2>{{ item.object_name }}</h2>
+                <h3>Author: {{ item.author_name}}</h3>
                 <h3>Section: {{ item.section_name}}</h3>
                 <h3>Exhibition: {{ item.exhibition_name}}</h3>
-                {{item.description}}
+                <form>
+                    <label>
+                        <input {% if bookmarked %} checked {% endif %} data-theme="a" type="checkbox" data-amuse-id="{{item.object_id}}" onchange="checkbox_fn.call(this)">
+                        Bookmark this item
+                    </label>
+                </form>
+                <p> {{item.object_description}} </p>
             </div>
         </div>
     </div>

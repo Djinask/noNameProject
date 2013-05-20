@@ -33,8 +33,7 @@ module.exports = function(req, res) {
 			objects_query = res.query.query_search;
 			break;
 		}
-		if(filter[0] == 'search') filter = ['%' + filter[1] + '%', '%' + filter[1] + '%', '%' + filter[1] + '%', '%' + filter[1] + '%'];
-		else filter = [filter[1]];
+		filter = [filter[1]];
 	}
 	filter.push(0);
 	connection.query(objects_query, filter, function(error, result) {
@@ -43,15 +42,13 @@ module.exports = function(req, res) {
 	});
 	connection.end(function() {
 		if(exhibitions && authors && sections) {
-			var items1 = [];
-			for(var i = 0; i < items.length; i+=4) {
-				items1.push(Array.prototype.slice.call(items, i, i+4));
-			}
+			var bookmarks = req.cookies.bookmarks ? JSON.parse(req.cookies.bookmarks) : new Object();
 			res.render('home.html', {
 				exhibitions: exhibitions,
 				sections: sections,
 				authors: authors,
-				items: items1
+				items: items,
+				bookmarks: bookmarks
 			});
 		} else {
 			res.send(200, '<h1>An error occurred</h1>');

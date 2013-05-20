@@ -34,8 +34,12 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 		conn.query(query.query_get_user, [id], function(err, results) {
 			if(err) {
 				res.send('Fatal error');
+			} else if(results.length == 0) {
+				res.clearCookie('user');
+				res.clearCookie('hash');
+				res.redirect('/photobook/login');
 			} else {
-				if(results[0].hash == hash) {
+				if(results[0].user_hash == hash) {
 					callback(results[0]);
 				} else {
 					res.clearCookie('user');
@@ -67,11 +71,10 @@ swig.init({
 app.use('/static', express.static('../public_html'));
 
 app.get('/object/:id', require('./object.js'));
-app.get('/signup/:email', require('./account.js'));
-
-//var gallery = require('./gallery.js');
-//app.get('/gallery/:selection', gallery);
-//app.get('/gallery', gallery);
+app.post('/signup', require('./account.js'));
+app.get('/signup', function(req, res) {
+	res.render('send.html');
+});
 
 var home = require('./home.js');
 app.get('/', home);
@@ -88,4 +91,45 @@ app.get('/photobook/photos/:name', require('./userphoto.js'));
 app.get('/photobook/myphotos', require('./myphotos.js'));
 app.get('/photobook/object/:id', require('./bookmark.js'));
 
-app.listen(8288);
+
+//ADMIN SECTION
+
+var admin_items = require ('./admin/items.js');
+
+//app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
+
+// remove section
+app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));
+app.get('/admin/authors/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/sections/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/exhibitions/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/users/remove/:type/:id', require ('./admin/remove.js'));
+// add section
+app.post('/admin/add_menu/exhibition_add', require ("./admin/ex_add_c.js"));
+app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));
+app.post('/admin/add_menu/section_add', require ("./admin/section_add_c.js"));
+app.post('/admin/add_menu/item_add', require ("./admin/item_add_c.js"));
+
+// get section
+app.get('/admin/items', admin_items);
+app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
+app.get('/admin', require ('./admin/home.js'));
+app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
+app.get('/admin/items/:filter/:id', admin_items);
+app.get('/admin/items/:id', require('./admin/item_info.js'));
+app.get('/admin/authors', require ('./admin/authors.js'));
+app.get('/admin/users', require ('./admin/users.js'));
+app.get('/admin/sections', require ('./admin/sections.js'));
+app.get('/admin/authors/:id', require ('./admin/author_info.js'));
+app.get('/admin/sections/:id', require('./admin/section_info.js'));
+app.get('/admin/add_menu', require ('./admin/add_menu.js'));
+app.get('/admin/add_menu/author_add', require ('./admin/author_add.js'));
+app.get('/admin/add_menu/ex_add', require ('./admin/ex_add.js'));
+app.get('/admin/add_menu/item_add', require ('./admin/item_add.js'));
+app.get('/admin/add_menu/section_add', require ('./admin/section_add.js'));
+
+//mobileapi
+app.get('/mobileapi/login/:email/:pass', require('./mobileapi/login.js'));
+
+app.listen(process.env.PORT || 8288);

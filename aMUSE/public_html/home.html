@@ -3,25 +3,25 @@
         <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
         <link rel="stylesheet" type="text/css" href="/static/css/css.css">
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="/static/js/jquery.cookie.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
         <script src="/static/js/kiosk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
     </head>
     <body>
-        <div data-role="page" id="home">
+        <div data-role="page" id="home" data-dom-cache="true">
             <div data-role="header">
                 <a href="#home"><img src="/static/img/museum.png"></a>
                 <h1>aMuse - The Muse Experience</h1>
             </div>
             <div data-role="content">
-                <input type="search" placeholder="Search something..." onchange="search_fn.call(this)">
-                <div class="ui-grid-d ui-responsive">
+                <div class="ui-grid-d my-button-responsive">
                     <div class="ui-block-a">
                         <select onchange="exhibition_fn.call(this)">
                             <option value="none">Exhibition</option>
                             {% for i in exhibitions -%}
-                            <option value="{{i.id_exhibition}}">{{i.exhibition_name}}</option>
+                            <option value="{{i.exhibition_id}}">{{i.exhibition_name}}</option>
                             {%- endfor %}
                         </select>
                     </div>
@@ -29,7 +29,7 @@
                         <select onchange="author_fn.call(this)">
                             <option value="none">Autor</option>
                             {% for i in authors -%}
-                            <option value="{{i.id_autor}}">{{i.autor_name}}</option>
+                            <option value="{{i.author_id}}">{{i.author_name}}</option>
                             {%- endfor %}
                         </select>
                     </div>
@@ -37,86 +37,47 @@
                         <select onchange="section_fn.call(this)">
                             <option value="none">Section</option>
                             {% for i in sections -%}
-                            <option value="{{i.id_section}}">{{i.section_name}}</option>
+                            <option value="{{i.section_id}}">{{i.section_name}}</option>
                             {%- endfor %}
                         </select>
                     </div>
                     <div class="ui-block-d">
-                        <a href="#" data-role="button" data-theme="e">Clear selections</a>
+                        <a href="#" data-role="button" data-theme="e" onclick="clear_fn()">Clear selections</a>
                     </div>
                     <div class="ui-block-e">
-                        <a href="#insert" data-role="button" data-transition="slide" data-theme="b">I'm done</a>
+                        <a href="/signup" data-role="button" data-transition="slide" data-theme="b">I'm done</a>
                     </div>
                 </div>
-                {% for i in items -%}
-                <div class="ui-grid-c ui-responsive my-responsive">
-                    {% if i[0] %}
-                    <div class="ui-block-a" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/object/{{i[0].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[0].object_id}}.jpg">
-                            </a>
+                <input type="search" placeholder="Search by exhibition, section, author or title..." onchange="search_fn.call(this)">
+
+                <div class="my-gallery-responsive">
+                    {% for i in items -%}
+                    <div>
+                        <div class="ui-bar ui-bar-d">
+                            <div class="contenitore-immagine">
+                                <a href="/object/{{i.object_id}}" data-transition="slide" data-inline="true">
+                                    <img class="immagine" src="/static/photos/{{i.object_id}}.jpg">
+                                </a>
+                            </div>
+                            <form class="contenitore-checkbox">
+                                <label>
+                                    <input {% if bookmarks[i.object_id] %} checked {% endif %} data-mini="true" data-inline="true" class="stellina" data-theme="a" type="checkbox" data-amuse-id="{{i.object_id}}" onchange="checkbox_fn.call(this)">
+                                    {{ i.object_name }}
+                                </label>
+                            </form>
                         </div>
-                        <form>
-                            <label>
-                                <input class="stellina" type="checkbox" data-amuse-id="{{i[0].object_id}}">{{ i[0].name }}
-                            </label>
-                        </form>
                     </div>
-                    {% endif %}
-                    {% if i[1] %}
-                    <div class="ui-block-b" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/object/{{i[1].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[1].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                <input class="stellina" type="checkbox" data-amuse-id="{{i[1].object_id}}">{{ i[1].name }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[2] %}
-                    <div class="ui-block-c" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/object/{{i[2].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[2].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                <input class="stellina" type="checkbox" data-amuse-id="{{i[2].object_id}}">{{ i[2].name }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
-                    {% if i[3] %}
-                    <div class="ui-block-d" data-theme="c">
-                        <div class="contenitore-immagine" data-theme="a">
-                            <a href="/object/{{i[3].object_id}}" data-transition="slide" data-inline="true">
-                                <img class="immagine" src="/static/photos/{{i[3].object_id}}.jpg">
-                            </a>
-                        </div>
-                        <form>
-                            <label>
-                                <input class="stellina" type="checkbox" data-amuse-id="{{i[3].object_id}}">{{ i[3].name }}
-                            </label>
-                        </form>
-                    </div>
-                    {% endif %}
+                    {% endfor -%}
                 </div>
-                {% endfor -%}
             </div>
         </div>
         <div data-role="page" id="insert">
             <div data-role="header">
-                <a href="#home" data-icon="back" data-iconpos="left" data-transition="slide" data-direction="reverse">Back</a>
+                <a onclick="history.back()" data-icon="back" data-iconpos="left" data-transition="slide" data-direction="reverse">Back</a>
                 <h1>aMuse - The Muse Experience</h1>
-            </div><!-- /header -->
-            <div data-role="content">
-                <form id="submit_form">
+            </div>
+            <div data-role="content" action="/signup" method="post">
+                <form>
                     <div >
                         <label for="email-1">Insert your e-mail</label>
                         <input type="email" data-clear-btn="true" name="email-1" id="email-1" value="">
@@ -126,32 +87,16 @@
                         <input type="email" data-clear-btn="true" name="email-2" id="email-2" value="">
                     </div>
                     <div>
-                        <button type="button" id="submit_button" data-role="button" data-theme="b">Submit</button>
+                        <button data-rel="dialog" type="submit" data-role="button" data-theme="b">Start sharing your experience!</button>
                     </div>
                 </form>
-            </div><!-- /content -->
-            <script>
-            $('#submit_button').click(function(e) {
-                var email = $('#email-1').val();
-                if($('#email-2').val() == email && email) {
-                    $.get('/signup/' + email, function(data) {
-                        if(data == 'success') $.mobile.changePage('#ok', {
-                            role: 'dialog',
-                            transition: 'flip'
-                        });
-                        else alert('Error');
-                    });
-                } else {
-                    alert('The two emails do not match');
-                }
-            });
-            </script>
+            </div>
         </div>
         <div data-role="page" id="ok">
             <div data-role="content">
-                <h2 >Sending e-mail confirmed!</h2>
-                <p><a href="#home" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
-            </div><!-- /content -->
+                <h2>The bookmarks have just been added to your photobook! A confirmation e-mail has been sent to you</h2>
+                <p><a href="/" onclick="clear_fn()" data-role="button" data-transition="flip" data-theme="b">Home</a></p>
+            </div>
         </div>
     </body>
 </html>

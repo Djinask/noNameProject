@@ -1,7 +1,7 @@
 module.exports = function(req, res) {
 	var user_id = req.body.id;
 	var object_id = req.body.object;
-	var user_password = res.body.password;
+	var user_password = req.body.password;
 	var conn = res.mysqlCreateConnection();
 	res.contentType('text/plain');
 	conn.query(res.query.query_get_last_visit, [user_id], function(error, results) {

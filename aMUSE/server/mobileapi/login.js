@@ -22,7 +22,7 @@ module.exports = function (req,res) {
 				if(!err) {
 					res.cookie('user', user_id);
 					res.cookie('hash', h);
-					res.send(user_id);
+					res.send(user_id + '');
 				} else {
 					res.send('fail');
 				}

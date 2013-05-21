@@ -19,11 +19,6 @@ var mysqlCreateConnection = function() {
 };
 http.ServerResponse.prototype.mysqlCreateConnection = mysqlCreateConnection;
 http.ServerResponse.prototype.query = query;
-http.ServerResponse.prototype.mysqlCreateConnection = function() {
-	var conn = mysql.createConnection(connection_data);
-	conn.connect();
-	return conn;
-};
 http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 	var id = this.cookies.user;
 	var hash = this.cookies.hash;
@@ -97,6 +92,7 @@ app.get('/photobook/myphotos', require('./photobook/myphotos.js'));
 app.get('/photobook/myphotos/:action/:id', require('./photobook/myphotos.js'));
 app.get('/photobook/bookmarks/:id', require('./photobook/bookmark.js'));
 app.get('/photobook/myphotos/:id', require('./photobook/personalphoto.js'));
+app.get('/photobook/share', require('./photobook/share.js'));
 
 
 //ADMIN SECTION
@@ -146,13 +142,18 @@ app.post('/mobileapi/login', require('./mobileapi/login.js'));
 app.post('/mobileapi/addobject', require('./mobileapi/addobject.js'));
 app.post('/mobileapi/register', require('./mobileapi/register.js'));
 app.post('/mobileapi/addphoto', require('./mobileapi/addphoto.js'));
+app.post('/mobileapi/geturl', require('./mobileapi/geturl.js'));
 
 //MOBILEVIEWS
 app.get('/mobileviews/bookmarks', require('./mobileviews/bookmarks.js'));
-//app.get('/mobileviews/photos/:name', require('./mobileviews/userphoto.js'));
 app.get('/mobileviews/myphotos', require('./mobileviews/myphotos.js'));
 app.get('/mobileviews/myphotos/:action/:id', require('./mobileviews/myphotos.js'));
 app.get('/mobileviews/bookmarks/:id', require('./mobileviews/bookmark.js'));
 app.get('/mobileviews/myphotos/:id', require('./mobileviews/personalphoto.js'));
+
+//PHOTOBOOK SHARING
+app.get('/booklet/:hash/photos/:offset?', require('./booklet/photos.js'));
+app.get('/booklet/:hash/:offset?', require('./booklet/booklet.js'));
+app.get('/booklet/:hash/photo/:id', require('./booklet/userphoto.js'));
 
 app.listen(process.env.PORT || 8288);

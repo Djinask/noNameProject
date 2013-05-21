@@ -19,8 +19,8 @@ module.exports = function(req, res) {
 			} else {	
 				imagemagick.convert([
 						image.path,
-						'-resize', '300x300>',
-						'-size', '300x300',
+						'-resize', '500x500>',
+						'-size', '500x500',
 						'xc:white',
 						'+swap',
 						'-gravity', 'center',

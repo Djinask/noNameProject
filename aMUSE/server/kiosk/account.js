@@ -1,4 +1,4 @@
-var sendEmail = require('../mail.js');
+var utils = require('../utils.js');
 var email_regex = /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|museum|name))$/;
 
 var email1_1 = "<p>Ciao! La tua password è: ";
@@ -7,30 +7,19 @@ var subject1 = "aMuse - Registration";
 var subject2 = "aMuse - New bookmarks added";
 var email2 = "<h3>You have just added new bookmarks to you photobook!</h3> <p>Login to aMuse to see your updated photobook and share it with your friends!</p>"
 
-var generatePassword = function() {
-	var text = "";
-	var possible = "abcdefghilmnopqrstuvzxyjkw_-.1234567890!?ABCDEFGHILMNOPQRSTUVZXYJKW";
-	var passLen = Math.floor(Math.random()*4)+6;		
-	for(var i=0; i<passLen; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-
-	return text;	
-};
-
-var _insertBookmarks = function(visit, user, req, res) {
+var _insertBookmarks = function(visit, user, req) {
 	var bookmarks = JSON.parse(req.cookies.bookmarks);
-	var conn = res.mysqlCreateConnection();
+	var conn = utils.mysqlCreateConnection();
 	for(var id in bookmarks) {
-		conn.query(res.query.query_insert_bookmark, [user, id, visit], function(error) {});
+		conn.query(utils.sql.query_insert_bookmark, [user, id, visit], function(error) {});
 	}
 	conn.end();
 }
 
-var insertBookmarks = function(user, req, res) {
+var insertBookmarks = function(user, req) {
 	if(req.cookies.bookmarks) {
-		var conn = res.mysqlCreateConnection();
-		conn.query(res.query.query_get_last_visit, [user], function(error, results) {
+		var conn = utils.mysqlCreateConnection();
+		conn.query(utils.sql.query_get_last_visit, [user], function(error, results) {
 			if(error) {
 				console.log(error);
 			} else {
@@ -39,14 +28,14 @@ var insertBookmarks = function(user, req, res) {
 				if(results.length > 0)
 					than = new Date(results[0].visit_time).getDay();
 				if(now != than) {
-					var conn = res.mysqlCreateConnection();
-					conn.query(res.query.query_insert_visit, [user], function(error, results) {
+					var conn = utils.mysqlCreateConnection();
+					conn.query(utils.sql.query_insert_visit, [user], function(error, results) {
 						if(error) console.log(error);
-						else _insertBookmarks(results.insertId, user, req, res);
+						else _insertBookmarks(results.insertId, user, req);
 					});
 					conn.end();
 				} else {
-					_insertBookmarks(results[0].visit_id, user, req, res);
+					_insertBookmarks(results[0].visit_id, user, req);
 				}
 			}
 		});
@@ -65,35 +54,37 @@ module.exports  = function(req, res) {
 			message: "The e-mails don't match"
 		});
 	} else {
-		var conn = res.mysqlCreateConnection();
-		conn.query(res.query.query_get_user_by_email, [email], function(error, results) {
+		var conn = utils.mysqlCreateConnection();
+		conn.query(utils.sql.query_get_user_by_email, [email], function(error, results) {
 			if(error) {
 				res.render('kiosk/send.html', {
 					message: "An error occurred! Please try again"
 				});
 			} else {
 				if(results.length == 0) {
-					var password = generatePassword();
-					var conn = res.mysqlCreateConnection();
-					conn.query(res.query.query_insert_user, [email, password], function(error, result) {
-						if(error) {
-							console.log(error);
-							res.render('kiosk/send.html', {
-								message: "An error occurred! Please try again"
-							});
-						} else {
-							sendEmail(email, subject1, email1_1 + password + email1_2);
-							insertBookmarks(result.insertId, req, res);
-							res.clearCookie('bookmarks');
-							res.render('kiosk/send.html', {
-								redirect: true
-							});
-						}
+					utils.generateUrl(email, function(url) {
+						var password = utils.generatePassword();
+						var conn = utils.mysqlCreateConnection();
+						conn.query(utils.sql.query_insert_user, [email, password, url], function(error, result) {
+							if(error) {
+								console.log(error);
+								res.render('kiosk/send.html', {
+									message: "An error occurred! Please try again"
+								});
+							} else {
+								utils.sendEmail(email, subject1, email1_1 + password + email1_2);
+								insertBookmarks(result.insertId, req);
+								res.clearCookie('bookmarks');
+								res.render('kiosk/send.html', {
+									redirect: true
+								});
+							}
+						});
+						conn.end();
 					});
-					conn.end();
 				} else if(results.length == 1) {
 					sendEmail(email, subject2, email2);
-					insertBookmarks(results[0].user_id, req, res);
+					insertBookmarks(results[0].user_id, req);
 					res.clearCookie('bookmarks');
 					res.render('kiosk/send.html', {
 						redirect: true

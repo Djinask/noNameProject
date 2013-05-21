@@ -10,23 +10,40 @@
 </head>
 <body>
 <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    $(window).on('pageshow resize orientationchange', function() {
+        $('.fb-like, .fb-comments').each(function() {
+            var self = $(this);
+            var dim = self.parent().width();
+            if(self.attr('data-width') != dim) {
+                self.attr('data-width', dim);
+                try {
+                    FB.XFBML.parse(this.parentNode, function() {
+                        self.css('visibility', 'visible');
+                    });
+                    self.css('visibility', 'hidden');
+                } catch(e){}
+            }
+        });
+    });
+</script>
 <div data-role="page">
     <div data-role="header" addBackBtn="true" data-position="fixed">
         {% if prev %}
-        <a href="/booklet/{{hash}}/photos/{{prev}}" data-icon="arrow-l" data-inline="true" data-transition="flow" data-direction="reverse">Previous</a>
+        <a href="/booklet/{{hash}}/photos/{{prev}}" data-icon="arrow-l" data-iconpos="notext" data-transition="flow" data-direction="reverse"></a>
         {% else %}
         <a href="/booklet/{{hash}}" data-icon="grid" data-transition="fade">Bookmarks</a>
         {% endif %}
         <h1>{{item.personalphoto_name|default("aMuse")}}</h1>
         {% if next %}
-        <a href="/booklet/{{hash}}/photos/{{next}}" data-icon="arrow-r" data-inline="true" data-transition="flow">Next</a>
+        <a href="/booklet/{{hash}}/photos/{{next}}" data-icon="arrow-r" data-iconpos="notext" data-transition="flow"></a>
         {% else %}
         <a href="/booklet/{{hash}}" data-icon="grid" data-transition="fade">Bookmarks</a>
         {% endif %}
@@ -41,11 +58,9 @@
                 <h2>{{ item.personalphoto_name }}</h2>
                 <p>{{item.personalphoto_comment}}</p>
                 <br>
-                <div class="fb-like" data-href="http://a-muse.herokuapp.com/booklet/{{hash}}/photos/{{curr}}" data-send="true" data-width="450" data-show-faces="true"></div>
-                <div class="fb-comments" data-href="http://a-muse.herokuapp.com/booklet/{{hash}}/photos/{{curr}}" data-num-posts="10" data-width="300"></div>
-                <script>
-                FB.XFBML.parse();
-                </script>
+                <div class="fb-like" data-href="http://a-muse.herokuapp.com/booklet/{{hash}}/photos/{{curr}}" data-send="true" data-width="280" data-show-faces="true"></div>
+                <br>
+                <div class="fb-comments" data-href="http://a-muse.herokuapp.com/booklet/{{hash}}/photos/{{curr}}" data-num-posts="10" data-width="280"></div>
             </div>
         </div>
         {% else %}

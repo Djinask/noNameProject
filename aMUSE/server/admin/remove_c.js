@@ -14,7 +14,6 @@ module.exports = function(req,res){
 				console.log(error);
 				data.message = "Connection error";
 			} else {
-				console.log(result);
 				if (result.length == 0) {
 					var conn = res.mysqlCreateConnection()
 					conn.query(res.query.query_remove_opera_by_id, [object_id], function(error,result){ // informazioni dell'opera con quell'id

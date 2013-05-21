@@ -110,11 +110,13 @@ app.get('/admin/authors/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/sections/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/exhibitions/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/users/remove/:type/:id', require ('./admin/remove.js'));
+app.get('/admin/admin_users/remove/:type/:id', require ('./admin/remove.js'));
 // add section
 app.post('/admin/add_menu/exhibition_add', require ("./admin/ex_add_c.js"));
 app.post('/admin/add_menu/author_add', require ("./admin/author_add_c.js"));
 app.post('/admin/add_menu/section_add', require ("./admin/section_add_c.js"));
 app.post('/admin/add_menu/item_add', require ("./admin/item_add_c.js"));
+app.post('/admin/add_menu/admin_user_add', require("./admin/admin_user_add_c.js"));
 
 //update section
 app.post('/admin/section_info/upd/:id', require ("./admin/section_upd.js"));
@@ -138,6 +140,8 @@ app.get('/admin/add_menu/author_add', require ('./admin/author_add.js'));
 app.get('/admin/add_menu/ex_add', require ('./admin/ex_add.js'));
 app.get('/admin/add_menu/item_add', require ('./admin/item_add.js'));
 app.get('/admin/add_menu/section_add', require ('./admin/section_add.js'));
+app.get('/admin/admin_users', require ('./admin/admin_users.js'));
+app.get('/admin/add_menu/admin_user_add', require ('./admin/admin_user_add.js'));
 
 //MOBILEAPI
 app.post('/mobileapi/login', require('./mobileapi/login.js'));

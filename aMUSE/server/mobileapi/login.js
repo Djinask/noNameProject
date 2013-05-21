@@ -18,11 +18,11 @@ module.exports = function (req,res) {
 			var h = hash();
 			var user_id = results[0].user_id;
 			var conn = res.mysqlCreateConnection();
-			conn.query(res.query.query_change_hash, [h, user_id], function(err, results) {
+			conn.query(res.query.query_change_hash, [h, user_id], function(err, result) {
 				if(!err) {
 					res.cookie('user', user_id);
 					res.cookie('hash', h);
-					res.send(user_id + '');
+					res.send(user_id + ' ' + results[0].user_url);
 				} else {
 					res.send('fail');
 				}

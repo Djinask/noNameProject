@@ -1,7 +1,7 @@
 var imagemagick = require('imagemagick');
 var fs = require('fs');
 
-module.exports = function(req,res){
+module.exports = function(req, res){
 	var id = req.body.id;
 	var object_name = req.body.object_name;
 	var object_desc = req.body.object_desc;
@@ -25,21 +25,21 @@ module.exports = function(req,res){
 				res.send("fatal error")
 			} else {
 					if (image){
-						imagemagick.resize({
-								srcPath: image.path,
-								dstPath: '../public_html/photos/' + parseInt(id) + '.jpg',
-								quality: 0.8,
-								format: 'jpg',
-								width: 300
-							}, function(err, stdout, stderr) {
-								if(err) {
-									console.log(err);
-									var conn = res.mysqlCreateConnection();
-									//conn.query();
-									conn.end();
-								} 
-								fs.unlink(image.path);
-								res.redirect('admin/items');
+						imagemagick.convert([
+							image.path,
+							'-resize', '300x300>',
+							'-size', '300x300',
+							'xc:white',
+							'+swap',
+							'-gravity', 'center',
+							'-composite',
+							'../public_html/photos/' + parseInt(id) + '.jpg'
+						], function(err, stdout, stderr) {
+							if(err) {
+								console.log(err);
+							} 
+							fs.unlink(image.path);
+							res.redirect('admin/items');
 						});
 					} else {
 						res.redirect('admin/items')

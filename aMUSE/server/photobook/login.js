@@ -1,24 +1,18 @@
-var hash_offset = 100000000;
-var hash_range = Math.pow(2, 32) - 1 - hash_offset;
-var hash = function() {
-	return hash_offset + Math.floor(Math.random() * hash_range);
-}
+var utils = require('../utils.js');
 
 // GET REQUIRED BOUNDS FOR LOG IN
-module.exports = function (req,res) {
+module.exports = function (req, res) {
 	var email = req.body.email;
 	var pass = req.body.password;
 	
 	if(email && pass) {
-		var conn = res.mysqlCreateConnection();
-		conn.query(res.query.query_login, [email, pass], function(err, results) {
+		utils.simpleQuery(utils.sql.query_login, [email, pass], function(err, results) {
 			if(err || results.length == 0)	{
 				res.render('photobook/login.html', {error: true});
 			} else {
-				var h = hash();
+				var h = utils.hash();
 				var user_id = results[0].user_id;
-				var conn = res.mysqlCreateConnection();
-				conn.query(res.query.query_change_hash, [h, user_id], function(err, results) {
+				utils.simpleQuery(utils.sql.query_change_hash, [h, user_id], function(err, results) {
 					if(!err) {
 						res.cookie('user', user_id);
 						res.cookie('hash', h);
@@ -29,10 +23,8 @@ module.exports = function (req,res) {
 					}
 					
 				});
-				conn.end();
 			}
 		});
-		conn.end();
 	} else if(req.cookies.user) {
 		res.redirect('/photobook');
 	} else {

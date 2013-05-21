@@ -2,6 +2,9 @@ div[data-role="header"] img {
     height: 1em;
     width: auto;
 }
+.blocco-immagine {
+    background-color: white;
+}
 .contenitore-immagine {
     height: 300px;
     text-align: center;

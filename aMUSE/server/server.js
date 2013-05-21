@@ -5,6 +5,7 @@ var http = require('http');
 var app = express();
 var mysql = require('mysql');
 var query = require('./sql.js');
+var utils = require('./utils.js');
 
 var connection_data = {
 	host: 'amuse.db.8861958.hostedresource.com',
@@ -48,6 +49,7 @@ http.IncomingMessage.prototype.checkIfLogged = function(res, callback) {
 };
 
 app.use(express.cookieParser('muhahaha'));
+app.use(express.limit('5mb'));
 app.use(express.bodyParser({
 	keepExtensions: true,
 	uploadDir: '../tmp'
@@ -64,6 +66,7 @@ swig.init({
 });
 
 app.use('/static', express.static('../public_html'));
+
 
 //KIOSK SECTION
 app.get('/object/:id', require('./kiosk/object.js'));
@@ -96,11 +99,10 @@ app.get('/photobook/share', require('./photobook/share.js'));
 
 
 //ADMIN SECTION
-
-var admin_items = require ('./admin/items.js');
-
+app.all('/admin/login', require('./admin/login.js'));
+app.get('/admin', utils.checkIfAdmin, require ('./admin/home.js'));
+app.all('/admin/*', utils.checkIfAdmin);
 app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
-
 // remove section
 app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));
@@ -121,11 +123,10 @@ app.post('/admin/ex_info/upd/:id',require ('./admin/ex_upd.js'));
 app.post('/admin/item_info', require('./admin/item_upd.js'));
 
 // get section
-app.get('/admin/items', admin_items);
+app.get('/admin/items', require ('./admin/items.js'));
 app.get('/admin/exhibitions', require('./admin/exhibitions.js'));
-app.get('/admin', require ('./admin/home.js'));
 app.get('/admin/exhibitions/:id', require('./admin/ex_info.js'));
-app.get('/admin/items/:filter/:id', admin_items);
+app.get('/admin/items/:filter/:id', require ('./admin/items.js'));
 app.get('/admin/items/:id', require('./admin/item_info.js'));
 app.get('/admin/authors', require ('./admin/authors.js'));
 app.get('/admin/users', require ('./admin/users.js'));

@@ -52,14 +52,19 @@ var mysqlCreateConnection = function() {
 	return conn;
 };
 
+var simpleQuery = function(query, params, callback) {
+	var conn = mysqlCreateConnection();
+	conn.query(query, params, callback);
+	conn.end();
+};
+
 var checkIfLogged = function(req, res, callback) {
 	var id = req.cookies.user;
 	var hash = req.cookies.hash;
 	if(!id || !hash) {
 		res.redirect('/photobook/login');
 	} else {
-		var conn = mysqlCreateConnection();
-		conn.query(sql.query_get_user, [id], function(err, results) {
+		simpleQuery(sql.query_get_user, [id], function(err, results) {
 			if(err) {
 				res.send('Fatal error');
 			} else if(results.length == 0) {
@@ -76,7 +81,27 @@ var checkIfLogged = function(req, res, callback) {
 				}
 			}
 		});
-		conn.end();
+	}
+};
+
+var hash = function() {
+	var hash_offset = 100000000;
+	var hash_range = Math.pow(2, 32) - 1 - hash_offset;
+	return hash_offset + Math.floor(Math.random() * hash_range);
+}
+
+var checkIfAdmin = function(req, res, next) {
+	var admin = req.cookies.admin ? req.cookies.admin.split(' ') : null;
+	if(admin) {
+		simpleQuery(sql.query_check_if_admin, admin, function(error, result) {
+			if(error || result.length == 0) {
+				res.redirect('/admin/login');
+			} else {
+				next();
+			}
+		});
+	} else {
+		res.redirect('/admin/login');
 	}
 };
 
@@ -103,12 +128,6 @@ var sendEmail = function(to, subject, text) {
     });
 };
 
-var simpleQuery = function(query, params, callback) {
-	var conn = mysqlCreateConnection();
-	conn.query(query, params, callback);
-	conn.end();
-} 
-
 exports.generatePassword = generatePassword;
 exports.sendEmail = sendEmail;
 exports.copyInto = copyInto;
@@ -117,4 +136,6 @@ exports.generatePassword = generatePassword;
 exports.mysqlCreateConnection = mysqlCreateConnection;
 exports.generateUrl = generateUrl;
 exports.simpleQuery = simpleQuery;
+exports.hash = hash;
+exports.checkIfAdmin = checkIfAdmin;
 exports.sql = sql;

@@ -67,6 +67,9 @@ exports.query_del_photo="DELETE FROM aMusePersonalPhoto WHERE user_id = ? AND pe
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
 
+exports.query_check_if_admin = "SELECT * FROM aMuseAdmin WHERE admin_name = ? AND admin_hash = ?";
+exports.query_admin_login = "UPDATE aMuseAdmin SET admin_hash = ? WHERE admin_name = ? AND admin_password = ?";
+
 // GET QUERY
 exports.query_get_exhibitions="SELECT * FROM aMuseExhibition";
 exports.query_get_exhibition_by_id="SELECT * FROM aMuseExhibition WHERE exhibition_id = ?";

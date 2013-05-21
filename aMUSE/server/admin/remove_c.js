@@ -14,7 +14,6 @@ module.exports = function(req,res){
 				console.log(error);
 				data.message = "Connection error";
 			} else {
-				console.log(result);
 				if (result.length == 0) {
 					var conn = res.mysqlCreateConnection()
 					conn.query(res.query.query_remove_opera_by_id, [object_id], function(error,result){ // informazioni dell'opera con quell'id
@@ -25,7 +24,7 @@ module.exports = function(req,res){
 							fs.unlink("../public_html/photos/" + object_id + ".jpg", function(err) {
 								console.log(err);
 							});
-							data.message = "Object successfully removed";
+						data.message = "Object successfully removed";
 						}
 						res.render('admin/remove_message.html', data);	
 					});

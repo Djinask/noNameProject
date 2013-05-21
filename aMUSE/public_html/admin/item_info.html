@@ -18,16 +18,17 @@
 </div>
 <div data-role="content" style="text-align: center">
   
-    <form data-ajax="false">
+    <form data-ajax="false" method="post" action="/admin/item_info" enctype ="multipart/form-data">
+        <input type="hidden" name="id" value="{{it_info.object_id}}">
         <ul data-role="listview" data-inset="true">
             <li data-role="fieldcontain">
                 <label for="item_info_name">Name:</label>
-                <input id="item_info_name" type="text" name="name2" value="{{it_info.object_name}}" data-clear-btn="true">
+                <input id="item_info_name" type="text" name="object_name" value="{{it_info.object_name}}" data-clear-btn="true">
             </li>
             <li data-role="fieldcontain">
                 <label for ="item_info_author">Author:</label>
-                <select id="item_info_author" name="select-native-1">
-                    <option disabled selected value="{{it_info.author_id}}">
+                <select id="item_info_author" name="object_author">
+                    <option selected value="{{it_info.author_id}}">
                         Current: {{it_info.author_name}}
                     </option>
                     {% for e in authors %}
@@ -37,12 +38,12 @@
             </li>
             <li data-role="fieldcontain">
                 <label for = "item_info_description">Description:</label>
-                <textarea id ="item_info_description" name="description">{{it_info.object_description}}</textarea>
+                <textarea id ="item_info_description" name="object_desc">{{it_info.object_description}}</textarea>
             </li>
             <li data-role="fieldcontain">
                 <label for="item_info_exhibition">Exhibition:</label>
-                <select id ="item_info_exhibition" name="select-native-1">
-                    <option disabled selected value="{{it_info.exhibition_id}}">
+                <select id ="item_info_exhibition" name="object_ex">
+                    <option selected value="{{it_info.exhibition_id}}">
                         Current: {{it_info.exhibition_name}}
                     </option>
                     {% for e in exhibitions %}
@@ -52,8 +53,8 @@
             </li>
             <li data-role="fieldcontain">
                 <label for ="item_info_section">Section:</label>
-                <select id ="item_info_section" name="select-native-1">
-                    <option disabled selected value="{{it_info.section_id}}">
+                <select id ="item_info_section" name="object_section">
+                    <option selected value="{{it_info.section_id}}">
                         Current: {{it_info.section_name}}
                     </option>
                     {% for e in sections %}
@@ -64,7 +65,7 @@
             <li data-role="fieldcontain">
                 <img src="/static/photos/{{it_info.object_id}}.jpg">
                 <label for = "item_info_image">Image:</label>
-                <input id = "item_info_image" type="file" name="file" value="">
+                <input id = "item_info_image" type="file" name="image" value="">
             </li>
             <li class="ui-body ui-body-b">
                 <fieldset class="ui-grid-b">

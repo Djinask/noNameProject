@@ -14,7 +14,7 @@ exports.query_select_exhibitions="SELECT * FROM aMuseExhibition ORDER BY exhibit
 exports.query_select_authors="SELECT * FROM aMuseAuthor ORDER BY author_name";
 exports.query_select_object="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection WHERE object_id = ?";
 
-exports.query_insert_user="INSERT INTO aMuseUser(user_email,user_password) VALUES (?, ?)";
+exports.query_insert_user="INSERT INTO aMuseUser(user_email, user_password, user_url) VALUES (?, ?, ?)";
 //QUERY LIMIT
 
 exports.query_select_objects="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition LIMIT ?, 24";
@@ -35,6 +35,7 @@ exports.query_login="SELECT * FROM aMuseUser WHERE user_email = ? AND user_passw
 exports.query_get_user_data="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_change_hash="UPDATE aMuseUser SET user_hash = ? WHERE user_id = ?";
 exports.query_get_user="SELECT * FROM aMuseUser WHERE user_id = ?";
+exports.query_get_user_by_url = "SELECT * FROM aMuseUser WHERE user_url = ?";
 
 // UPDATE USER DATA
 
@@ -55,7 +56,7 @@ exports.query_get_photo = "SELECT * FROM aMusePersonalPhoto NATURAL LEFT OUTER J
 //ADD PHOTOBOOK
 
 exports.query_insert_bookmark="INSERT INTO aMuseUserBookmark(user_id, object_id, visit_id) VALUES(?,?,?)";
-exports.query_get_last_visit = "SELECT * FROM aMuseVisit WHERE user_id = ? ORDER BY visit_id DESC LIMIT 0, 1";
+exports.query_get_last_visit = "SELECT * FROM aMuseVisit NATURAL RIGHT OUTER JOIN aMuseUser WHERE user_id = ? ORDER BY visit_id DESC LIMIT 0, 1";
 exports.query_insert_visit = "INSERT INTO aMuseVisit(user_id) VALUES(?)";
 
 //REMOVING
@@ -114,3 +115,8 @@ exports.query_reset_author_name="UPDATE aMuseAuthor SET author_name = ? WHERE au
 exports.query_reset_section_name="UPDATE aMuseSection SET section_name = ? WHERE section_id = ?";
 	// visit
 exports.query_reset_visit_user="UPDATE aMuseVisit SET user_id = ? WHERE visit_id = ?";
+
+//BOOKLET
+exports.query_get_bookmarks_by_url = "SELECT * FROM aMuseUserBookmark NATURAL JOIN aMuseUser NATURAL JOIN aMuseObject NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseExhibition WHERE user_url = ? LIMIT ?, 2";
+exports.query_get_photos_by_url = "SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseUser WHERE user_url = ? LIMIT ?, 2";
+exports.query_check_if_photo_in_url = "SELECT * FROM aMusePersonalPhoto NATURAL JOIN aMuseUser WHERE user_url = ? AND personalphoto_id = ?";

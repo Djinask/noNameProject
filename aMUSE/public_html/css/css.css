@@ -4,6 +4,7 @@ div[data-role="header"] img {
 }
 .blocco-immagine {
     background-color: white;
+    padding: 8px;
 }
 .contenitore-immagine {
     height: 300px;
@@ -25,10 +26,18 @@ div[data-role="header"] img {
 { width: 100%; }
 
 .immagine {
-    max-height: 300px;
-    max-width: 300px;
+    height: 280px;
+    width: 280px;
 }
 
+.contenitore-immagine-grande {
+    text-align: center;
+}
+
+.immagine-grande {
+    max-width: 100%;
+    height: auto;
+}
 /* 16px = 1em */
 
 @media all and (min-width: 45em) {

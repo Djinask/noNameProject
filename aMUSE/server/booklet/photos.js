@@ -11,6 +11,7 @@ module.exports = function(req, res) {
 		} else {
 			res.render("booklet/photos.html", {
 				item: results[0],
+				curr: offset,
 				next: results[1] ? offset + 1 : undefined,
 				prev: offset == 1 ? undefined : offset - 1,
 				hash: req.params.hash

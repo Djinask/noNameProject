@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/css.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <title>My aMuse - My photos</title>
+    </head>
+    <body>
+    	<div data-role="page" data-dom-cache="false">
+    		<div data-role="content" style="text-align: center">
+            {% if items.length == 0 %}
+            <h2>Your photobook doesn't contain any photos</h2>
+            {% endif %}
+            <div class="my-gallery-responsive">
+                {% for i in items %}
+                <div>
+                    <div class="ui-body ui-body-d">
+                        <div class="contenitore-immagine">
+                            <a href="/mobileviews/myphotos/{{ i.personalphoto_id }}" data-transition="slide" data-inline="true">
+                                <img class="immagine" src="/photobook/photos/{{i.personalphoto_id}}.jpg">
+                            </a>
+                        </div>
+                        <ul data-role="listview" data-theme="a" data-inset="true" data-split-icon="delete" data-split-theme="b">
+                            <li>
+                                <a href="/mobileviews/myphotos/{{i.personalphoto_id}}" data-transition="slide">
+                                    {{ i.personalphoto_name }}
+                                </a>
+                                <a href="/mobileviews/myphotos/delete/{{i.personalphoto_id}}" data-close-btn="none" data-rel="dialog" data-transition="pop"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    	</div>
+    </body>
+</html>

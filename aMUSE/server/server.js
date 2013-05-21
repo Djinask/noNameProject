@@ -142,7 +142,18 @@ app.get('/admin/add_menu/ex_add', require ('./admin/ex_add.js'));
 app.get('/admin/add_menu/item_add', require ('./admin/item_add.js'));
 app.get('/admin/add_menu/section_add', require ('./admin/section_add.js'));
 
-//mobileapi
-app.get('/mobileapi/login/:email/:pass', require('./mobileapi/login.js'));
+//MOBILEAPI
+app.post('/mobileapi/login', require('./mobileapi/login.js'));
+app.post('/mobileapi/addobject', require('./mobileapi/addobject.js'));
+app.post('/mobileapi/register', require('./mobileapi/register.js'));
+app.post('/mobileapi/addphoto', require('./mobileapi/addphoto.js'));
+
+//MOBILEVIEWS
+app.get('/mobileviews/bookmarks', require('./mobileviews/bookmarks.js'));
+//app.get('/mobileviews/photos/:name', require('./mobileviews/userphoto.js'));
+app.get('/mobileviews/myphotos', require('./mobileviews/myphotos.js'));
+app.get('/mobileviews/myphotos/:action/:id', require('./mobileviews/myphotos.js'));
+app.get('/mobileviews/bookmarks/:id', require('./mobileviews/bookmark.js'));
+app.get('/mobileviews/myphotos/:id', require('./mobileviews/personalphoto.js'));
 
 app.listen(process.env.PORT || 8288);

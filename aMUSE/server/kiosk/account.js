@@ -83,7 +83,7 @@ module.exports  = function(req, res) {
 						conn.end();
 					});
 				} else if(results.length == 1) {
-					sendEmail(email, subject2, email2);
+					utils.sendEmail(email, subject2, email2);
 					insertBookmarks(results[0].user_id, req);
 					res.clearCookie('bookmarks');
 					res.render('kiosk/send.html', {

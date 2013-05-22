@@ -1,0 +1,65 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/css.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+    <script src="/static/js/admin.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Add Admin User</title>
+</head>
+
+<body>
+ <div data-role="page" class="ui-responsive-panel">
+  <div data-role="header">
+    <a href="#menu" data-role="button" data-icon="bars">Menu</a>
+    <h1>Add Admin User</h1>
+</div>
+<div data-role="content" style="text-align: center">
+    <h1>
+        New Admin User
+    </h1>
+
+    <form action="/admin/add_menu/admin_user_add" method="post"data-position-fixed="true">
+        <ul data-role="listview" data-inset="true">
+            <li data-role="fieldcontain">
+                <label for="admin_name">Name:</label>
+                <input type="text" name="admin_name" id="admin_name" value="">
+            </li>
+            <li data-role="fieldcontain">
+                <label for="admin_pass1">Password:</label>
+                <input type="password" name="admin_pass1" id="admin_pass1" value="">
+            </li>
+            <li data-role="fieldcontain">
+                <label for="admin_pass2">Repeat Password:</label>
+                <input type="password" name="admin_pass2" id="admin_pass2" value="">
+            </li>
+            <li class="ui-body ui-body-b">
+                <button type="submit" data-theme="a">Submit</button>
+            </li>
+        </ul>
+    </form>
+</div>
+
+
+
+    <div data-role="panel" id="menu" data-position-fixed="true" data-position="left" data-display="reveal" data-theme="a" data-dismissible="false">
+    <ul data-role="listview" data-inset="false" data-theme="a">
+        <li data-icon="plus" data-theme="b"><a href="/admin/add_menu">Add Menu</a></li>
+        <li data-icon="plus"><a href="/admin/admin_users">Admin Accounts</a>
+        <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
+        <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>
+        <li data-icon="plus"><a href="/admin/sections">Sections</a></li>
+        <li data-icon="plus"><a href="/admin/authors">Authors</a></li>
+        <li data-icon="plus"><a href="/admin/items">Items</a></li>
+    </ul>
+    <br>
+    <br>
+    <ul data-role="listview" data-inset="false" data-theme="b">
+        <li><a href="/photobook/logout">Logout</a></li>
+    </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -103,6 +103,7 @@ app.all('/admin/login', require('./admin/login.js'));
 app.get('/admin', utils.checkIfAdmin, require ('./admin/home.js'));
 app.all('/admin/*', utils.checkIfAdmin);
 app.get('/admin/qrcode/:id', require('./qrcodeGen.js'));
+app.get('/admin/logout', require ('./admin/logout.js'));
 // remove section
 app.get('/admin/items/remove/:type/:id', require ('./admin/remove.js'));
 app.get('/admin/items/remove/c/:type/:id', require ('./admin/remove_c.js'));

@@ -5,11 +5,14 @@ module.exports = function(req,res){
 
 	var connection = res.mysqlCreateConnection();
 	var type = req.params.type;
+	
 
 	if (type == "items"){
+		
+		var data = {};
 		var object_id = req.params.id;
 		connection.query(res.query.query_check_if_bookmarked, [object_id], function(error,result){
-			var data = {};
+			data.type = type;
 			if (error){
 				console.log(error);
 				data.message = "Connection error";
@@ -23,17 +26,21 @@ module.exports = function(req,res){
 						} else {
 							fs.unlink("../public_html/photos/" + object_id + ".jpg", function(err) {
 								console.log(err);
+								data.message = "Object successfully removed";
+
 							});
-						data.message = "Object successfully removed";
 						}
-						res.render('admin/remove_message.html', data);	
+						
 					});
 					conn.end();
 				} else {
 					data.message = "This object has already been bookmarked";
 				}
 			}
-			res.render('admin/remove_message.html', data);		
+			res.render('admin/remove_message.html', {
+				message: data.message,
+				type: data.type
+			});		
 		});
 		connection.end(function() {
 			//res.redirect('admin/items');
@@ -126,12 +133,17 @@ module.exports = function(req,res){
 					conn.query(res.query.query_remove_admin_user_by_name, [admin_name], function(error,result){
 						if (error){
 							console.log(error);
-						}			
+						}	
+						conn.end();		
 					});
 				}
+				else {
+					conn.end();
+				}
 			} 
+
 		});
-		conn.end();
+		
 		connection.end(function() {
 			res.redirect('admin/admin_users');
 		});

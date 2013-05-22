@@ -80,6 +80,7 @@ exports.query_get_sections="SELECT * FROM aMuseSection";
 exports.query_get_section_by_id="SELECT * FROM aMuseSection WHERE section_id = ?";
 exports.query_get_admin_users = "SELECT * FROM aMuseAdmin";
 exports.query_get_all_admin_users = "SELECT * FROM aMuseAdmin LIMIT 0,2";
+
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */
 exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE object_id = ?";
 exports.query_get_personal_photos_by_user_id="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";

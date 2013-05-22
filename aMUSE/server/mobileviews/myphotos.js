@@ -1,4 +1,4 @@
-var message_html = '<div data-role="page"><div data-role="content"><h1>Operation was successful!</h1><a href="/mobileviews/myphotos" data-role="button">OK</a></div></div>';
+var message_html = '<div data-role="page"><div data-role="content"><h1>Operation was successful!</h1><a href="/mobileviews/myphotos" data-role="button" data-ajax="false">OK</a></div></div>';
 
 module.exports = function(req, res) {
 	req.checkIfLogged(res, function(user) {

@@ -1,9 +1,12 @@
 module.exports = function(req, res) {
+	res.contentType('text/plain');
 	var user_id = req.body.id;
-	var object_id = req.body.object;
+	var object_id = parseInt(req.body.object);
+	if(object_id <= 0) {
+		res.send('fail');
+	}
 	var user_password = req.body.password;
 	var conn = res.mysqlCreateConnection();
-	res.contentType('text/plain');
 	conn.query(res.query.query_get_last_visit, [user_id], function(error, results) {
 		if(error || !results[0]) {
 			res.send('fail');
@@ -18,11 +21,14 @@ module.exports = function(req, res) {
 				var conn = res.mysqlCreateConnection();
 				conn.query(res.query.query_insert_visit, [user_id], function(error, results) {
 					if(error) {
-						res.send('fail');
+						res.send('fail')
 					} else {
 						var conn = res.mysqlCreateConnection();
 						conn.query(res.query.query_insert_bookmark, [user_id, object_id, results.insertId], function(error) {
-							if(error) res.send('fail');
+							if(error) {
+								if(error.code == "ER_DUP_ENTRY") res.send('alreadyused');
+								else res.send('fail');
+							}
 							else res.send('success');
 						});
 						conn.end();
@@ -32,7 +38,10 @@ module.exports = function(req, res) {
 			} else {
 				var conn = res.mysqlCreateConnection();
 				conn.query(res.query.query_insert_bookmark, [user_id, object_id, results[0].visit_id], function(error) {
-					if(error) res.send('fail');
+					if(error) {
+						if(error.code == "ER_DUP_ENTRY") res.send('alreadyused');
+						else res.send('fail');
+					}
 					else res.send('success');
 				});
 				conn.end();

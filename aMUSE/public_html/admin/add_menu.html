@@ -7,13 +7,14 @@
   <script src="/static/js/admin.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
+  <title>Add Menu</title>
 </head>
 
 <body>
  <div data-role="page" class ="ui-responsive-panel">
   <div data-role="header">
     <a href="#menu" data-role="button" data-icon="bars">Menu</a>
-    <h1>Add</h1>
+    <h1>Add Menu</h1>
   </div>
   <div data-role="content" style="text-align: center">
     <h1>
@@ -28,6 +29,7 @@
           <a href="/admin/add_menu/ex_add" data-theme="c" data-role="button">Exhibition</a>
           <a href="/admin/add_menu/item_add" data-theme="c" data-role="button">Item</a>
           <a href="/admin/add_menu/section_add" data-theme="c" data-role="button">Section</a>
+          <a href="/admin/add_menu/admin_user_add" data-theme="c" data-role="button">Admin User</a>
         </fieldset>
       </li>
     </ul>
@@ -36,6 +38,7 @@
 
   <div data-role="panel" id="menu" data-position-fixed="true" data-position="left" data-display="reveal" data-theme="a" data-dismissible="false">
     <ul data-role="listview" data-inset="false" data-theme="a">
+        <li data-icon="plus"><a href="/admin/admin_users">Admin Accounts</a>
         <li data-icon="plus"><a href="/admin/add_menu">Add Menu</a></li>
         <li data-icon="plus"><a href="/admin/users">aMuse accounts</a></li>
         <li data-icon="plus"><a href="/admin/exhibitions">Exhibitions</a></li>

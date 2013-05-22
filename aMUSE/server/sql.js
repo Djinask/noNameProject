@@ -78,6 +78,8 @@ exports.query_get_user_by_id="SELECT * FROM aMuseUser WHERE user_id = ?";
 exports.query_get_user_by_email="SELECT * FROM aMuseUser WHERE user_email = ?";
 exports.query_get_sections="SELECT * FROM aMuseSection";
 exports.query_get_section_by_id="SELECT * FROM aMuseSection WHERE section_id = ?";
+exports.query_get_admin_users = "SELECT * FROM aMuseAdmin";
+exports.query_get_all_admin_users = "SELECT * FROM aMuseAdmin LIMIT 0,2";
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */
 exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE object_id = ?";
 exports.query_get_personal_photos_by_user_id="SELECT * FROM aMusePersonalPhoto WHERE user_id = ?";
@@ -93,6 +95,7 @@ exports.query_add_author="INSERT INTO aMuseAuthor(author_name) VALUES (?)";
 exports.query_add_exhibition="INSERT INTO aMuseExhibition(exhibition_name,exhibition_begin,exhibition_end,exhibition_description) VALUES (?,?,?,?)";
 exports.query_add_section="INSERT INTO aMuseSection(section_name) VALUES (?)";
 exports.query_add_visit="INSERT INTO aMuseVisit(user_id) VALUES (?)";
+exports.query_add_admin_user= "INSERT INTO aMuseAdmin (admin_password, admin_name) VALUES (?,?)";
 
 // REMOVE QUERY
 	// Ban aMuseUser
@@ -106,6 +109,7 @@ exports.query_remove_author_by_id="DELETE FROM aMuseAuthor WHERE author_id = ?";
 exports.query_remove_section_by_id="DELETE FROM aMuseSection WHERE section_id = ?";
 exports.query_remove_visit_by_id="DELETE FROM aMuseVisit WHERE visit_id = ?";
 exports.query_remove_exhibition_by_id="DELETE FROM aMuseExhibition WHERE exhibition_id = ?";
+exports.query_remove_admin_user_by_name = "DELETE FROM aMuseAdmin WHERE admin_name = ?";
 
 // CHANGES QUERY
 	// Exhibition

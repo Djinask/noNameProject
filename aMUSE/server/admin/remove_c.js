@@ -111,6 +111,32 @@ module.exports = function(req,res){
 			res.redirect('admin/users');
 		});
 	}
+	
+	else if (type == "admin_users"){
+
+		var length;
+		var admin_name = req.params.id;
+		var conn = res.mysqlCreateConnection() 
+		connection.query(res.query.query_get_all_admin_users, function(error,result){
+			if (error){
+				console.log(error);
+			}
+			else{
+				if (result.length >=2){
+					conn.query(res.query.query_remove_admin_user_by_name, [admin_name], function(error,result){
+						if (error){
+							console.log(error);
+						}			
+					});
+				}
+			} 
+		});
+		conn.end();
+		connection.end(function() {
+			res.redirect('admin/admin_users');
+		});
+	
+	}
 	else {
 		connection.end();
 	}

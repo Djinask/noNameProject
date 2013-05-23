@@ -8,26 +8,28 @@
  *
  */
 
-exports.query_data="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition";
+exports.query_data="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE";
 exports.query_select_sections="SELECT * FROM aMuseSection ORDER BY section_name";
-exports.query_select_exhibitions="SELECT * FROM aMuseExhibition ORDER BY exhibition_name";
+exports.query_select_exhibitions="SELECT * FROM aMuseExhibition WHERE exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE ORDER BY exhibition_name";
 exports.query_select_authors="SELECT * FROM aMuseAuthor ORDER BY author_name";
 exports.query_select_object="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection WHERE object_id = ?";
 
 exports.query_insert_user="INSERT INTO aMuseUser(user_email, user_password, user_url) VALUES (?, ?, ?)";
 //QUERY LIMIT
 
-exports.query_select_objects="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition LIMIT ?, 24";
+exports.query_select_objects="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
 
 
 //FILTER
 
-exports.query_select_object_by_author="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE author_id = ? LIMIT ?, 24";
-exports.query_select_object_by_section="SELECT * FROM aMuseObject NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor WHERE section_id = ? LIMIT ?, 24";
-exports.query_select_object_by_exhibition="SELECT * FROM aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor WHERE exhibition_id = ? LIMIT ?, 24";
+exports.query_select_object_by_author="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE author_id = ? AND exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
+exports.query_select_object_by_section="SELECT * FROM aMuseObject NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor WHERE section_id = ? AND exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
+exports.query_select_object_by_exhibition="SELECT * FROM aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor WHERE exhibition_id = ? AND exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
 
 
-exports.query_search = "SELECT DISTINCT * FROM aMuseObject WHERE MATCH(object_name, object_description) AGAINST(?) LIMIT ?, 24";
+//exports.query_search = "SELECT DISTINCT * FROM aMuseObject WHERE MATCH(object_name, object_description) AGAINST(?) AND exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
+
+exports.query_search = "SELECT * FROM (SELECT DISTINCT * FROM aMuseObject WHERE MATCH(object_name, object_description) AGAINST(?)) AS t1 NATURAL JOIN aMuseExhibition WHERE exhibition_begin <= CURRENT_DATE AND exhibition_end >= CURRENT_DATE LIMIT ?, 384";
 
 //LOGIN
 
@@ -66,7 +68,7 @@ exports.query_del_bookmark="DELETE FROM aMuseUserBookmark WHERE user_id = ?  AND
 exports.query_del_photo="DELETE FROM aMusePersonalPhoto WHERE user_id = ? AND personalphoto_id = ?";
 
 // ++++++++++++++++ ADMIN QUERY-SET +++++++++++++++++++
-
+exports.query_data_all="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition";
 exports.query_check_if_admin = "SELECT * FROM aMuseAdmin WHERE admin_name = ? AND admin_hash = ?";
 exports.query_admin_login = "UPDATE aMuseAdmin SET admin_hash = ? WHERE admin_name = ? AND admin_password = ?";
 
@@ -80,6 +82,10 @@ exports.query_get_sections="SELECT * FROM aMuseSection";
 exports.query_get_section_by_id="SELECT * FROM aMuseSection WHERE section_id = ?";
 exports.query_get_admin_users = "SELECT * FROM aMuseAdmin";
 exports.query_get_all_admin_users = "SELECT * FROM aMuseAdmin LIMIT 0,2";
+exports.query_select_object_by_author_all="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE author_id = ? LIMIT ?, 384";
+exports.query_select_object_by_section_all="SELECT * FROM aMuseObject NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseAuthor WHERE section_id = ? LIMIT ?, 384";
+exports.query_select_object_by_exhibition_all="SELECT * FROM aMuseObject NATURAL JOIN aMuseExhibition NATURAL JOIN aMuseSection NATURAL JOIN aMuseAuthor WHERE exhibition_id = ? LIMIT ?, 384";
+
 
 /* USE QUERY GET DATA FOR GETTING OPERAS INFO */
 exports.query_get_opera_by_id="SELECT * FROM aMuseObject NATURAL JOIN aMuseAuthor NATURAL JOIN aMuseSection NATURAL JOIN aMuseExhibition WHERE object_id = ?";

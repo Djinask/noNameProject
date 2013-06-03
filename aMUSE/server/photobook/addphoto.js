@@ -35,28 +35,32 @@ module.exports = function(req, res) {
 					output.message = messages[2];
 					renderPage(user, res, output);
 				} else {
-					imagemagick.convert([
-							photo.path,
-							'-resize', '500x500>',
-							'-size', '500x500',
-							'xc:white',
-							'+swap',
-							'-gravity', 'center',
-							'-composite',
-							'../userphotos/' + results.insertId + '.jpg'
-						], function(err, stdout, stderr) {
-						if(err) {
-							console.log(err);
-							output.message = messages[2];
-							res.mysqlCreateConnection()
-							.query(res.query.query_remove_presonal_photo, [results.insertId])
-							.end();
-						} else {
-							output.message = messages[0];
-						}
-						fs.unlink(photo.path);
-						renderPage(user, res, output);
-					});
+					try {
+						imagemagick.convert([
+								photo.path,
+								'-resize', '500x500>',
+								'-size', '500x500',
+								'xc:white',
+								'+swap',
+								'-gravity', 'center',
+								'-composite',
+								'../userphotos/' + results.insertId + '.jpg'
+							], function(err, stdout, stderr) {
+							if(err) {
+								console.log(err);
+								output.message = messages[2];
+								res.mysqlCreateConnection()
+								.query(res.query.query_remove_personal_photo, [results.insertId])
+								.end();
+							} else {
+								output.message = messages[0];
+							}
+							fs.unlink(photo.path);
+							renderPage(user, res, output);
+						});
+					} catch(e) {
+						console.log(e);
+					}
 				}
 			});
 			conn.end();
